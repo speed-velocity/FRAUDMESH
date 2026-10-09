@@ -9,12 +9,25 @@ from app.reasoning.validator import mask_prompt_records
 
 
 def _parse_json(content: str) -> dict:
-    cleaned = content.strip()
+    """Extract the first JSON object from a model response.
+
+    Reasoning models may wrap the requested object in markdown fences, a
+    short preamble, or a private ``<think>`` block.  We still require a real
+    JSON object; downstream evidence validation remains the source of truth.
+    """
+    cleaned = re.sub(r"<think>.*?</think>", "", content, flags=re.I | re.S).strip()
     cleaned = re.sub(r"^```(?:json)?\s*|\s*```$", "", cleaned, flags=re.I | re.S).strip()
-    value = json.loads(cleaned)
-    if not isinstance(value, dict):
-        raise ValueError("Nemotron response must be a JSON object")
-    return value
+    decoder = json.JSONDecoder()
+    for index, character in enumerate(cleaned):
+        if character != "{":
+            continue
+        try:
+            value, _ = decoder.raw_decode(cleaned[index:])
+        except json.JSONDecodeError:
+            continue
+        if isinstance(value, dict):
+            return value
+    raise ValueError("Nemotron response must contain a JSON object")
 
 
 async def run_live_reasoning(database_url: str, case_id: str, client: NemotronClient) -> dict:
