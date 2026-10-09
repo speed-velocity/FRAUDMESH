@@ -30,6 +30,23 @@ def _parse_json(content: str) -> dict:
     raise ValueError("Nemotron response must contain a JSON object")
 
 
+def _normalise_payload(payload: dict) -> dict:
+    """Accept common OpenAI/model wrappers without weakening evidence checks."""
+    for key in ("output", "result", "data"):
+        nested = payload.get(key)
+        if isinstance(nested, dict) and any(name in nested for name in ("summary", "findings", "suspicious_patterns", "recommended_checks")):
+            return nested
+    return payload
+
+
+def _text_from_payload(payload: dict) -> str:
+    for key in ("summary", "explanation", "analysis", "reasoning", "narrative", "text", "response", "message"):
+        value = payload.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return ""
+
+
 async def run_live_reasoning(database_url: str, case_id: str, client: NemotronClient) -> dict:
     records = case_evidence(database_url, case_id)
     if not records:
@@ -58,11 +75,12 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
         payload = _parse_json(result.content)
     except (json.JSONDecodeError, ValueError) as exc:
         raise ValueError("Nemotron returned invalid JSON") from exc
+    payload = _normalise_payload(payload)
 
     cited = [item for item in payload.get("cited_evidence_ids", []) if item in allowed]
     withheld = len(payload.get("cited_evidence_ids", [])) - len(cited)
     findings = []
-    for item in payload.get("suspicious_patterns", []):
+    for item in payload.get("suspicious_patterns", payload.get("findings", [])):
         if not isinstance(item, dict):
             withheld += 1
             continue
@@ -80,7 +98,7 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
             "review_state": "pending",
         })
     plan_steps = []
-    for rank, item in enumerate(payload.get("recommended_checks", []), 1):
+    for rank, item in enumerate(payload.get("recommended_checks", payload.get("plan_steps", [])), 1):
         if not isinstance(item, dict):
             continue
         action = str(item.get("check", item.get("action", ""))).strip()
@@ -92,13 +110,7 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
                 "evidence_ids": [value for value in item.get("evidence_ids", []) if value in allowed],
                 "review_state": "pending",
             })
-    summary = str(
-        payload.get("summary")
-        or payload.get("explanation")
-        or payload.get("analysis")
-        or payload.get("response")
-        or ""
-    ).strip()
+    summary = _text_from_payload(payload)
     if not summary and findings:
         summary = " ".join(item["statement"] for item in findings[:3])
     if not summary and plan_steps:

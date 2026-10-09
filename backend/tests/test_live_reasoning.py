@@ -35,6 +35,13 @@ def test_live_reasoning_uses_validated_finding_when_summary_is_empty():
     database_path.unlink(missing_ok=True)
 
 
+def test_live_reasoning_accepts_nested_model_output():
+    from app.reasoning.live import _normalise_payload, _text_from_payload
+
+    payload = _normalise_payload({"output": {"reasoning": "Review the linked movement.", "findings": []}})
+    assert _text_from_payload(payload) == "Review the linked movement."
+
+
 def test_live_reasoning_grounds_mocked_token_factory_response():
     selector_policy = getattr(asyncio, "WindowsSelectorEventLoopPolicy", None)
     if selector_policy:
