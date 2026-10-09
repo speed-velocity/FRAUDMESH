@@ -1098,3 +1098,100 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .mobile-menu-toggle { background: var(--lm-black); color: var(--lm-lime); border-bottom-color: var(--lm-line); }
   .sidebar { background: var(--lm-black); border-bottom-color: var(--lm-line); }
 }
+
+/* Generated from docs/LAMBORGHINI_DESIGN.md: final brand system pass. */
+:root {
+  --lm-black: #000000;
+  --lm-surface: #181818;
+  --lm-panel: #202020;
+  --lm-panel-raised: #202020;
+  --lm-gold: #ffc000;
+  --lm-gold-hover: #917300;
+  --lm-white: #ffffff;
+  --lm-smoke: #f5f5f5;
+  --lm-ash: #7d7d7d;
+  --lm-steel: #969696;
+  --lm-line: #494949;
+  --lm-info: #29abe2;
+  --fm-primary: var(--lm-gold);
+  --fm-surface-dark: var(--lm-black);
+  --fm-on-dark: var(--lm-white);
+  --fm-on-dark-mute: var(--lm-ash);
+  --fm-hairline-strong: rgba(255,255,255,.5);
+  --fm-radius: 0px;
+}
+
+html, body, #root { background: var(--lm-black); color: var(--lm-white); }
+body { font-family: "LamboType", "Roboto", "Helvetica Neue", Arial, sans-serif; }
+button, input, select, textarea { font-family: inherit; border-radius: 0 !important; }
+.app { background: var(--lm-black); color: var(--lm-white); }
+.app-header {
+  min-height: 80px;
+  background: var(--lm-black);
+  border-bottom: 0;
+  box-shadow: none;
+}
+.app-brand .brand-mark { background: var(--lm-white); color: var(--lm-black); border: 0; }
+.app-brand .brand-logo { background: var(--lm-black); border: 1px solid var(--lm-white); }
+.brand-page-title, .header-wordmark strong { color: var(--lm-white); text-transform: uppercase; font-weight: 400; letter-spacing: 0; }
+.wordmark-accent, .brand-copy small { color: var(--lm-white); }
+.wordmark-live::after { color: var(--lm-gold); }
+.role-chip { background: transparent; border-color: rgba(255,255,255,.5); }
+.role-chip .avatar { background: var(--lm-white); color: var(--lm-black); }
+.sign-out { border: 1px solid rgba(255,255,255,.5); color: var(--lm-white); background: transparent; }
+.sign-out:hover, .sign-out:focus-visible { background: var(--lm-info); color: var(--lm-white); border-color: var(--lm-info); }
+.layout { max-width: 1440px; gap: 32px; }
+.sidebar { background: var(--lm-black); border-right: 1px solid var(--lm-panel); }
+nav a { color: var(--lm-smoke); border-radius: 0; font-weight: 400; text-transform: uppercase; }
+nav a.active, nav a:hover { color: var(--lm-black); background: var(--lm-gold); }
+.sidebar-foot { color: var(--lm-ash); }
+.status-dot.online { background: var(--lm-gold); }
+.topbar { border-bottom: 1px solid var(--lm-panel); }
+.topbar h1, .panel h3, .empty-state strong, .detail-state strong { color: var(--lm-white); text-transform: uppercase; font-weight: 400; }
+.eyebrow, .metric span { color: var(--lm-ash); text-transform: uppercase; letter-spacing: .96px; }
+.intro { background: var(--lm-panel); border: 0; border-bottom: 1px solid var(--lm-line); border-radius: 0; box-shadow: none; }
+.intro h2 { color: var(--lm-white); text-transform: uppercase; font-weight: 400; line-height: .98; }
+.intro p, .metric small, .empty-state p, .detail-state p, .detail-state small, .muted { color: var(--lm-ash); }
+.mode-badge { color: var(--lm-white); border-color: rgba(255,255,255,.5); border-radius: 0; }
+.metric-grid, .metric { border-color: var(--lm-panel); }
+.metric strong { color: var(--lm-white); font-weight: 400; }
+.panel { background: var(--lm-panel); border: 0; border-bottom: 1px solid var(--lm-line); border-radius: 0; box-shadow: none; }
+.count-badge, .score-badge { color: var(--lm-gold); background: transparent; border: 1px solid var(--lm-gold); border-radius: 0; }
+.alert-row, .case-row, .evidence-row, .event-row, .entity-result, .path-result, .graph-wrap, .control-row {
+  background: var(--lm-surface); color: var(--lm-white); border: 0; border-bottom: 1px solid var(--lm-line); border-radius: 0;
+}
+.alert-row:hover, .alert-row.selected, .case-row:hover, .case-row.selected { background: var(--lm-panel); border-color: var(--lm-gold); }
+.alert-row small, .case-row small, .event-row small, .evidence-row small, .evidence-row b { color: var(--lm-ash); }
+.alert-row b, .case-row b, .path-row b { color: var(--lm-gold); }
+.primary-action { background: var(--lm-gold); color: var(--lm-black); border: 0; border-radius: 0; padding: 16px 24px; font-weight: 400; }
+.primary-action:hover { background: var(--lm-gold-hover); color: var(--lm-white); }
+.secondary-action { background: transparent; color: var(--lm-white); border: 1px solid rgba(255,255,255,.5); border-radius: 0; padding: 16px; font-weight: 400; }
+.secondary-action:hover { background: var(--lm-info); color: var(--lm-white); border-color: var(--lm-info); }
+.case-detail textarea, .evidence-search input, .evidence-search select, .path-search select, .login-form input, .status-select {
+  background: var(--lm-black); color: var(--lm-white); border: 1px solid var(--lm-steel); border-radius: 0;
+}
+.case-detail textarea::placeholder, .login-form input::placeholder { color: var(--lm-steel); }
+.case-detail label, .evidence-search label, .path-search label, .login-form label { color: var(--lm-ash); }
+.timeline { border-left-color: var(--lm-line); }
+.timeline-dot { background: var(--lm-black); border-color: var(--lm-white); }
+.path-row { color: var(--lm-smoke); border-bottom-color: var(--lm-panel); }
+.path-result { border-left: 2px solid var(--lm-gold); }
+.control-status, .event-status { color: var(--lm-smoke); }
+.control-status.not-implemented, .event-status.duplicate { color: var(--lm-gold); }
+.review-item { border-bottom-color: var(--lm-line); }
+.review-item small { color: var(--lm-ash); }
+.app-footer { border-top-color: var(--lm-panel); color: var(--lm-ash); }
+.login-shell { background: var(--lm-black); }
+.login-card { background: var(--lm-panel); color: var(--lm-white); border: 0; border-bottom: 1px solid var(--lm-line); border-radius: 0; box-shadow: none; }
+.login-card h1 { color: var(--lm-white); text-transform: uppercase; font-weight: 400; }
+.login-card p { color: var(--lm-ash); }
+.login-error { color: #ff7770; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--lm-gold); outline-offset: 3px; }
+
+@media (max-width: 767px) {
+  .app-header { min-height: 72px; }
+  .mobile-menu-toggle { background: var(--lm-black); color: var(--lm-white); border-bottom: 1px solid var(--lm-panel); }
+  .sidebar { background: var(--lm-black); border-bottom-color: var(--lm-panel); }
+  .intro h2 { font-size: 40px; }
+  .primary-action, .secondary-action { width: 100%; min-height: 48px; }
+}
