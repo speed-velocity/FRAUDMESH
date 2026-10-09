@@ -33,7 +33,7 @@ services:
     name: fraudmesh-ui
     runtime: static
     rootDir: frontend
-    buildCommand: npm install --global pnpm@10.14.0 && pnpm install --frozen-lockfile && pnpm run build
+    buildCommand: npx --yes pnpm@10.14.0 install --frozen-lockfile && npx --yes pnpm@10.14.0 run build
     staticPublishPath: dist
     envVars:
       - key: VITE_API_ORIGIN
