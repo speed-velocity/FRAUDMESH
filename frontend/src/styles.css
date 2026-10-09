@@ -1264,3 +1264,28 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .case-review-panel .review-item > span { color: var(--fm-color-smoke); line-height: 1.5; }
 .case-review-panel .review-item small { color: var(--fm-color-ash); }
 .case-review-panel .secondary-action { padding: var(--fm-space-12) var(--fm-space-16); }
+
+/* Fraud Network: graph canvas and inspector use layered darkness, not shadows. */
+.network-experience { background: var(--fm-color-black); color: var(--fm-color-white); }
+.network-experience-header, .network-toolbar { border-color: var(--fm-color-charcoal); }
+.network-experience-header h1 { color: var(--fm-color-white); text-transform: uppercase; font-size: clamp(40px, 7vw, 80px); font-weight: 400; line-height: .98; }
+.network-experience-header p, .network-kpis, .network-toolbar label, .network-legend { color: var(--fm-color-ash); }
+.network-kpis span { border-left-color: var(--fm-color-gold); }
+.network-kpis b { color: var(--fm-color-white); }
+.network-toolbar { background: var(--fm-color-charcoal); }
+.network-toolbar input, .network-toolbar select { background: var(--fm-color-black); color: var(--fm-color-white); border-color: var(--fm-color-graphite); }
+.network-canvas-panel, .network-inspector { background: var(--fm-color-charcoal); border-color: var(--fm-color-graphite); }
+.network-canvas { min-height: 480px; background: var(--fm-color-black); border-color: var(--fm-color-graphite); }
+.network-edge { stroke: var(--fm-color-steel); }
+.network-edge.exact { stroke: var(--fm-color-gold); }
+.network-edge.inferred { stroke: var(--fm-color-cyan); }
+.network-edge.weak { stroke: var(--fm-color-graphite); }
+.network-node circle { fill: var(--fm-color-iron); stroke: var(--fm-color-steel); }
+.network-node.selected circle { fill: var(--fm-color-gold); stroke: var(--fm-color-white); }
+.network-node text { fill: var(--fm-color-smoke); }
+.legend-swatch { background: var(--fm-color-gold); }
+.legend-swatch.inferred { background: var(--fm-color-cyan); }
+.legend-swatch.weak { background: var(--fm-color-steel); }
+.inspector-content small, .network-table-row small { color: var(--fm-color-ash); }
+.network-table-panel, .network-table-row { background: var(--fm-color-charcoal); }
+.network-table-row { border-bottom-color: var(--fm-color-graphite); color: var(--fm-color-smoke); }
