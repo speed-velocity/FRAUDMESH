@@ -1289,3 +1289,71 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .inspector-content small, .network-table-row small { color: var(--fm-color-ash); }
 .network-table-panel, .network-table-row { background: var(--fm-color-charcoal); }
 .network-table-row { border-bottom-color: var(--fm-color-graphite); color: var(--fm-color-smoke); }
+
+/* Causal Chain: bounded reasoning path with clear evidence hierarchy. */
+.chain-experience { background: var(--fm-color-black); color: var(--fm-color-white); }
+.chain-experience-header, .chain-toolbar { border-color: var(--fm-color-charcoal); }
+.chain-experience-header h1 { color: var(--fm-color-white); text-transform: uppercase; font-size: clamp(40px, 7vw, 80px); font-weight: 400; line-height: .98; }
+.chain-experience-header p { color: var(--fm-color-ash); font-size: 18px; }
+.chain-toolbar { background: var(--fm-color-charcoal); }
+.chain-toolbar label { color: var(--fm-color-ash); }
+.chain-toolbar select { background: var(--fm-color-black); color: var(--fm-color-white); border-color: var(--fm-color-graphite); }
+.chain-arrow { color: var(--fm-color-gold); }
+.chain-message { background: var(--fm-color-iron); border-left-color: var(--fm-color-gold); color: var(--fm-color-smoke); }
+.chain-review, .chain-steps, .chain-evidence { background: var(--fm-color-charcoal); border-color: var(--fm-color-graphite); }
+.chain-summary { border-bottom-color: var(--fm-color-graphite); }
+.chain-summary strong, .chain-step h3, .chain-evidence h3 { color: var(--fm-color-white); }
+.chain-summary span, .chain-step small, .chain-evidence-row small { color: var(--fm-color-ash); }
+.chain-step { background: var(--fm-color-iron); border-color: var(--fm-color-graphite); }
+.chain-step-number { background: var(--fm-color-gold); color: var(--fm-color-black); }
+.chain-connector { color: var(--fm-color-gold); }
+.chain-connector small { color: var(--fm-color-ash); }
+.chain-evidence-row { border-bottom-color: var(--fm-color-graphite); }
+.chain-evidence-row strong { color: var(--fm-color-smoke); }
+.chain-empty { background: var(--fm-color-charcoal); color: var(--fm-color-smoke); }
+
+/* Evidence Explorer: dense source index with a focused detail plate. */
+.evidence-experience { background: var(--fm-color-black); color: var(--fm-color-white); }
+.evidence-experience-header, .evidence-experience-toolbar { border-color: var(--fm-color-charcoal); }
+.evidence-experience-header h1 { color: var(--fm-color-white); text-transform: uppercase; font-size: clamp(40px, 7vw, 80px); font-weight: 400; line-height: .98; }
+.evidence-experience-header p { color: var(--fm-color-ash); font-size: 18px; }
+.evidence-experience-toolbar { background: var(--fm-color-charcoal); }
+.evidence-experience-toolbar label { color: var(--fm-color-ash); }
+.evidence-experience-toolbar input, .evidence-experience-toolbar select { background: var(--fm-color-black); color: var(--fm-color-white); border-color: var(--fm-color-graphite); }
+.evidence-record-panel, .evidence-detail-panel { background: var(--fm-color-charcoal); border-color: var(--fm-color-graphite); }
+.evidence-record-row { background: var(--fm-color-iron); border-bottom-color: var(--fm-color-graphite); color: var(--fm-color-smoke); }
+.evidence-record-row:hover, .evidence-record-row.selected { background: var(--fm-color-black); border-left-color: var(--fm-color-gold); }
+.evidence-record-row small, .evidence-record-row b, .evidence-detail-content small { color: var(--fm-color-ash); }
+.evidence-detail-panel h3 { color: var(--fm-color-white); }
+.masked-record { background: var(--fm-color-iron); border-left-color: var(--fm-color-gold); }
+.masked-record strong { color: var(--fm-color-smoke); }
+.masked-record p { color: var(--fm-color-ash); }
+
+/* Audit & Access: controlled release and append-only activity. */
+.audit-shell { background: var(--fm-color-black); color: var(--fm-color-white); }
+.audit-header { border-bottom-color: var(--fm-color-charcoal); }
+.audit-header h1 { color: var(--fm-color-white); text-transform: uppercase; font-size: clamp(40px, 7vw, 80px); font-weight: 400; line-height: .98; }
+.audit-header p { color: var(--fm-color-ash); font-size: 18px; }
+.audit-grid { gap: var(--fm-space-24); }
+.audit-grid > .panel { background: var(--fm-color-charcoal); border-color: var(--fm-color-graphite); }
+.audit-row { background: var(--fm-color-iron); border-bottom-color: var(--fm-color-graphite); }
+.audit-row strong { color: var(--fm-color-smoke); }
+.audit-row small { color: var(--fm-color-ash); }
+.audit-outcome { color: var(--fm-color-gold); }
+.saved-state { color: var(--fm-color-gold); }
+.evidence-search input, .evidence-search textarea { background: var(--fm-color-black); color: var(--fm-color-white); border-color: var(--fm-color-steel); }
+.release-result { background: var(--fm-color-iron); border-left-color: var(--fm-color-gold); color: var(--fm-color-smoke); }
+.release-result small { color: var(--fm-color-ash); }
+
+/* Login and 404 keep the same focused, high-contrast entry experience. */
+.login-shell { background: var(--fm-color-black); color: var(--fm-color-white); }
+.login-card { width: min(520px, 100%); padding: var(--fm-space-40); background: var(--fm-color-charcoal); border: 1px solid var(--fm-color-graphite); }
+.login-card h1 { font-size: clamp(40px, 7vw, 64px); line-height: .98; }
+.login-card p { font-size: 16px; line-height: 1.5; }
+.login-form { gap: var(--fm-space-12); }
+.login-form input { min-height: 48px; background: var(--fm-color-black); color: var(--fm-color-white); border-color: var(--fm-color-steel); }
+.login-error { color: var(--fm-color-error); }
+.not-found { background: var(--fm-color-charcoal); border: 1px solid var(--fm-color-graphite); color: var(--fm-color-white); }
+.not-found h2 { color: var(--fm-color-white); text-transform: uppercase; font-weight: 400; }
+.not-found p { color: var(--fm-color-ash); }
+.app-footer { border-top-color: var(--fm-color-charcoal); color: var(--fm-color-ash); }
