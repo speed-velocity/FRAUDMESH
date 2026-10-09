@@ -1316,7 +1316,13 @@ nav a, .sidebar nav a { min-height: 48px; padding-block: 12px; line-height: 1.3;
 .brand-page-title { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
 .risk-profile-form { min-width: 0; flex-wrap: wrap; }
 .risk-profile-form > * { min-width: 0; max-width: 100%; }
+.risk-profile-form { flex-wrap: wrap; }
+.risk-profile-form label { flex: 1 1 240px; min-width: min(100%, 240px); }
+.risk-profile-form .secondary-action { flex: 0 1 auto; max-width: 100%; }
 .intro p, .metric small, .empty-state p, .detail-state p, .detail-state small, .muted, label, .sidebar-foot, .network-kpis, .back-link, .event-status, .app-footer { color: var(--fm-color-steel); font-size: 12px; }
+.eyebrow, label, small, .sidebar-foot, .network-kpis, .back-link, .event-status, .app-footer { color: var(--fm-color-steel) !important; font-size: 12px !important; }
+.app-brand { min-height: 48px; }
+.zoom-controls .secondary-action { min-width: 44px; min-height: 44px; }
 .intro p, .muted, .empty-state p, .detail-state p, .detail-state small { line-height: 1.5; }
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--fm-color-gold); outline-offset: 3px; }
 

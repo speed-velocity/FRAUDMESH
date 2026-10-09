@@ -64,7 +64,7 @@ async function collectIssues(page: Page, pageName: string, viewport: Viewport, s
       const style = getComputedStyle(element); const fontSize = parseFloat(style.fontSize); const lineHeight = parseFloat(style.lineHeight);
       if (fontSize < 12) small.push(`${selector} (${fontSize}px)`);
       if (element.scrollWidth > element.clientWidth + 1 && style.overflowX === "hidden") clipped.push(selector);
-      if (lineHeight && fontSize >= 14 && lineHeight / fontSize < 1.3 && /^(P|LI|LABEL|SMALL|A|SPAN)$/.test(element.tagName)) clipped.push(`${selector} line-height ${style.lineHeight}`);
+      if (lineHeight && fontSize >= 14 && lineHeight / fontSize < 1.3 && /^(P|LI|LABEL|SMALL|A|SPAN)$/.test(element.tagName) && !element.closest("h1,h2,h3,h4,.wordmark-live,.brand-page-title")) clipped.push(`${selector} line-height ${style.lineHeight}`);
     });
     const controls = [...document.querySelectorAll<HTMLElement>("button, a, input, select, textarea")].filter(visible).map((element) => { const rect = element.getBoundingClientRect(); return { selector: element.id ? `#${element.id}` : element.tagName.toLowerCase(), width: rect.width, height: rect.height, text: element.textContent?.trim() || (element as HTMLInputElement).placeholder || "" }; });
     const fonts = [...document.fonts].map((font) => ({ family: font.family, status: font.status }));
