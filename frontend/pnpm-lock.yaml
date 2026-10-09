@@ -9,22 +9,22 @@ importers:
   .:
     dependencies:
       '@vitejs/plugin-react':
-        specifier: latest
+        specifier: 6.1.2
         version: 6.1.2(vite@8.3.3)
       react:
-        specifier: latest
+        specifier: 19.3.0
         version: 19.3.0
       react-dom:
-        specifier: latest
+        specifier: 19.3.0
         version: 19.3.0(react@19.3.0)
       typescript:
-        specifier: latest
+        specifier: 7.0.2
         version: 7.0.2
       vite:
-        specifier: latest
+        specifier: 8.3.3
         version: 8.3.3
       vitest:
-        specifier: latest
+        specifier: 5.0.3
         version: 5.0.3(vite@8.3.3)
 
 packages:

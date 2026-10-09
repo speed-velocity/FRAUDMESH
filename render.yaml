@@ -33,7 +33,7 @@ services:
     name: fraudmesh-ui
     runtime: static
     rootDir: frontend
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --no-audit --no-fund && npm run build
     staticPublishPath: dist
     envVars:
       - key: VITE_API_ORIGIN
