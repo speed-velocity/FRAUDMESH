@@ -1236,3 +1236,31 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .event-status { color: var(--fm-color-smoke); }
 .event-status.duplicate { color: var(--fm-color-gold); }
 .event-validation-panel textarea { min-height: 160px; background: var(--fm-color-black); color: var(--fm-color-white); border-color: var(--fm-color-graphite); }
+
+/* Investigation Cases: timeline-first workspace with reviewable evidence plates. */
+.cases-experience { background: var(--fm-color-black); color: var(--fm-color-white); }
+.cases-experience-header, .cases-toolbar { border-color: var(--fm-color-charcoal); }
+.cases-experience-header h1 { color: var(--fm-color-white); text-transform: uppercase; font-size: clamp(40px, 7vw, 80px); font-weight: 400; line-height: .98; }
+.cases-experience-header p { color: var(--fm-color-ash); font-size: 18px; }
+.back-link { color: var(--fm-color-white); }
+.back-link:hover { color: var(--fm-color-link); }
+.cases-toolbar { background: var(--fm-color-charcoal); }
+.cases-toolbar label { color: var(--fm-color-ash); }
+.cases-toolbar select, .timeline-mode { background: var(--fm-color-black); border-color: var(--fm-color-graphite); color: var(--fm-color-white); }
+.timeline-mode button { background: var(--fm-color-black); color: var(--fm-color-ash); }
+.timeline-mode button + button { border-left-color: var(--fm-color-graphite); }
+.timeline-mode button.active { background: var(--fm-color-gold); color: var(--fm-color-black); }
+.case-experience-grid { gap: var(--fm-space-24); }
+.timeline-ruler { color: var(--fm-color-ash); }
+.enhanced-timeline { border-left-color: var(--fm-color-graphite); }
+.enhanced-timeline-item > button { color: var(--fm-color-smoke); }
+.enhanced-timeline-item > button:hover, .enhanced-timeline-item.selected > button { color: var(--fm-color-gold); }
+.timeline-marker { border-color: var(--fm-color-gold); background: var(--fm-color-black); }
+.enhanced-timeline-item small, .enhanced-timeline-item p, .timeline-gap { color: var(--fm-color-ash); }
+.conflict-card { border-left-color: var(--fm-color-gold); background: var(--fm-color-iron); color: var(--fm-color-smoke); }
+.case-review-panel { margin-top: var(--fm-space-24); }
+.case-review-panel .review-columns { gap: var(--fm-space-32); }
+.case-review-panel .review-item { min-height: 132px; padding: var(--fm-space-16) 0; }
+.case-review-panel .review-item > span { color: var(--fm-color-smoke); line-height: 1.5; }
+.case-review-panel .review-item small { color: var(--fm-color-ash); }
+.case-review-panel .secondary-action { padding: var(--fm-space-12) var(--fm-space-16); }
