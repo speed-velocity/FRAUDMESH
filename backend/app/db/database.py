@@ -449,6 +449,12 @@ def network_summary(database_url: str = "sqlite:///data/runtime/fraudmesh.db", l
     try:
         nodes = [dict(row) for row in connection.execute("SELECT entity_id, type, display_label, scope FROM entities ORDER BY entity_id LIMIT ?", (limit,)).fetchall()]
         edges = [dict(row) for row in connection.execute("SELECT from_entity AS source, to_entity AS target, kind, COUNT(*) AS count, SUM(amount_paise) / 100 AS amount_inr, GROUP_CONCAT(evidence_id) AS evidence_ids FROM transactions WHERE to_entity IS NOT NULL GROUP BY from_entity, to_entity, kind ORDER BY count DESC LIMIT ?", (limit,)).fetchall()]
+        ownership_edges = []
+        for account in connection.execute("SELECT entity_id, attrs_json FROM entities WHERE type = 'BankAccount'").fetchall():
+            holder = json.loads(account["attrs_json"]).get("holder_entity_id")
+            if holder:
+                ownership_edges.append({"source": account["entity_id"], "target": holder, "kind": "account_holder", "count": 1, "amount_inr": 0, "evidence_ids": None})
+        edges.extend(ownership_edges)
         adjacency = {node["entity_id"]: set() for node in nodes}
         for edge in edges:
             adjacency.setdefault(edge["source"], set()).add(edge["target"])
@@ -513,6 +519,10 @@ def network_path(database_url: str, source: str, target: str, max_hops: int = 8)
         adjacency: dict[str, list[dict]] = {}
         for row in rows:
             adjacency.setdefault(row["from_entity"], []).append(dict(row))
+        for account in connection.execute("SELECT entity_id, attrs_json FROM entities WHERE type = 'BankAccount'").fetchall():
+            holder = json.loads(account["attrs_json"]).get("holder_entity_id")
+            if holder:
+                adjacency.setdefault(account["entity_id"], []).append({"from_entity": account["entity_id"], "to_entity": holder, "kind": "account_holder", "count": 1})
         queue = deque([(source, [source], [])]); visited = {source}
         while queue:
             node, nodes, edges = queue.popleft()
