@@ -1,5 +1,14 @@
 # FraudMesh Implementation Report
 
+## Security hardening pass
+
+- Added bounded request bodies, login throttling, expensive-endpoint throttling, request IDs, CSP, permissions policy, frame protection, MIME sniffing protection, referrer policy, and conditional HSTS headers.
+- Expanded the environment template with security limits and the active Vite port.
+- Confirmed `.env`, runtime databases, generated test databases, and server logs are excluded from Git; no key-pattern matches were found in tracked history during the current scan.
+- Confirmed server-side bearer authentication and role checks remain authoritative; frontend identity, role, IDs, scores, and action values are not trusted for authorization.
+- Added regression tests for security headers and oversized request rejection.
+- Payments, arbitrary uploads, password-reset flow, and production backup/restore are not implemented product surfaces; they remain explicit follow-up work rather than falsely marked complete.
+
 ## Current verification
 
 - Synthetic dataset generation and safe loading: Verified by backend tests.

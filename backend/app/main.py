@@ -1,5 +1,8 @@
 from contextlib import asynccontextmanager
+from collections import defaultdict, deque
 from pathlib import Path
+from time import monotonic
+from threading import Lock
 from uuid import uuid4
 
 from fastapi import FastAPI, Body, Request
@@ -34,6 +37,21 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
+    rate_windows: dict[tuple[str, str], deque[float]] = defaultdict(deque)
+    rate_lock = Lock()
+
+    def rate_limited(bucket: str, key: str, limit: int) -> bool:
+        now = monotonic()
+        cutoff = now - 60
+        with rate_lock:
+            window = rate_windows[(bucket, key)]
+            while window and window[0] <= cutoff:
+                window.popleft()
+            if len(window) >= max(1, limit):
+                return True
+            window.append(now)
+            return False
+
     @app.exception_handler(RequestValidationError)
     async def validation_error(request: Request, exc: RequestValidationError) -> JSONResponse:
         request_id = request.headers.get("X-Request-ID", str(uuid4()))
@@ -44,6 +62,23 @@ def create_app() -> FastAPI:
     @app.middleware("http")
     async def request_context(request: Request, call_next):
         request_id = request.headers.get("X-Request-ID", str(uuid4()))
+        client_key = request.client.host if request.client else "unknown"
+        content_length = request.headers.get("content-length")
+        if content_length and content_length.isdigit() and int(content_length) > settings.max_request_body_bytes:
+            response = JSONResponse({"detail": "Request body too large", "code": "request_too_large", "request_id": request_id}, status_code=413)
+            response.headers["X-Request-ID"] = request_id
+            return response
+        if request.url.path == "/api/v1/auth/login" and rate_limited("login", client_key, settings.login_rate_limit_per_minute):
+            response = JSONResponse({"detail": "Too many login attempts", "code": "rate_limited", "request_id": request_id}, status_code=429)
+            response.headers["Retry-After"] = "60"
+            response.headers["X-Request-ID"] = request_id
+            return response
+        expensive_prefixes = ("/api/v1/reasoning", "/api/v1/events", "/api/v1/simulator", "/api/v1/network/path")
+        if request.url.path.startswith(expensive_prefixes) and rate_limited("expensive", client_key, settings.expensive_rate_limit_per_minute):
+            response = JSONResponse({"detail": "Request rate limit exceeded", "code": "rate_limited", "request_id": request_id}, status_code=429)
+            response.headers["Retry-After"] = "60"
+            response.headers["X-Request-ID"] = request_id
+            return response
         public_paths = {"/api/v1/health", "/api/v1/auth/login"}
         if settings.app_env in {"demo", "prod"} and request.url.path.startswith("/api/v1/") and request.url.path not in public_paths and request.method != "OPTIONS":
             authorization = request.headers.get("Authorization", "")
@@ -57,6 +92,10 @@ def create_app() -> FastAPI:
         response.headers["X-Content-Type-Options"] = "nosniff"
         response.headers["X-Frame-Options"] = "DENY"
         response.headers["Referrer-Policy"] = "no-referrer"
+        response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+        response.headers["Content-Security-Policy"] = "default-src 'self'; connect-src 'self' http://127.0.0.1:8000 http://localhost:8000; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'"
+        if request.url.scheme == "https":
+            response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
         return response
 
     @app.get("/api/v1/health")

@@ -114,7 +114,7 @@ The UI shows `API ONLINE` when the backend is available. The frontend proxies `/
 
 Demo users are created from the two password environment variables. Default usernames are `investigator` and `admin`; use the private values in your own `backend/.env`.
 
-Protected mode supports signed access tokens, session revocation, expiry, failed-login lockout, role checks, and append-only audit records. `APP_ENV=dev` permits local iteration; `demo` and `prod` enforce bearer authentication for protected API routes.
+Protected mode supports signed access tokens, session revocation, expiry, failed-login lockout, role checks, append-only audit records, login throttling, expensive-request throttling, request-size limits, and security response headers. `APP_ENV=dev` permits local iteration; `demo` and `prod` enforce bearer authentication for protected API routes.
 
 ## Main UI areas
 
@@ -188,6 +188,8 @@ Acceptance evidence is maintained in `docs/ACCEPTANCE_MATRIX.md`, `docs/ACCEPTAN
 The included dataset is synthetic and intended for investigation-support demonstrations. Do not use it as production data. FraudMesh does not perform automatic account blocking, enforcement, or guilt determination.
 
 Never commit `backend/.env`, NVIDIA/Nemotron keys, JWT secrets, real customer data, runtime SQLite databases, server logs, or generated test databases.
+
+The server is the authority for identity, role, entity IDs, case IDs, scores, and action permissions. Frontend values are treated as untrusted input. The API uses parameterized SQLite queries, bounded request bodies, strict event validation, masking before reasoning transmission, and rate limits for login and expensive endpoints. The current prototype has no payment or arbitrary file-upload surface; those capabilities must be server-verified and size/type restricted before being added.
 
 ## Troubleshooting
 
