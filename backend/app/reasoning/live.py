@@ -92,11 +92,23 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
                 "evidence_ids": [value for value in item.get("evidence_ids", []) if value in allowed],
                 "review_state": "pending",
             })
+    summary = str(
+        payload.get("summary")
+        or payload.get("explanation")
+        or payload.get("analysis")
+        or payload.get("response")
+        or ""
+    ).strip()
+    if not summary and findings:
+        summary = " ".join(item["statement"] for item in findings[:3])
+    if not summary and plan_steps:
+        summary = "Recommended checks: " + "; ".join(item["action"] for item in plan_steps[:3])
+
     return {
         "case_id": case_id,
         "mode": "live",
         "label": "Live Nemotron · Nebius Token Factory",
-        "summary": str(payload.get("summary", "")).strip(),
+        "summary": summary,
         "findings": findings,
         "hypotheses": [],
         "plan_steps": plan_steps,

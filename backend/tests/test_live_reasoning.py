@@ -16,6 +16,25 @@ def test_live_parser_accepts_reasoning_wrapper_and_markdown_fence():
     assert _parse_json('<think>internal reasoning</think>\n```json\n{"summary":"ready"}\n```') == {"summary": "ready"}
 
 
+def test_live_reasoning_uses_validated_finding_when_summary_is_empty():
+    class FindingOnlyClient:
+        async def complete(self, messages):
+            return type("Result", (), {"status": "complete", "content": '{"suspicious_patterns":[{"pattern":"Repeated linked transfers warrant review.","evidence_ids":["E-0001"]}],"cited_evidence_ids":["E-0001"]}', "error": None})()
+
+    selector_policy = getattr(asyncio, "WindowsSelectorEventLoopPolicy", None)
+    if selector_policy:
+        asyncio.set_event_loop_policy(selector_policy())
+    database_path = Path(__file__).resolve().parent / "_api_tmp" / "live_reasoning_summary.db"
+    database_path.unlink(missing_ok=True)
+    database = f"sqlite:///{database_path}"
+    dataset = Path(__file__).resolve().parents[2] / "data" / "demo"
+    load_dataset(str(dataset), database)
+    create_case(database, "ACC-M3", 80, "Review ACC-M3", "Investigator review")
+    result = asyncio.run(run_live_reasoning(database, "CASE-001", FindingOnlyClient()))
+    assert result["summary"] == "Repeated linked transfers warrant review."
+    database_path.unlink(missing_ok=True)
+
+
 def test_live_reasoning_grounds_mocked_token_factory_response():
     selector_policy = getattr(asyncio, "WindowsSelectorEventLoopPolicy", None)
     if selector_policy:
