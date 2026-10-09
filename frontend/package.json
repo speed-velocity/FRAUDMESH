@@ -3,8 +3,22 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "scripts": { "dev": "vite", "build": "vite build", "test": "vitest run" },
-  "dependencies": { "@vitejs/plugin-react": "6.1.2", "vite": "8.3.3", "typescript": "7.0.2", "react": "19.3.0", "react-dom": "19.3.0", "vitest": "5.0.3" },
-  "devDependencies": {}
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest run",
+    "ui:audit": "playwright test tests/ui-audit.spec.ts"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "6.1.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.3",
+    "vitest": "5.0.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "axe-core": "^4.14.0"
+  }
 }
-

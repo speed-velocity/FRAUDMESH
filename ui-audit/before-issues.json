@@ -1,0 +1,2324 @@
+[
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "dashboard",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/dashboard-375.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "dashboard",
+    "viewport": "375",
+    "selector": "span (10px), small (11px), .eyebrow (10px), .count-badge (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/dashboard-375.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "dashboard",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 18px, h2 line-height 39.2px, strong line-height 40px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/dashboard-375.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "dashboard",
+    "viewport": "375",
+    "selector": ".intro > div > p, .risk-profile-panel > .panel-head > div > .eyebrow",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/dashboard-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "dashboard",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "DASHBOARD is 219×38px.",
+    "screenshot": "ui-audit/before/dashboard-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "dashboard",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Sign out is 68×38px.",
+    "screenshot": "ui-audit/before/dashboard-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "dashboard",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Menu is 375×39px.",
+    "screenshot": "ui-audit/before/dashboard-375.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "dashboard",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, nav, .active, a",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/dashboard-768.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "dashboard",
+    "viewport": "768",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), span (10px), small (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/dashboard-768.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "dashboard",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 22px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/dashboard-768.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "dashboard",
+    "viewport": "768",
+    "selector": ".intro > div > p, .risk-profile-panel > .panel-head > div > .eyebrow",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/dashboard-768.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "dashboard",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/dashboard-1280.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "dashboard",
+    "viewport": "1280",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), span (10px), small (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/dashboard-1280.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "dashboard",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 26px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/dashboard-1280.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "dashboard",
+    "viewport": "1280",
+    "selector": ".intro > div > p, .risk-profile-panel > .panel-head > div > .eyebrow",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/dashboard-1280.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "dashboard",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/dashboard-1920.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "dashboard",
+    "viewport": "1920",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), span (10px), small (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/dashboard-1920.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "dashboard",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 26px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/dashboard-1920.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "dashboard",
+    "viewport": "1920",
+    "selector": ".intro > div > p, .risk-profile-panel > .panel-head > div > .eyebrow",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/dashboard-1920.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "live-alerts",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/live-alerts-375.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "live-alerts",
+    "viewport": "375",
+    "selector": ".eyebrow (10px), .count-badge (11px), small (11px), .score-badge (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/live-alerts-375.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "live-alerts",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 18px, h2 line-height 39.2px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/live-alerts-375.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "live-alerts",
+    "viewport": "375",
+    "selector": ".intro > div > p, label:nth-child(1)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/live-alerts-375.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "live-alerts",
+    "viewport": "375",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/live-alerts-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "live-alerts",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "LIVE ALERTS is 219×38px.",
+    "screenshot": "ui-audit/before/live-alerts-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "live-alerts",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Sign out is 68×38px.",
+    "screenshot": "ui-audit/before/live-alerts-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "live-alerts",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Menu is 375×39px.",
+    "screenshot": "ui-audit/before/live-alerts-375.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "live-alerts",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, nav, a",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/live-alerts-768.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "live-alerts",
+    "viewport": "768",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .eyebrow (10px), .count-badge (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/live-alerts-768.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "live-alerts",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 22px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/live-alerts-768.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "live-alerts",
+    "viewport": "768",
+    "selector": ".intro > div > p, label:nth-child(1)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/live-alerts-768.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "live-alerts",
+    "viewport": "768",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/live-alerts-768.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "live-alerts",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/live-alerts-1280.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "live-alerts",
+    "viewport": "1280",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .eyebrow (10px), .count-badge (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/live-alerts-1280.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "live-alerts",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 26px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/live-alerts-1280.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "live-alerts",
+    "viewport": "1280",
+    "selector": ".intro > div > p, label:nth-child(1)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/live-alerts-1280.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "live-alerts",
+    "viewport": "1280",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/live-alerts-1280.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "live-alerts",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/live-alerts-1920.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "live-alerts",
+    "viewport": "1920",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .eyebrow (10px), .count-badge (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/live-alerts-1920.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "live-alerts",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 26px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/live-alerts-1920.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "live-alerts",
+    "viewport": "1920",
+    "selector": ".intro > div > p, label:nth-child(1)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/live-alerts-1920.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "live-alerts",
+    "viewport": "1920",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/live-alerts-1920.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo, .brand-page-title",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".eyebrow (10px), .count-badge (11px), .muted (11px), .secondary-action (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo, .brand-page-title, .brand-page-title line-height 18px, h1 line-height 39.2px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".reasoning-run-panel > .panel-head > div > .eyebrow, .reasoning-run-panel > p",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".reasoning-run-panel > .panel-head > div > h3, article > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".cases-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "INVESTIGATION CASES is 219×38px.",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Sign out is 68×38px.",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Menu is 375×39px.",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "← Back to console is 133×12px.",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": "select",
+    "severity": "major",
+    "details": "Select a caseCASE-001 · ACC-VERY-LONG-IDENTIFIER-001 is 281×38px.",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Recorded order is 140×31px.",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Review order is 140×31px.",
+    "screenshot": "ui-audit/before/investigation-cases-375.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, .brand-page-title, nav, a",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/investigation-cases-768.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .eyebrow (10px), .count-badge (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/investigation-cases-768.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, .brand-page-title, .brand-page-title line-height 22px, .wordmark-live line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/investigation-cases-768.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".reasoning-run-panel > .panel-head > div > .eyebrow, .reasoning-run-panel > p",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/investigation-cases-768.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".reasoning-run-panel > .panel-head > div > h3, article > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/investigation-cases-768.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/investigation-cases-768.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".cases-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/investigation-cases-768.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/investigation-cases-768.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/investigation-cases-768.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo, .brand-page-title",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/investigation-cases-1280.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .eyebrow (10px), .count-badge (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/investigation-cases-1280.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo, .brand-page-title, .brand-page-title line-height 26px, .wordmark-live line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/investigation-cases-1280.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".reasoning-run-panel > .panel-head > div > .eyebrow, .reasoning-run-panel > p",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/investigation-cases-1280.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".reasoning-run-panel > .panel-head > div > h3, article > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/investigation-cases-1280.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/investigation-cases-1280.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".cases-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/investigation-cases-1280.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/investigation-cases-1280.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/investigation-cases-1280.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo, .brand-page-title",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/investigation-cases-1920.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .eyebrow (10px), .count-badge (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/investigation-cases-1920.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo, .brand-page-title, .brand-page-title line-height 26px, .wordmark-live line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/investigation-cases-1920.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".reasoning-run-panel > .panel-head > div > .eyebrow, .reasoning-run-panel > p",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/investigation-cases-1920.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".reasoning-run-panel > .panel-head > div > h3, article > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/investigation-cases-1920.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/investigation-cases-1920.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".cases-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/investigation-cases-1920.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/investigation-cases-1920.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/investigation-cases-1920.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": ".back-link (11px), .eyebrow (10px), .network-kpis (10px), span (10px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 18px, h1 line-height 39.2px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "label:nth-child(1), label:nth-child(2)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "div:nth-child(1) > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": ".network-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "FRAUD NETWORK is 219×38px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Sign out is 68×38px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Menu is 375×39px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "← Back to console is 133×12px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "input",
+    "severity": "major",
+    "details": "ID or label is 281×36px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "select",
+    "severity": "major",
+    "details": "All typesBankAccountPerson/EntityDeviceCase is 281×38px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "select",
+    "severity": "major",
+    "details": "All linksExactInferredWeak is 281×38px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "＋ is 38×34px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "− is 38×34px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Fit is 39×34px.",
+    "screenshot": "ui-audit/before/fraud-network-375.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, nav, a, .active",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/fraud-network-768.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .back-link (11px), .eyebrow (10px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/fraud-network-768.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 22px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/fraud-network-768.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": "label:nth-child(1), label:nth-child(2)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/fraud-network-768.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": "div:nth-child(1) > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/fraud-network-768.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/fraud-network-768.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": ".network-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/fraud-network-768.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/fraud-network-768.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/fraud-network-768.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/fraud-network-1280.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .back-link (11px), .eyebrow (10px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/fraud-network-1280.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 26px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/fraud-network-1280.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": "label:nth-child(1), label:nth-child(2)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/fraud-network-1280.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": "div:nth-child(1) > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/fraud-network-1280.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/fraud-network-1280.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": ".network-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/fraud-network-1280.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/fraud-network-1280.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/fraud-network-1280.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/fraud-network-1920.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .back-link (11px), .eyebrow (10px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/fraud-network-1920.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 26px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/fraud-network-1920.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": "label:nth-child(1), label:nth-child(2)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/fraud-network-1920.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": "div:nth-child(1) > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/fraud-network-1920.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/fraud-network-1920.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": ".network-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/fraud-network-1920.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/fraud-network-1920.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/fraud-network-1920.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": ".back-link (11px), .eyebrow (10px), .count-badge (11px), label (9px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 18px, h1 line-height 39.2px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": "label:nth-child(1), label:nth-child(3)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": ".chain-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "CAUSAL CHAIN is 219×38px.",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Sign out is 68×38px.",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Menu is 375×39px.",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "← Back to network is 136×12px.",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": "select",
+    "severity": "major",
+    "details": "Select sourceACC-VERY-LONG-IDENTIFIER-001 · BankAccountENT-08 · Person/EntityDEV-001 · DeviceCASE-001 · Case is 281×38px.",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": "select",
+    "severity": "major",
+    "details": "Select targetACC-VERY-LONG-IDENTIFIER-001 · BankAccountENT-08 · Person/EntityDEV-001 · DeviceCASE-001 · Case is 281×38px.",
+    "screenshot": "ui-audit/before/causal-chain-375.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, nav, a",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/causal-chain-768.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .back-link (11px), .eyebrow (10px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/causal-chain-768.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 22px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/causal-chain-768.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": "label:nth-child(1), label:nth-child(3)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/causal-chain-768.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/causal-chain-768.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": ".chain-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/causal-chain-768.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/causal-chain-768.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/causal-chain-768.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/causal-chain-1280.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .back-link (11px), .eyebrow (10px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/causal-chain-1280.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 26px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/causal-chain-1280.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": "label:nth-child(1), label:nth-child(3)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/causal-chain-1280.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/causal-chain-1280.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": ".chain-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/causal-chain-1280.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/causal-chain-1280.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/causal-chain-1280.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/causal-chain-1920.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .back-link (11px), .eyebrow (10px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/causal-chain-1920.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 26px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/causal-chain-1920.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": "label:nth-child(1), label:nth-child(3)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/causal-chain-1920.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/causal-chain-1920.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": ".chain-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/causal-chain-1920.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/causal-chain-1920.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/causal-chain-1920.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo, .brand-page-title",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": ".back-link (11px), .eyebrow (10px), .count-badge (11px), label (9px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo, .brand-page-title, .brand-page-title line-height 18px, h1 line-height 39.2px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "label:nth-child(1), label:nth-child(2)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": ".evidence-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "EVIDENCE EXPLORER is 219×38px.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Sign out is 68×38px.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Menu is 375×39px.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "← Back to console is 133×12px.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "input",
+    "severity": "major",
+    "details": "ID, source, type, or text is 281×36px.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "select",
+    "severity": "major",
+    "details": "All typescomplainttransaction is 281×38px.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "input",
+    "severity": "major",
+    "details": "control is 281×38px.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "input",
+    "severity": "major",
+    "details": "control is 281×38px.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "input",
+    "severity": "major",
+    "details": "Entity, case, or text is 281×36px.",
+    "screenshot": "ui-audit/before/evidence-explorer-375.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, nav, a, .active",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/evidence-explorer-768.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .back-link (11px), .eyebrow (10px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/evidence-explorer-768.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 22px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/evidence-explorer-768.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": "label:nth-child(1), label:nth-child(2)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/evidence-explorer-768.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": "div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/evidence-explorer-768.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/evidence-explorer-768.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": ".evidence-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/evidence-explorer-768.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/evidence-explorer-768.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/evidence-explorer-768.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo, .brand-page-title",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/evidence-explorer-1280.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .back-link (11px), .eyebrow (10px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/evidence-explorer-1280.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo, .brand-page-title, .brand-page-title line-height 26px, .wordmark-live line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/evidence-explorer-1280.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": "label:nth-child(1), label:nth-child(2)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/evidence-explorer-1280.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": "div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/evidence-explorer-1280.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/evidence-explorer-1280.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": ".evidence-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/evidence-explorer-1280.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/evidence-explorer-1280.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/evidence-explorer-1280.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo, .brand-page-title",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/evidence-explorer-1920.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .back-link (11px), .eyebrow (10px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/evidence-explorer-1920.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo, .brand-page-title, .brand-page-title line-height 26px, .wordmark-live line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/evidence-explorer-1920.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": "label:nth-child(1), label:nth-child(2)",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/evidence-explorer-1920.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": "div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/evidence-explorer-1920.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/evidence-explorer-1920.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": ".evidence-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/evidence-explorer-1920.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/evidence-explorer-1920.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/evidence-explorer-1920.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": ".eyebrow (10px), .secondary-action (11px), .count-badge (11px), .muted (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 18px, h1 line-height 39.2px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": "article:nth-child(1) > .panel-head > div > .eyebrow, .empty-state > p",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": "article:nth-child(1) > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": ".audit-shell",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": "a",
+    "severity": "major",
+    "details": "AUDIT & ACCESS is 219×38px.",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Sign out is 68×38px.",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": "button",
+    "severity": "major",
+    "details": "Menu is 375×39px.",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "TOUCH-TARGET",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": "#audit-evidence-id",
+    "severity": "major",
+    "details": "E-... is 275×38px.",
+    "screenshot": "ui-audit/before/audit-access-375.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, nav, a",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/audit-access-768.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .eyebrow (10px), .secondary-action (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/audit-access-768.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 22px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/audit-access-768.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": "article:nth-child(1) > .panel-head > div > .eyebrow, .empty-state > p",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/audit-access-768.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": "article:nth-child(1) > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/audit-access-768.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/audit-access-768.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": ".audit-shell",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/audit-access-768.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/audit-access-768.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/audit-access-768.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/audit-access-1280.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .eyebrow (10px), .secondary-action (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/audit-access-1280.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 26px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/audit-access-1280.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": "article:nth-child(1) > .panel-head > div > .eyebrow, .empty-state > p",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/audit-access-1280.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": "article:nth-child(1) > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/audit-access-1280.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/audit-access-1280.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": ".audit-shell",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/audit-access-1280.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/audit-access-1280.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/audit-access-1280.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/audit-access-1920.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": ".sidebar-foot (10px), .status-dot.online (10px), .eyebrow (10px), .secondary-action (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/audit-access-1920.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": ".brand-mark.brand-logo, .brand-page-title line-height 26px, .wordmark-live line-height 30px, span line-height 30px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/audit-access-1920.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": "article:nth-child(1) > .panel-head > div > .eyebrow, .empty-state > p",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/audit-access-1920.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": "article:nth-child(1) > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/before/audit-access-1920.png"
+  },
+  {
+    "id": "AXE-label-content-name-mismatch",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": ".app-brand",
+    "severity": "major",
+    "details": "Elements must have their visible text as part of their accessible name",
+    "screenshot": "ui-audit/before/audit-access-1920.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": ".audit-shell",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/before/audit-access-1920.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/before/audit-access-1920.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/before/audit-access-1920.png"
+  },
+  {
+    "id": "OVERFLOW-ELEMENT",
+    "page": "login",
+    "viewport": "375",
+    "selector": "h1",
+    "severity": "major",
+    "details": "Visible element has scrollWidth greater than clientWidth.",
+    "screenshot": "ui-audit/before/login-375.png"
+  },
+  {
+    "id": "TEXT-SIZE",
+    "page": "login",
+    "viewport": "375",
+    "selector": ".eyebrow (10px), label (10px), .primary-action (11px)",
+    "severity": "minor",
+    "details": "Visible text is below 12px.",
+    "screenshot": "ui-audit/before/login-375.png"
+  },
+  {
+    "id": "TEXT-CLIP",
+    "page": "login",
+    "viewport": "375",
+    "selector": "h1 line-height 39.2px",
+    "severity": "major",
+    "details": "Content is clipped or line-height is too tight.",
+    "screenshot": "ui-audit/before/login-375.png"
+  },
+  {
+    "id": "AXE-color-contrast",
+    "page": "login",
+    "viewport": "375",
+    "selector": "span, p",
+    "severity": "major",
+    "details": "Elements must meet minimum color contrast ratio thresholds",
+    "screenshot": "ui-audit/before/login-375.png"
+  }
+]
