@@ -23,9 +23,9 @@ services:
       - key: CORS_ORIGINS
         value: https://fraudmesh-ui.onrender.com
       - key: NEMOTRON_BASE_URL
-        value: https://integrate.api.nvidia.com/v1
+        value: https://api.tokenfactory.nebius.com/v1
       - key: NEMOTRON_MODEL
-        value: nvidia/nemotron-3.5-lightning-30b-a3b
+        value: nvidia/Nemotron-3_5-Lightning
       - key: NEMOTRON_API_KEY
         sync: false
 

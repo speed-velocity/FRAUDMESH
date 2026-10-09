@@ -110,7 +110,7 @@ GET http://127.0.0.1:8000/api/v1/health
 
 The API root (`/`) returns a small service-status payload; the health endpoint above is the deployment health check.
 
-The UI shows `API ONLINE` when the backend is available. The frontend proxies `/api` requests to the backend.
+The UI shows `API ONLINE` when the backend is available. Set `VITE_API_ORIGIN` at build time for a hosted backend; local development defaults to `http://127.0.0.1:8000`.
 
 ## Deploy on Render free tier
 
@@ -167,19 +167,36 @@ Alert rules are deterministic and sequenced. R1 through R6 are covered, includin
 
 Risk is an explainable investigation-priority signal, not a finding of fraud, guilt, or legal liability. The UI keeps that boundary visible.
 
+## Runs on Nebius
+
+FraudMesh satisfies the Nebius runtime requirement in two explicit ways:
+
+1. **Nebius Token Factory inference:** `backend/app/reasoning/live.py` calls the existing `POST /api/v1/cases/{case_id}/reasoning` path, which uses `NemotronClient` and Token Factory's OpenAI-compatible `/v1/chat/completions` endpoint. The alert shortcut is `POST /api/v1/alerts/{entity_id}/reasoning`. The default documented model is `nvidia/Nemotron-3_5-Lightning`; verify the exact model ID in the Token Factory catalog for your account.
+2. **Nebius AI Cloud backend:** `backend/Dockerfile` packages the FastAPI service and canonical demo data for a Nebius AI Cloud container/Compute VM deployment. The exact Serverless Endpoint product flags are account- and region-specific and are documented as a TODO in [docs/NEBIUS_DEPLOY.md](docs/NEBIUS_DEPLOY.md) rather than guessed.
+
+Deployment link: `TODO — add the final Nebius backend URL after deployment`.
+
+### Five-step demo flow
+
+1. Open **Live Alerts** and select the `ACC-M3` signal.
+2. Choose **Explain with Nemotron**.
+3. Review the live, evidence-grounded summary and cited IDs; all output remains human-review-only.
+4. Choose **Open investigation case**.
+5. Open **Evidence Explorer** to inspect the linked source records and masking controls.
+
 ## Nemotron integration
 
-Nemotron is optional. Configure the NVIDIA-compatible OpenAI endpoint privately:
+Nemotron is optional. Configure the Nebius Token Factory-compatible OpenAI endpoint privately:
 
 ```dotenv
-NEMOTRON_BASE_URL=https://integrate.api.nvidia.com/v1
-NEMOTRON_API_KEY=your-private-key
-NEMOTRON_MODEL=nvidia/nemotron-3.5-lightning-30b-a3b
+NEMOTRON_BASE_URL=https://api.tokenfactory.nebius.com/v1
+NEMOTRON_API_KEY=your-private-token-factory-key
+NEMOTRON_MODEL=nvidia/Nemotron-3_5-Lightning
 NEMOTRON_TIMEOUT_S=90
 NEMOTRON_MAX_TOKENS=2048
 ```
 
-The client accepts a host or `/v1` base URL and never prints the API key. Prompts are bounded and masked before transmission. The validator accepts only grounded findings, hypotheses, and plan steps that refer to available evidence; unsupported output is withheld. Cached reasoning permits deterministic local review without a live model.
+The client accepts a host or `/v1` base URL and never prints the API key. Prompts are assembled from server-side alert/case data, bounded and masked before transmission. The validator accepts only grounded findings and plan checks that refer to available evidence; unsupported output is withheld. Cached reasoning remains available as a clearly labelled sample recording without a live model. See [docs/NEBIUS_DEPLOY.md](docs/NEBIUS_DEPLOY.md) for container setup.
 
 ## Testing and build
 

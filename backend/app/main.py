@@ -11,6 +11,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.core.config import get_settings
+from app.reasoning.client import NemotronClient
+from app.reasoning.live import run_live_reasoning
 from app.db.database import alert_actions, alert_status, append_audit, apply_alert_action, audit_records, authenticate_user, case_contradictions, case_evidence, case_subgraph, cases_for_entity, chronology_summary, complaint_extraction, contradiction_catalog, create_case, create_finding, create_hypothesis, create_link, create_plan_step, current_summary, edge_detail, ensure_demo_users, entity_detail, evidence_detail, evidence_records, evaluation_summary, ingest_transaction, ingested_events, list_cases, list_findings, list_hypotheses, list_links, list_plan_steps, list_users, narrative_links, network_path, network_summary, review_finding, review_link, review_plan_item, risk_alerts, risk_profile, rollback_alert_action, run_grounded_reasoning, search_entities, session_user, revoke_session, simulator_reset, simulator_status, simulator_step, update_case_notes, update_case_status
 
 
@@ -101,7 +103,8 @@ def create_app() -> FastAPI:
     @app.get("/api/v1/health")
     async def health() -> JSONResponse:
         summary = current_summary(settings.database_url)
-        return JSONResponse({"status": "ok", "service": "fraudmesh", **summary})
+        configured = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model).configured
+        return JSONResponse({"status": "ok", "service": "fraudmesh", "reasoning": {"live_configured": configured}, **summary})
 
     @app.get("/")
     async def root() -> JSONResponse:
@@ -131,7 +134,9 @@ def create_app() -> FastAPI:
         cached_dir = Path("data/demo/cached_reasoning")
         if not cached_dir.exists():
             cached_dir = Path(__file__).resolve().parents[2] / "data" / "demo" / "cached_reasoning"
-        return JSONResponse({"live_configured": bool(settings_now.nemotron_base_url and settings_now.nemotron_api_key and settings_now.nemotron_model), "cached_available": cached_dir.exists() and any(cached_dir.glob("*.json")), "cached_label": "Cached (not live)", "human_review_required": True})
+        client_now = NemotronClient(settings_now.nemotron_base_url, settings_now.nemotron_api_key, settings_now.nemotron_model)
+        missing = client_now.missing_configuration
+        return JSONResponse({"live_configured": not missing, "missing": missing, "cached_available": cached_dir.exists() and any(cached_dir.glob("*.json")), "cached_label": "Sample recording · Cached (not live)", "live_label": "Live Nemotron · Nebius Token Factory", "human_review_required": True})
 
     def bearer_user(request: Request) -> dict | None:
         header = request.headers.get("Authorization", "")
@@ -436,10 +441,35 @@ def create_app() -> FastAPI:
     @app.post("/api/v1/cases/{case_id}/reasoning")
     async def run_reasoning(case_id: str, payload: dict = Body(default={}), request: Request = None) -> JSONResponse:
         try:
-            result = run_grounded_reasoning(settings.database_url, case_id, str(payload.get("mode", "cached")))
+            mode = str(payload.get("mode", "cached"))
+            if mode == "live":
+                client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
+                if not client.configured:
+                    return JSONResponse({"detail": f"Live Nemotron reasoning unavailable. Missing or invalid: {', '.join(client.missing_configuration)}", "missing": client.missing_configuration, "code": "reasoning_unavailable"}, status_code=503)
+                result = await run_live_reasoning(settings.database_url, case_id, client)
+            else:
+                result = run_grounded_reasoning(settings.database_url, case_id, mode)
             actor = bearer_user(request) if request else None
             if actor:
                 append_audit(settings.database_url, actor["user_id"], actor["role"], "reasoning_run", "success", request.headers.get("X-Request-ID"), "case", case_id, {"mode": result["mode"]})
+            return JSONResponse(result)
+        except ValueError as exc:
+            return JSONResponse({"detail": str(exc), "code": "reasoning_unavailable"}, status_code=400)
+
+    @app.post("/api/v1/alerts/{entity_id}/reasoning")
+    async def explain_alert(entity_id: str, request: Request = None) -> JSONResponse:
+        """Run live reasoning for an alert using server-side case/evidence context."""
+        linked_cases = cases_for_entity(settings.database_url, entity_id)
+        if not linked_cases:
+            return JSONResponse({"detail": "Open an investigation case for this alert before requesting reasoning.", "code": "case_required"}, status_code=400)
+        try:
+            client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
+            if not client.configured:
+                return JSONResponse({"detail": f"Live Nemotron reasoning unavailable. Missing or invalid: {', '.join(client.missing_configuration)}", "missing": client.missing_configuration, "code": "reasoning_unavailable"}, status_code=503)
+            result = await run_live_reasoning(settings.database_url, linked_cases[0]["case_id"], client)
+            actor = bearer_user(request) if request else None
+            if actor:
+                append_audit(settings.database_url, actor["user_id"], actor["role"], "alert_reasoning", "success", request.headers.get("X-Request-ID"), "entity", entity_id, {"case_id": linked_cases[0]["case_id"], "provider": "Nebius Token Factory"})
             return JSONResponse(result)
         except ValueError as exc:
             return JSONResponse({"detail": str(exc), "code": "reasoning_unavailable"}, status_code=400)

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 from dataclasses import dataclass
+from urllib.parse import urlparse
 
 import httpx
 
@@ -24,7 +25,18 @@ class NemotronClient:
 
     @property
     def configured(self) -> bool:
-        return bool(self.base_url and self.api_key and self.model)
+        return not self.missing_configuration
+
+    @property
+    def missing_configuration(self) -> list[str]:
+        missing = []
+        if not self.base_url or urlparse(self.base_url).scheme not in {"http", "https"}:
+            missing.append("NEMOTRON_BASE_URL")
+        if not self.api_key:
+            missing.append("NEMOTRON_API_KEY")
+        if not self.model:
+            missing.append("NEMOTRON_MODEL")
+        return missing
 
     @property
     def completion_url(self) -> str:
@@ -33,7 +45,7 @@ class NemotronClient:
 
     async def complete(self, messages: list[dict], temperature: float = 0.0) -> NemotronResult:
         if not self.configured:
-            return NemotronResult("unavailable", error="Nemotron endpoint, key, or model is not configured")
+            return NemotronResult("unavailable", error=f"Missing or invalid configuration: {', '.join(self.missing_configuration)}")
         payload = {"model": self.model, "messages": messages, "temperature": temperature, "max_tokens": self.max_tokens}
         headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
         for attempt in range(self.max_retries + 1):
