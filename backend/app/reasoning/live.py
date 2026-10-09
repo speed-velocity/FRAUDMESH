@@ -47,6 +47,18 @@ def _text_from_payload(payload: dict) -> str:
     return ""
 
 
+def _is_meta_summary(summary: str) -> bool:
+    lowered = summary.lower()
+    return any(phrase in lowered for phrase in (
+        "i'll make it",
+        "i will make it",
+        "in json",
+        "3-4 concise",
+        "the requested schema",
+        "as requested",
+    ))
+
+
 async def run_live_reasoning(database_url: str, case_id: str, client: NemotronClient) -> dict:
     records = case_evidence(database_url, case_id)
     if not records:
@@ -66,7 +78,7 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
         "evidence": mask_prompt_records(records),
     }
     result = await client.complete([
-        {"role": "system", "content": "Return only valid JSON matching the requested schema. Never invent evidence IDs or facts."},
+        {"role": "system", "content": "Return only one valid JSON object matching the requested schema. Do not describe the schema, prompt, or your formatting plan. The summary must directly explain this case using the supplied evidence in 3-4 concise sentences. Never say you will write a summary, never mention JSON, and never invent evidence IDs or facts."},
         {"role": "user", "content": json.dumps(prompt, ensure_ascii=True)},
     ])
     if result.status != "complete" or not result.content:
@@ -111,6 +123,8 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
                 "review_state": "pending",
             })
     summary = _text_from_payload(payload)
+    if _is_meta_summary(summary):
+        summary = ""
     if not summary and findings:
         summary = " ".join(item["statement"] for item in findings[:3])
     if not summary and plan_steps:
