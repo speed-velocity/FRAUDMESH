@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: fraudmesh-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m app.cli reset-and-seed --dataset ../data/demo --database-url sqlite:///data/runtime/fraudmesh.db && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: APP_ENV
+        value: demo
+      - key: DATABASE_URL
+        value: sqlite:///data/runtime/fraudmesh.db
+      - key: DATA_DIR
+        value: ../data/demo
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DEMO_INVESTIGATOR_PASSWORD
+        sync: false
+      - key: DEMO_ADMIN_PASSWORD
+        sync: false
+      - key: CORS_ORIGINS
+        value: https://fraudmesh-ui.onrender.com
+      - key: NEMOTRON_BASE_URL
+        value: https://integrate.api.nvidia.com/v1
+      - key: NEMOTRON_MODEL
+        value: nvidia/nemotron-3.5-lightning-30b-a3b
+      - key: NEMOTRON_API_KEY
+        sync: false
+
+  - type: web
+    name: fraudmesh-ui
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    plan: free
+    envVars:
+      - key: VITE_API_ORIGIN
+        value: https://fraudmesh-api.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

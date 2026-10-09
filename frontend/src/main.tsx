@@ -4,7 +4,7 @@ import "./styles.css";
 import { Header, SafetyBanner, runSignOut, type HeaderPage, type HeaderUser } from "./header";
 
 const nativeFetch = window.fetch.bind(window);
-const API_ORIGIN = "http://127.0.0.1:8000";
+const API_ORIGIN = ((import.meta.env.VITE_API_ORIGIN as string | undefined) ?? "http://127.0.0.1:8000").replace(/\/$/, "");
 let sessionToken = window.localStorage.getItem("fraudmesh_token") ?? "";
 window.fetch = (input: RequestInfo | URL, init: RequestInit = {}) => {
   const token = sessionToken || window.localStorage.getItem("fraudmesh_token") || "";

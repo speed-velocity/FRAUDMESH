@@ -110,6 +110,20 @@ GET http://127.0.0.1:8000/api/v1/health
 
 The UI shows `API ONLINE` when the backend is available. The frontend proxies `/api` requests to the backend.
 
+## Deploy on Render free tier
+
+The repository includes `render.yaml` with a free API web service and a free static frontend. In Render, choose **New → Blueprint**, connect this GitHub repository, and apply the blueprint. Render will build the two services and provide public `onrender.com` URLs.
+
+Before the first deploy, set these private API-service variables in Render:
+
+- `DEMO_INVESTIGATOR_PASSWORD`
+- `DEMO_ADMIN_PASSWORD`
+- `NEMOTRON_API_KEY` (optional)
+
+The blueprint generates `JWT_SECRET` and keeps secrets out of the repository. If Render assigns different service URLs, update `CORS_ORIGINS` on `fraudmesh-api` and `VITE_API_ORIGIN` on `fraudmesh-ui`, then redeploy the frontend.
+
+The free API service seeds the synthetic demo dataset at startup. Render free services sleep after inactivity and their local filesystem is ephemeral, so SQLite changes, cases, sessions, and audit records can disappear after restart/redeploy. This setup is for a demo, not production persistence. Render documents these free-tier limitations at [Deploy for Free](https://render.com/docs/free).
+
 ## Authentication
 
 Demo users are created from the two password environment variables. Default usernames are `investigator` and `admin`; use the private values in your own `backend/.env`.
