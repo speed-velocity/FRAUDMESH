@@ -1000,3 +1000,101 @@ img, svg { max-width: 100%; }
 @media (max-width: 520px) {
   .role-chip { min-width: 38px; width: 38px; padding: 4px; }
 }
+
+/* Lamborghini-inspired performance console: carbon surfaces, signal lime, sharp hierarchy. */
+:root {
+  --lm-black: #080a08;
+  --lm-surface: #0d100d;
+  --lm-panel: #121612;
+  --lm-panel-raised: #171c16;
+  --lm-lime: #d7ff00;
+  --lm-lime-deep: #9fbd00;
+  --lm-text: #f4f7ee;
+  --lm-muted: #9da69a;
+  --lm-line: #2b3429;
+  --lm-warn: #ffb84d;
+  --fm-primary: var(--lm-lime);
+  --fm-surface-dark: var(--lm-black);
+  --fm-on-dark: var(--lm-text);
+  --fm-on-dark-mute: var(--lm-muted);
+  --fm-hairline-strong: var(--lm-line);
+  --fm-radius: 3px;
+}
+
+html, body { background: var(--lm-black); color: var(--lm-text); }
+body { font-family: Inter, Arial, Helvetica, sans-serif; }
+.app { background: var(--lm-black); color: var(--lm-text); }
+.app-header {
+  min-height: 76px;
+  background: var(--lm-black);
+  border-bottom: 1px solid var(--lm-line);
+  box-shadow: 0 8px 24px rgba(0,0,0,.22);
+}
+.app-brand .brand-mark {
+  background: var(--lm-lime);
+  border: 1px solid var(--lm-lime);
+  border-radius: 2px;
+}
+.app-brand .brand-logo { background: var(--lm-black); border-color: var(--lm-lime); }
+.brand-page-title, .header-wordmark strong { color: var(--lm-text); font-weight: 800; letter-spacing: -.55px; }
+.wordmark-accent, .brand-copy small { color: var(--lm-lime); }
+.header-wordmark strong { font-size: 30px; text-transform: uppercase; }
+.role-chip { background: var(--lm-panel); border-color: var(--lm-line); }
+.role-chip .avatar { background: var(--lm-lime); color: var(--lm-black); }
+.sign-out { border-color: var(--lm-lime); color: var(--lm-lime); background: transparent; border-radius: 2px; }
+.sign-out:hover, .sign-out:focus-visible { background: var(--lm-lime); color: var(--lm-black); }
+.layout { gap: 28px; }
+.sidebar { background: var(--lm-black); border-right: 1px solid var(--lm-line); }
+nav a { color: var(--lm-muted); border-radius: 2px; font-weight: 700; letter-spacing: .45px; }
+nav a.active, nav a:hover { color: var(--lm-black); background: var(--lm-lime); }
+.sidebar-foot { color: var(--lm-muted); }
+.status-dot.online { background: var(--lm-lime); }
+.content { padding-top: 26px; }
+.topbar { border-bottom-color: var(--lm-line); }
+.topbar h1 { color: var(--lm-text); font-weight: 800; }
+.eyebrow, .metric span, .metric small, .muted { color: var(--lm-muted); }
+.intro { background: var(--lm-panel); border: 1px solid var(--lm-line); border-left: 3px solid var(--lm-lime); border-radius: 2px; }
+.intro h2 { color: var(--lm-text); font-weight: 750; }
+.intro p { color: var(--lm-muted); }
+.mode-badge, .count-badge, .score-badge { color: var(--lm-lime); border-color: var(--lm-lime); background: transparent; border-radius: 2px; }
+.metric-grid, .metric { border-color: var(--lm-line); }
+.metric strong { color: var(--lm-text); }
+.panel { background: var(--lm-panel); border-color: var(--lm-line); border-radius: 3px; box-shadow: 0 12px 30px rgba(0,0,0,.16); }
+.panel h3, .empty-state strong, .detail-state strong { color: var(--lm-text); }
+.alert-row, .case-row, .evidence-row, .event-row, .entity-result, .path-result, .graph-wrap, .control-row {
+  background: var(--lm-panel-raised); color: var(--lm-text); border-color: var(--lm-line); border-radius: 2px;
+}
+.alert-row:hover, .alert-row.selected, .case-row:hover, .case-row.selected { background: #283018; border-color: var(--lm-lime); }
+.alert-row small, .case-row small, .event-row small, .evidence-row small, .evidence-row b { color: var(--lm-muted); }
+.alert-row b, .case-row b, .path-row b { color: var(--lm-lime); }
+.detail-state ul, .detail-state p, .detail-state small { color: var(--lm-muted); }
+.primary-action { background: var(--lm-lime); color: var(--lm-black); border-radius: 2px; font-weight: 800; }
+.primary-action:hover { background: #efff80; }
+.secondary-action { background: transparent; color: var(--lm-lime); border: 1px solid var(--lm-lime-deep); border-radius: 2px; font-weight: 700; }
+.secondary-action:hover { background: var(--lm-lime); color: var(--lm-black); border-color: var(--lm-lime); }
+.case-detail textarea, .evidence-search input, .evidence-search select, .path-search select, .login-form input, .status-select {
+  background: var(--lm-panel-raised); color: var(--lm-text); border-color: var(--lm-line); border-radius: 2px;
+}
+.case-detail textarea::placeholder, .login-form input::placeholder { color: #697266; }
+.case-detail label, .evidence-search label, .path-search label, .login-form label { color: var(--lm-muted); }
+.timeline { border-left-color: var(--lm-line); }
+.timeline-dot { background: var(--lm-panel); border-color: var(--lm-lime); }
+.path-row { color: var(--lm-text); border-bottom-color: var(--lm-line); }
+.path-result { border-left-color: var(--lm-lime); }
+.control-status, .event-status { color: var(--lm-lime); }
+.control-status.not-implemented, .event-status.duplicate { color: var(--lm-warn); }
+.review-item { border-bottom-color: var(--lm-line); }
+.review-item small { color: var(--lm-muted); }
+.app-footer { border-top-color: var(--lm-line); color: var(--lm-muted); }
+.login-shell { background: var(--lm-black); }
+.login-card { background: var(--lm-panel); color: var(--lm-text); border-color: var(--lm-line); border-radius: 3px; }
+.login-card h1 { color: var(--lm-text); }
+.login-card p { color: var(--lm-muted); }
+.login-error { color: #ff6b62; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline-color: var(--lm-lime); }
+
+@media (max-width: 767px) {
+  .app-header { min-height: 72px; background: var(--lm-black); }
+  .mobile-menu-toggle { background: var(--lm-black); color: var(--lm-lime); border-bottom-color: var(--lm-line); }
+  .sidebar { background: var(--lm-black); border-bottom-color: var(--lm-line); }
+}
