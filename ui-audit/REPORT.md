@@ -69,3 +69,22 @@ The remaining minor axe findings are structural: the shared authenticated shell 
 - The Lamborghini black/charcoal/gold system remains intact; readability wins over tiny uppercase microcopy.
 - No content, routes, API contracts, authentication behavior, or backend files are changed.
 - The exact proprietary LamboType font is unavailable; the existing documented Roboto/Helvetica/Arial fallback remains.
+
+## Light/dark mode verification
+
+Branch: `ui/editorial`  
+Default theme: `editorial`  
+Mode selection: `data-mode="light|dark"`, with OS preference on first visit and a guarded `localStorage` override after the toggle is used.
+
+The mode toggle is present in the authenticated header and login screen, has a changing accessible name, `aria-pressed`, a tooltip, keyboard support, and a minimum 44px target (48px on mobile). The head bootstrap applies the saved/OS mode before the first paint, and the meta theme colour follows the active palette.
+
+| Mode | Screenshots | Findings | Axe serious/critical |
+|---|---:|---:|---:|
+| Light | 57 in [`light/`](light/) | 0 | 0 |
+| Dark | 57 in [`dark/`](dark/) | 0 | 0 |
+
+Both runs covered all routes and login at 375, 768, 1280, and 1920px, plus mobile navigation, focus, Nemotron-unavailable, long-ID, and OS-preference states. Raw results are [`light-issues.json`](light-issues.json) and [`dark-issues.json`](dark-issues.json); the combined file is [`mode-issues.json`](mode-issues.json).
+
+Run the verification with `$env:AUDIT_MODE='light'; pnpm run ui:audit` and `$env:AUDIT_MODE='dark'; pnpm run ui:audit` from `frontend/`.
+
+The mode audit intentionally runs axe on the shared dashboard and login surfaces at every viewport while running the DOM/layout checks across every route and viewport; this avoids exhausting the browser renderer on the available Windows paging configuration while still exercising the shared token/control surfaces.

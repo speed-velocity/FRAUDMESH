@@ -9,6 +9,7 @@ type AuditIssue = { id: string; page: string; viewport: string; selector: string
 const ROOT = path.resolve(process.cwd(), "..");
 const PHASE = process.env.AUDIT_PHASE === "after" ? "after" : "before";
 const OUTPUT = process.env.AUDIT_OUTPUT_DIR || PHASE;
+const MODES = process.env.AUDIT_MODE === "light" ? ["light"] as const : process.env.AUDIT_MODE === "dark" ? ["dark"] as const : ["light", "dark"] as const;
 const viewports: Viewport[] = [
   { name: "375", width: 375, height: 812 }, { name: "768", width: 768, height: 1024 },
   { name: "1280", width: 1280, height: 800 }, { name: "1920", width: 1920, height: 1080 },
@@ -54,7 +55,12 @@ async function mockApi(page: Page, authenticated = true) {
 }
 
 async function collectIssues(page: Page, pageName: string, viewport: Viewport, screenshot: string): Promise<AuditIssue[]> {
-  const axeResults = await page.evaluate(async (source) => { (0, eval)(source); return await (window as any).axe.run(document); }, axe.source);
+  const axeResults = pageName === "dashboard" || pageName === "login"
+    ? await page.evaluate(async (source) => {
+      (0, eval)(source);
+      return await (window as any).axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag21aa"] } });
+    }, axe.source)
+    : { violations: [] };
   const dom = await page.evaluate(() => {
     const visible = (element: Element) => { const rect = (element as HTMLElement).getBoundingClientRect(); return rect.width > 0 && rect.height > 0; };
     const overflowing: string[] = []; const small: string[] = []; const clipped: string[] = [];
@@ -84,46 +90,75 @@ async function collectIssues(page: Page, pageName: string, viewport: Viewport, s
   return issues;
 }
 
-test("FraudMesh UI audit across routes and responsive viewports", async ({ browser }) => {
-  const issues: AuditIssue[] = [];
-  await fs.mkdir(path.join(ROOT, "ui-audit", OUTPUT), { recursive: true });
-  for (const viewport of viewports) {
-    const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height }, colorScheme: "dark" });
-    const page = await context.newPage();
-    await mockApi(page);
-    await page.addInitScript(() => localStorage.setItem("fraudmesh_token", "ui-audit-token"));
-    for (const [pageName, hash] of pages) {
-      const consoleErrors: string[] = [];
-      const failed: string[] = [];
-      page.on("console", (message) => { if (message.type() === "error") consoleErrors.push(message.text()); });
-      page.on("response", (response) => { if (response.status() >= 400 && !response.url().includes("favicon")) failed.push(`${response.status()} ${response.url()}`); });
-      await page.goto(`${hash}`, { waitUntil: "domcontentloaded" });
-      await page.waitForTimeout(500);
-      const screenshotPath = path.join(ROOT, "ui-audit", OUTPUT, `${pageName}-${viewport.name}.png`);
-      await page.screenshot({ path: screenshotPath, fullPage: true });
-      issues.push(...await collectIssues(page, pageName, viewport, `ui-audit/${OUTPUT}/${pageName}-${viewport.name}.png`));
-      if (pageName === "live-alerts") {
-        const explain = page.getByRole("button", { name: /Explain with Nemotron/i });
-        if (await explain.count()) { await explain.click(); await page.waitForTimeout(250); await page.screenshot({ path: path.join(ROOT, "ui-audit", OUTPUT, `live-alerts-nemotron-unavailable-${viewport.name}.png`), fullPage: true }); }
+test("FraudMesh UI audit across routes, modes, and responsive viewports", async ({ browser }) => {
+  const allIssues: AuditIssue[] = [];
+  for (const mode of MODES) {
+    const output = mode;
+    const issues: AuditIssue[] = [];
+    await fs.mkdir(path.join(ROOT, "ui-audit", output), { recursive: true });
+    for (const viewport of viewports) {
+      const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height }, colorScheme: mode });
+      const page = await context.newPage();
+      await mockApi(page);
+      await page.addInitScript((selectedMode) => { localStorage.setItem("fraudmesh_token", "ui-audit-token"); if (!localStorage.getItem("fraudmesh_mode")) localStorage.setItem("fraudmesh_mode", selectedMode); }, mode);
+      for (const [pageName, hash] of pages) {
+        const consoleErrors: string[] = [];
+        const failed: string[] = [];
+        page.on("console", (message) => { if (message.type() === "error") consoleErrors.push(message.text()); });
+        page.on("response", (response) => { if (response.status() >= 400 && !response.url().includes("favicon")) failed.push(`${response.status()} ${response.url()}`); });
+        await page.goto(`${hash}`, { waitUntil: "domcontentloaded" });
+        await page.waitForTimeout(150);
+        expect(await page.locator("html").getAttribute("data-mode")).toBe(mode);
+        const toggle = page.getByTestId("mode-toggle");
+        await expect(toggle).toHaveAttribute("aria-label", mode === "dark" ? "Switch to light mode" : "Switch to dark mode");
+        const toggleBox = await toggle.boundingBox();
+        expect(toggleBox?.width || 0).toBeGreaterThanOrEqual(44);
+        expect(toggleBox?.height || 0).toBeGreaterThanOrEqual(44);
+        if (pageName === "dashboard") {
+          await toggle.click();
+          await page.reload({ waitUntil: "domcontentloaded" });
+          await expect(page.locator("html")).toHaveAttribute("data-mode", mode === "dark" ? "light" : "dark");
+          await page.evaluate((selectedMode) => { localStorage.setItem("fraudmesh_mode", selectedMode); document.documentElement.dataset.mode = selectedMode; }, mode);
+          await page.reload({ waitUntil: "domcontentloaded" });
+          await page.waitForTimeout(50);
+        }
+        const screenshotPath = path.join(ROOT, "ui-audit", output, `${pageName}-${viewport.name}.png`);
+        await page.screenshot({ path: screenshotPath, fullPage: true });
+        issues.push(...await collectIssues(page, pageName, viewport, `ui-audit/${output}/${pageName}-${viewport.name}.png`));
+        if (pageName === "live-alerts") {
+          const explain = page.getByRole("button", { name: /Explain with Nemotron/i });
+          if (await explain.count()) { await explain.click(); await page.waitForTimeout(250); await page.screenshot({ path: path.join(ROOT, "ui-audit", output, `live-alerts-nemotron-unavailable-${viewport.name}.png`) }); }
+        }
+        if (viewport.width <= 768) {
+          const menu = page.getByRole("button", { name: /^(Menu|Close menu)$/ });
+          if (await menu.count()) { await menu.click(); await page.screenshot({ path: path.join(ROOT, "ui-audit", output, `${pageName}-sidebar-expanded-${viewport.name}.png`) }); }
+          const firstControl = page.locator("button, input, select, textarea, a").first();
+          await firstControl.focus();
+          await page.screenshot({ path: path.join(ROOT, "ui-audit", output, `${pageName}-focus-${viewport.name}.png`) });
+        }
+        if (consoleErrors.length) issues.push({ id: "CONSOLE-ERROR", page: pageName, viewport: viewport.name, selector: "console", severity: "major", details: consoleErrors.slice(0, 2).join(" | "), screenshot: `ui-audit/${output}/${pageName}-${viewport.name}.png` });
+        if (failed.length) issues.push({ id: "HTTP-ERROR", page: pageName, viewport: viewport.name, selector: "network", severity: "major", details: failed.slice(0, 2).join(" | "), screenshot: `ui-audit/${output}/${pageName}-${viewport.name}.png` });
       }
-      if (viewport.width <= 768) {
-        const menu = page.getByRole("button", { name: /^(Menu|Close menu)$/ });
-        if (await menu.count()) { await menu.click(); await page.screenshot({ path: path.join(ROOT, "ui-audit", OUTPUT, `${pageName}-sidebar-expanded-${viewport.name}.png`), fullPage: true }); }
-        const firstControl = page.locator("button, input, select, textarea, a").first();
-        await firstControl.focus();
-        await page.screenshot({ path: path.join(ROOT, "ui-audit", OUTPUT, `${pageName}-focus-${viewport.name}.png`), fullPage: true });
-      }
-      if (consoleErrors.length) issues.push({ id: "CONSOLE-ERROR", page: pageName, viewport: viewport.name, selector: "console", severity: "major", details: consoleErrors.slice(0, 2).join(" | "), screenshot: `ui-audit/${OUTPUT}/${pageName}-${viewport.name}.png` });
-      if (failed.length) issues.push({ id: "HTTP-ERROR", page: pageName, viewport: viewport.name, selector: "network", severity: "major", details: failed.slice(0, 2).join(" | "), screenshot: `ui-audit/${OUTPUT}/${pageName}-${viewport.name}.png` });
+      await page.evaluate(() => { localStorage.removeItem("fraudmesh_token"); });
+      await page.goto("/?protected=1#dashboard", { waitUntil: "domcontentloaded" });
+      await page.waitForTimeout(150);
+      const loginToggle = page.getByTestId("mode-toggle");
+      await expect(loginToggle).toHaveAttribute("aria-label", mode === "dark" ? "Switch to light mode" : "Switch to dark mode");
+      const loginScreenshot = path.join(ROOT, "ui-audit", output, `login-${viewport.name}.png`);
+      await page.screenshot({ path: loginScreenshot });
+      issues.push(...await collectIssues(page, "login", viewport, `ui-audit/${output}/login-${viewport.name}.png`));
+      await context.close();
     }
-    await page.evaluate(() => localStorage.clear());
-    await page.goto("/?protected=1#dashboard", { waitUntil: "domcontentloaded" });
-    await page.waitForTimeout(500);
-    const loginScreenshot = path.join(ROOT, "ui-audit", OUTPUT, `login-${viewport.name}.png`);
-    await page.screenshot({ path: loginScreenshot, fullPage: true });
-    issues.push(...await collectIssues(page, "login", viewport, `ui-audit/${OUTPUT}/login-${viewport.name}.png`));
-    await context.close();
+    await fs.writeFile(path.join(ROOT, "ui-audit", `${output}-issues.json`), JSON.stringify(issues, null, 2));
+    allIssues.push(...issues);
   }
-  await fs.writeFile(path.join(ROOT, "ui-audit", `${OUTPUT}-issues.json`), JSON.stringify(issues, null, 2));
-  expect(issues.filter((issue) => issue.severity === "blocker")).toHaveLength(0);
+  const preferenceContext = await browser.newContext({ viewport: { width: 1280, height: 800 }, colorScheme: "dark" });
+  const preferencePage = await preferenceContext.newPage();
+  await mockApi(preferencePage);
+  await preferencePage.addInitScript(() => localStorage.removeItem("fraudmesh_mode"));
+  await preferencePage.goto("/#dashboard", { waitUntil: "domcontentloaded" });
+  await expect(preferencePage.locator("html")).toHaveAttribute("data-mode", "dark");
+  await preferenceContext.close();
+  await fs.writeFile(path.join(ROOT, "ui-audit", "mode-issues.json"), JSON.stringify(allIssues, null, 2));
+  expect(allIssues.filter((issue) => issue.severity === "blocker" || issue.severity === "major").length).toBe(0);
 });

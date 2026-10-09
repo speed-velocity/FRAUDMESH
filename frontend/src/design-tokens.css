@@ -18,6 +18,13 @@
   --fm-danger: var(--fm-oxblood);
   --fm-focus: #1f4f80;
   --fm-overlay: rgba(22, 19, 15, .72);
+  --fm-graph-exact: #2f5d3a;
+  --fm-graph-inferred: #8c1c13;
+  --fm-graph-weak: #5a5348;
+  --fm-logo-filter: none;
+  --fm-scrollbar-track: #eee8dd;
+  --fm-scrollbar-thumb: #a69b88;
+  --fm-meta-theme: #f6f2ea;
 }
 
 [data-theme="neoclassical"] {
@@ -37,6 +44,65 @@
   --fm-danger: var(--fm-oxblood);
   --fm-focus: #254b7c;
   --fm-overlay: rgba(20, 33, 61, .72);
+  --fm-graph-exact: #315b4a;
+  --fm-graph-inferred: #6b1e2b;
+  --fm-graph-weak: #4e5668;
+  --fm-logo-filter: none;
+  --fm-scrollbar-track: #e8e4dc;
+  --fm-scrollbar-thumb: #9b8b5c;
+  --fm-meta-theme: #faf7f0;
+}
+
+[data-theme="editorial"][data-mode="dark"] {
+  color-scheme: dark;
+  --fm-paper: #14110d;
+  --fm-paper-raised: #1d1913;
+  --fm-paper-deep: #242018;
+  --fm-ink: #ede6d8;
+  --fm-muted: #a89f8d;
+  --fm-rule: #3a342a;
+  --fm-oxblood: #d4584a;
+  --fm-oxblood-soft: #3a201c;
+  --fm-green: #7fbd8c;
+  --fm-green-soft: #1e3024;
+  --fm-amber: #e2aa55;
+  --fm-amber-soft: #3a2c1a;
+  --fm-danger: #f07a6d;
+  --fm-focus: #91c5f4;
+  --fm-overlay: rgba(0, 0, 0, .78);
+  --fm-graph-exact: #7fbd8c;
+  --fm-graph-inferred: #d4584a;
+  --fm-graph-weak: #a89f8d;
+  --fm-logo-filter: brightness(0) invert(1);
+  --fm-scrollbar-track: #1d1913;
+  --fm-scrollbar-thumb: #5c5142;
+  --fm-meta-theme: #14110d;
+}
+
+[data-theme="neoclassical"][data-mode="dark"] {
+  color-scheme: dark;
+  --fm-paper: #0e1730;
+  --fm-paper-raised: #16213b;
+  --fm-paper-deep: #202c49;
+  --fm-ink: #f7f0df;
+  --fm-muted: #c0c4cf;
+  --fm-rule: #c9a24a;
+  --fm-oxblood: #d68591;
+  --fm-oxblood-soft: #3d202b;
+  --fm-green: #91c5a6;
+  --fm-green-soft: #1d3930;
+  --fm-amber: #e3c36d;
+  --fm-amber-soft: #3b321d;
+  --fm-danger: #f29aa5;
+  --fm-focus: #9bc8ff;
+  --fm-overlay: rgba(0, 0, 0, .8);
+  --fm-graph-exact: #91c5a6;
+  --fm-graph-inferred: #d68591;
+  --fm-graph-weak: #c0c4cf;
+  --fm-logo-filter: brightness(0) invert(1);
+  --fm-scrollbar-track: #16213b;
+  --fm-scrollbar-thumb: #68738d;
+  --fm-meta-theme: #0e1730;
 }
 
 :root {
