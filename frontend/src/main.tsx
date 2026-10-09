@@ -4,13 +4,15 @@ import "./styles.css";
 import { Header, SafetyBanner, runSignOut, type HeaderPage, type HeaderUser } from "./header";
 
 const nativeFetch = window.fetch.bind(window);
-const API_ORIGIN = ((import.meta.env.VITE_API_ORIGIN as string | undefined) ?? "http://127.0.0.1:8000").replace(/\/$/, "");
+const configuredApiOrigin = (import.meta.env.VITE_API_ORIGIN as string | undefined)?.trim();
+const API_ORIGIN = (configuredApiOrigin || (window.location.hostname.endsWith("onrender.com") ? "https://fraudmesh-api.onrender.com" : "http://127.0.0.1:8000")).replace(/\/$/, "");
 let sessionToken = window.localStorage.getItem("fraudmesh_token") ?? "";
 window.fetch = (input: RequestInfo | URL, init: RequestInit = {}) => {
   const token = sessionToken || window.localStorage.getItem("fraudmesh_token") || "";
   const headers = new Headers(init.headers);
   if (token) headers.set("Authorization", `Bearer ${token}`);
-  const normalizedInput = typeof input === "string" && input.startsWith(API_ORIGIN) ? input.slice(API_ORIGIN.length) || "/" : input;
+  const rawInput = typeof input === "string" ? input : input instanceof URL ? input.toString() : input.url;
+  const normalizedInput = typeof rawInput === "string" && rawInput.startsWith("http://127.0.0.1:8000") ? `${API_ORIGIN}${rawInput.slice("http://127.0.0.1:8000".length) || "/"}` : input;
   return nativeFetch(normalizedInput, { ...init, headers });
 };
 
