@@ -1,5 +1,17 @@
 # FraudMesh UI QA surgery report
 
+## Editorial redesign verification
+
+Branch: `ui/editorial`  
+Theme: `editorial` (default via `data-theme="editorial"`)  
+Audit command: `$env:AUDIT_OUTPUT_DIR='editorial'; pnpm run ui:audit`
+
+The editorial audit passed: 0 blocker, 0 major, 0 minor, 0 horizontal-overflow, and 0 axe findings. It generated 57 screenshots under [`ui-audit/editorial/`](editorial/), covering every authenticated route and login at 375, 768, 1280, and 1920px, plus mobile navigation, focus, Nemotron-unavailable, and long-ID states. Raw results are in [`editorial-issues.json`](editorial-issues.json).
+
+The redesign uses one semantic token file with a `data-theme` switch. Editorial is the default; neoclassical values are also shipped for a future switch. Playfair Display, Source Serif 4, and IBM Plex Mono are loaded from Google Fonts; no proprietary font substitution was needed. Existing route structure, API calls, authentication, labels, graph interactions, and review flows remain unchanged.
+
+Accessibility/layout fixes included one authenticated `<main>` landmark, named content regions, corrected heading levels, 48px controls, 48px mobile touch targets, long-ID wrapping, graph width constraints, and exact/inferred/weak graph edge styles that remain distinguishable without colour alone.
+
 Branch: `ui/lamborghini`  
 Audit command: `pnpm run ui:audit`  
 Screenshots: [`before/`](before/) and [`after/`](after/)

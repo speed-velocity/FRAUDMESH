@@ -8,6 +8,7 @@ type AuditIssue = { id: string; page: string; viewport: string; selector: string
 
 const ROOT = path.resolve(process.cwd(), "..");
 const PHASE = process.env.AUDIT_PHASE === "after" ? "after" : "before";
+const OUTPUT = process.env.AUDIT_OUTPUT_DIR || PHASE;
 const viewports: Viewport[] = [
   { name: "375", width: 375, height: 812 }, { name: "768", width: 768, height: 1024 },
   { name: "1280", width: 1280, height: 800 }, { name: "1920", width: 1920, height: 1080 },
@@ -62,7 +63,8 @@ async function collectIssues(page: Page, pageName: string, viewport: Viewport, s
       const selector = element.id ? `#${element.id}` : element.className && typeof element.className === "string" ? `.${element.className.split(/\s+/).filter(Boolean).slice(0, 2).join(".")}` : element.tagName.toLowerCase();
       if (element.scrollWidth > element.clientWidth + 1) overflowing.push(selector);
       const style = getComputedStyle(element); const fontSize = parseFloat(style.fontSize); const lineHeight = parseFloat(style.lineHeight);
-      if (fontSize < 12) small.push(`${selector} (${fontSize}px)`);
+      const minimum = viewport.width < 768 ? 14 : 12;
+      if (fontSize < minimum) small.push(`${selector} (${fontSize}px)`);
       if (element.scrollWidth > element.clientWidth + 1 && style.overflowX === "hidden") clipped.push(selector);
       if (lineHeight && fontSize >= 14 && lineHeight / fontSize < 1.3 && /^(P|LI|LABEL|SMALL|A|SPAN)$/.test(element.tagName) && !element.closest("h1,h2,h3,h4,.wordmark-live,.brand-page-title")) clipped.push(`${selector} line-height ${style.lineHeight}`);
     });
@@ -73,38 +75,55 @@ async function collectIssues(page: Page, pageName: string, viewport: Viewport, s
   const issues: AuditIssue[] = [];
   if (dom.scrollWidth > viewport.width + 1) issues.push({ id: "OVERFLOW-DOCUMENT", page: pageName, viewport: viewport.name, selector: "document", severity: "major", details: `document scrollWidth ${dom.scrollWidth} > ${viewport.width}`, screenshot });
   if (dom.overflowing.length) issues.push({ id: "OVERFLOW-ELEMENT", page: pageName, viewport: viewport.name, selector: dom.overflowing.slice(0, 4).join(", "), severity: "major", details: "Visible element has scrollWidth greater than clientWidth.", screenshot });
-  if (dom.small.length) issues.push({ id: "TEXT-SIZE", page: pageName, viewport: viewport.name, selector: dom.small.slice(0, 4).join(", "), severity: "minor", details: "Visible text is below 12px.", screenshot });
+  if (dom.small.length) issues.push({ id: "TEXT-SIZE", page: pageName, viewport: viewport.name, selector: dom.small.slice(0, 4).join(", "), severity: "minor", details: "Visible text is below the responsive minimum.", screenshot });
   if (dom.clipped.length) issues.push({ id: "TEXT-CLIP", page: pageName, viewport: viewport.name, selector: dom.clipped.slice(0, 4).join(", "), severity: "major", details: "Content is clipped or line-height is too tight.", screenshot });
   for (const violation of axeResults.violations) issues.push({ id: `AXE-${violation.id}`, page: pageName, viewport: viewport.name, selector: violation.nodes.slice(0, 2).flatMap((node: any) => node.target).join(", "), severity: violation.impact === "critical" || violation.impact === "serious" ? "major" : "minor", details: violation.help, screenshot });
   for (const control of dom.controls.filter((item) => viewport.width < 768 && (item.width < 44 || item.height < 44))) issues.push({ id: "TOUCH-TARGET", page: pageName, viewport: viewport.name, selector: control.selector, severity: "major", details: `${control.text || "control"} is ${Math.round(control.width)}×${Math.round(control.height)}px.`, screenshot });
+  const controlGroups = await page.locator(".timeline-mode button, .primary-action, .secondary-action").evaluateAll((elements) => elements.map((element) => Math.round((element as HTMLElement).getBoundingClientRect().height)).filter(Boolean));
+  if (new Set(controlGroups).size > 1) issues.push({ id: "CONTROL-HEIGHT", page: pageName, viewport: viewport.name, selector: ".timeline-mode button, .primary-action, .secondary-action", severity: "minor", details: `Control heights differ: ${[...new Set(controlGroups)].join(", ")}px.`, screenshot });
   return issues;
 }
 
 test("FraudMesh UI audit across routes and responsive viewports", async ({ browser }) => {
   const issues: AuditIssue[] = [];
-  await fs.mkdir(path.join(ROOT, "ui-audit", PHASE), { recursive: true });
-  for (const [pageName, hash] of pages) for (const viewport of viewports) {
+  await fs.mkdir(path.join(ROOT, "ui-audit", OUTPUT), { recursive: true });
+  for (const viewport of viewports) {
     const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height }, colorScheme: "dark" });
-    const page = await context.newPage(); await mockApi(page); await page.addInitScript(() => localStorage.setItem("fraudmesh_token", "ui-audit-token"));
-    const consoleErrors: string[] = []; const failed: string[] = [];
-    page.on("console", (message) => { if (message.type() === "error") consoleErrors.push(message.text()); }); page.on("response", (response) => { if (response.status() >= 400 && !response.url().includes("favicon")) failed.push(`${response.status()} ${response.url()}`); });
-    await page.goto(`${hash}`, { waitUntil: "domcontentloaded" }); await page.waitForTimeout(500);
-    const screenshotPath = path.join(ROOT, "ui-audit", PHASE, `${pageName}-${viewport.name}.png`); await page.screenshot({ path: screenshotPath, fullPage: true });
-    issues.push(...await collectIssues(page, pageName, viewport, `ui-audit/${PHASE}/${pageName}-${viewport.name}.png`));
-    if (pageName === "live-alerts") {
-      const explain = page.getByRole("button", { name: /Explain with Nemotron/i });
-      if (await explain.count()) { await explain.click(); await page.waitForTimeout(250); await page.screenshot({ path: path.join(ROOT, "ui-audit", PHASE, `live-alerts-nemotron-unavailable-${viewport.name}.png`), fullPage: true }); }
+    const page = await context.newPage();
+    await mockApi(page);
+    await page.addInitScript(() => localStorage.setItem("fraudmesh_token", "ui-audit-token"));
+    for (const [pageName, hash] of pages) {
+      const consoleErrors: string[] = [];
+      const failed: string[] = [];
+      page.on("console", (message) => { if (message.type() === "error") consoleErrors.push(message.text()); });
+      page.on("response", (response) => { if (response.status() >= 400 && !response.url().includes("favicon")) failed.push(`${response.status()} ${response.url()}`); });
+      await page.goto(`${hash}`, { waitUntil: "domcontentloaded" });
+      await page.waitForTimeout(500);
+      const screenshotPath = path.join(ROOT, "ui-audit", OUTPUT, `${pageName}-${viewport.name}.png`);
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+      issues.push(...await collectIssues(page, pageName, viewport, `ui-audit/${OUTPUT}/${pageName}-${viewport.name}.png`));
+      if (pageName === "live-alerts") {
+        const explain = page.getByRole("button", { name: /Explain with Nemotron/i });
+        if (await explain.count()) { await explain.click(); await page.waitForTimeout(250); await page.screenshot({ path: path.join(ROOT, "ui-audit", OUTPUT, `live-alerts-nemotron-unavailable-${viewport.name}.png`), fullPage: true }); }
+      }
+      if (viewport.width <= 768) {
+        const menu = page.getByRole("button", { name: /^(Menu|Close menu)$/ });
+        if (await menu.count()) { await menu.click(); await page.screenshot({ path: path.join(ROOT, "ui-audit", OUTPUT, `${pageName}-sidebar-expanded-${viewport.name}.png`), fullPage: true }); }
+        const firstControl = page.locator("button, input, select, textarea, a").first();
+        await firstControl.focus();
+        await page.screenshot({ path: path.join(ROOT, "ui-audit", OUTPUT, `${pageName}-focus-${viewport.name}.png`), fullPage: true });
+      }
+      if (consoleErrors.length) issues.push({ id: "CONSOLE-ERROR", page: pageName, viewport: viewport.name, selector: "console", severity: "major", details: consoleErrors.slice(0, 2).join(" | "), screenshot: `ui-audit/${OUTPUT}/${pageName}-${viewport.name}.png` });
+      if (failed.length) issues.push({ id: "HTTP-ERROR", page: pageName, viewport: viewport.name, selector: "network", severity: "major", details: failed.slice(0, 2).join(" | "), screenshot: `ui-audit/${OUTPUT}/${pageName}-${viewport.name}.png` });
     }
-    if (viewport.width <= 768) {
-      const menu = page.getByRole("button", { name: /^(Menu|Close menu)$/ });
-      if (await menu.count()) { await menu.click(); await page.screenshot({ path: path.join(ROOT, "ui-audit", PHASE, `${pageName}-sidebar-expanded-${viewport.name}.png`), fullPage: true }); }
-      const firstControl = page.locator("button, input, select, textarea, a").first(); await firstControl.focus(); await page.screenshot({ path: path.join(ROOT, "ui-audit", PHASE, `${pageName}-focus-${viewport.name}.png`), fullPage: true });
-    }
-    if (consoleErrors.length) issues.push({ id: "CONSOLE-ERROR", page: pageName, viewport: viewport.name, selector: "console", severity: "major", details: consoleErrors.slice(0, 2).join(" | "), screenshot: `ui-audit/${PHASE}/${pageName}-${viewport.name}.png` });
-    if (failed.length) issues.push({ id: "HTTP-ERROR", page: pageName, viewport: viewport.name, selector: "network", severity: "major", details: failed.slice(0, 2).join(" | "), screenshot: `ui-audit/${PHASE}/${pageName}-${viewport.name}.png` });
+    await page.evaluate(() => localStorage.clear());
+    await page.goto("/?protected=1#dashboard", { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(500);
+    const loginScreenshot = path.join(ROOT, "ui-audit", OUTPUT, `login-${viewport.name}.png`);
+    await page.screenshot({ path: loginScreenshot, fullPage: true });
+    issues.push(...await collectIssues(page, "login", viewport, `ui-audit/${OUTPUT}/login-${viewport.name}.png`));
     await context.close();
   }
-  const loginContext = await browser.newContext({ viewport: { width: 375, height: 812 }, colorScheme: "dark" }); const login = await loginContext.newPage(); await mockApi(login, false); await login.goto("/?protected=1#dashboard", { waitUntil: "domcontentloaded" }); await login.waitForTimeout(500); await login.screenshot({ path: path.join(ROOT, "ui-audit", PHASE, "login-375.png"), fullPage: true }); issues.push(...await collectIssues(login, "login", viewports[0], `ui-audit/${PHASE}/login-375.png`)); await loginContext.close();
-  await fs.writeFile(path.join(ROOT, "ui-audit", `${PHASE}-issues.json`), JSON.stringify(issues, null, 2));
+  await fs.writeFile(path.join(ROOT, "ui-audit", `${OUTPUT}-issues.json`), JSON.stringify(issues, null, 2));
   expect(issues.filter((issue) => issue.severity === "blocker")).toHaveLength(0);
 });
