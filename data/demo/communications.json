@@ -1,0 +1,74 @@
+[
+  {
+    "comm_id": "COM-01",
+    "type": "call_log",
+    "from_ref": "PHN-P1",
+    "to_ref": "VIC-V01",
+    "ts": "2026-09-02T04:00:00Z",
+    "text": "3 min call"
+  },
+  {
+    "comm_id": "COM-02",
+    "type": "call_log",
+    "from_ref": "PHN-P1",
+    "to_ref": "VIC-V02",
+    "ts": "2026-09-03T08:35:00Z",
+    "text": "12 min call"
+  },
+  {
+    "comm_id": "COM-03",
+    "type": "message",
+    "from_ref": "PHN-P2",
+    "to_ref": "VIC-V06",
+    "ts": "2026-09-03T13:30:00Z",
+    "text": "Message about task earnings"
+  },
+  {
+    "comm_id": "COM-04",
+    "type": "call_log",
+    "from_ref": "PHN-P3",
+    "to_ref": "VIC-V12",
+    "ts": "2026-09-02T12:50:00Z",
+    "text": "6 min call"
+  },
+  {
+    "comm_id": "COM-05",
+    "type": "call_log",
+    "from_ref": "PHN-P3",
+    "to_ref": "VIC-V12",
+    "ts": "2026-09-06T18:00:00Z",
+    "text": "9 min call"
+  },
+  {
+    "comm_id": "COM-06",
+    "type": "call_log",
+    "from_ref": "PHN-P3",
+    "to_ref": "VIC-V11",
+    "ts": "2026-09-04T03:30:00Z",
+    "text": "10 min call"
+  },
+  {
+    "comm_id": "COM-07",
+    "type": "message",
+    "from_ref": "PHN-P4",
+    "to_ref": "VIC-V16",
+    "ts": "2026-09-13T04:20:00Z",
+    "text": "Message about refund processing"
+  },
+  {
+    "comm_id": "COM-08",
+    "type": "call_log",
+    "from_ref": "PHN-P4",
+    "to_ref": "VIC-V17",
+    "ts": "2026-09-15T08:10:00Z",
+    "text": "8 min call"
+  },
+  {
+    "comm_id": "COM-09",
+    "type": "call_log",
+    "from_ref": "PHN-P2",
+    "to_ref": "VIC-V09",
+    "ts": "2026-09-09T04:00:00Z",
+    "text": "5 min call"
+  }
+]

@@ -1,0 +1,142 @@
+[
+  {
+    "victim_id": "V01",
+    "display_name": "Synthetic Victim 01",
+    "incident_id": "INC-A",
+    "source_account_id": "ACC-VA01",
+    "source_account_number": "980000000001"
+  },
+  {
+    "victim_id": "V02",
+    "display_name": "Synthetic Victim 02",
+    "incident_id": "INC-A",
+    "source_account_id": "ACC-VA02",
+    "source_account_number": "980000000002"
+  },
+  {
+    "victim_id": "V03",
+    "display_name": "Synthetic Victim 03",
+    "incident_id": "INC-A",
+    "source_account_id": "ACC-VA03",
+    "source_account_number": "980000000003"
+  },
+  {
+    "victim_id": "V04",
+    "display_name": "Synthetic Victim 04",
+    "incident_id": "INC-A",
+    "source_account_id": "ACC-VA04",
+    "source_account_number": "980000000004"
+  },
+  {
+    "victim_id": "V05",
+    "display_name": "Synthetic Victim 05",
+    "incident_id": "INC-A",
+    "source_account_id": "ACC-VA05",
+    "source_account_number": "980000000005"
+  },
+  {
+    "victim_id": "V06",
+    "display_name": "Synthetic Victim 06",
+    "incident_id": "INC-B",
+    "source_account_id": "ACC-VA06",
+    "source_account_number": "980000000006"
+  },
+  {
+    "victim_id": "V07",
+    "display_name": "Synthetic Victim 07",
+    "incident_id": "INC-B",
+    "source_account_id": "ACC-VA07",
+    "source_account_number": "980000000007"
+  },
+  {
+    "victim_id": "V08",
+    "display_name": "Synthetic Victim 08",
+    "incident_id": "INC-B",
+    "source_account_id": "ACC-VA08",
+    "source_account_number": "980000000008"
+  },
+  {
+    "victim_id": "V09",
+    "display_name": "Synthetic Victim 09",
+    "incident_id": "INC-B",
+    "source_account_id": "ACC-VA09",
+    "source_account_number": "980000000009"
+  },
+  {
+    "victim_id": "V10",
+    "display_name": "Synthetic Victim 10",
+    "incident_id": "INC-B",
+    "source_account_id": "ACC-VA10",
+    "source_account_number": "980000000010"
+  },
+  {
+    "victim_id": "V11",
+    "display_name": "Synthetic Victim 11",
+    "incident_id": "INC-C",
+    "source_account_id": "ACC-VA11",
+    "source_account_number": "980000000011"
+  },
+  {
+    "victim_id": "V12",
+    "display_name": "Synthetic Victim 12",
+    "incident_id": "INC-C",
+    "source_account_id": "ACC-VA12",
+    "source_account_number": "980000000012"
+  },
+  {
+    "victim_id": "V13",
+    "display_name": "Synthetic Victim 13",
+    "incident_id": "INC-C",
+    "source_account_id": "ACC-VA13",
+    "source_account_number": "980000000013"
+  },
+  {
+    "victim_id": "V14",
+    "display_name": "Synthetic Victim 14",
+    "incident_id": "INC-C",
+    "source_account_id": "ACC-VA14",
+    "source_account_number": "980000000014"
+  },
+  {
+    "victim_id": "V15",
+    "display_name": "Synthetic Victim 15",
+    "incident_id": "INC-C",
+    "source_account_id": "ACC-VA15",
+    "source_account_number": "980000000015"
+  },
+  {
+    "victim_id": "V16",
+    "display_name": "Synthetic Victim 16",
+    "incident_id": "INC-D",
+    "source_account_id": "ACC-VA16",
+    "source_account_number": "980000000016"
+  },
+  {
+    "victim_id": "V17",
+    "display_name": "Synthetic Victim 17",
+    "incident_id": "INC-D",
+    "source_account_id": "ACC-VA17",
+    "source_account_number": "980000000017"
+  },
+  {
+    "victim_id": "V18",
+    "display_name": "Synthetic Victim 18",
+    "incident_id": "INC-D",
+    "source_account_id": "ACC-VA18",
+    "source_account_number": "980000000018"
+  },
+  {
+    "victim_id": "V19",
+    "display_name": "Synthetic Victim 19",
+    "incident_id": "INC-D",
+    "source_account_id": "ACC-VA19",
+    "source_account_number": "980000000019"
+  },
+  {
+    "victim_id": "V20",
+    "display_name": "Synthetic Victim 20",
+    "incident_id": "INC-D",
+    "source_account_id": "ACC-VA20",
+    "source_account_number": "980000000020"
+  }
+]

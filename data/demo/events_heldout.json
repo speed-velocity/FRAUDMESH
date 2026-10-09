@@ -1,0 +1,82 @@
+[
+  {
+    "txn_id": "T-020",
+    "kind": "victim_payment",
+    "from_account": "ACC-VA20",
+    "to_account": "ACC-M2",
+    "amount_inr": 80000,
+    "ts": "2026-09-18T05:30:00Z",
+    "channel": "upi",
+    "reference": "Victim payment V20",
+    "location_label": null,
+    "held_out": true
+  },
+  {
+    "txn_id": "T-026",
+    "kind": "transfer",
+    "from_account": "ACC-M2",
+    "to_account": "ACC-M5",
+    "amount_inr": 76000,
+    "ts": "2026-09-18T05:48:00Z",
+    "channel": "bank_transfer",
+    "reference": "Layer transfer 26",
+    "location_label": null,
+    "held_out": true
+  },
+  {
+    "txn_id": "T-035",
+    "kind": "transfer",
+    "from_account": "ACC-M5",
+    "to_account": "ACC-M6",
+    "amount_inr": 74000,
+    "ts": "2026-09-18T06:11:00Z",
+    "channel": "bank_transfer",
+    "reference": "Collector transfer 35",
+    "location_label": null,
+    "held_out": true
+  },
+  {
+    "txn_id": "T-038",
+    "kind": "transfer",
+    "from_account": "ACC-M6",
+    "to_account": "ACC-M7",
+    "amount_inr": 72000,
+    "ts": "2026-09-18T06:35:00Z",
+    "channel": "bank_transfer",
+    "reference": "Cashout transfer 38",
+    "location_label": null,
+    "held_out": true
+  },
+  {
+    "txn_id": "T-044",
+    "kind": "withdrawal",
+    "from_account": "ACC-M7",
+    "to_account": null,
+    "amount_inr": 52000,
+    "ts": "2026-09-18T06:55:00Z",
+    "channel": "cash",
+    "reference": "Withdrawal 44",
+    "location_label": "Synthetic City North, ATM cluster 2",
+    "held_out": true
+  },
+  {
+    "txn_id": "T-045",
+    "kind": "withdrawal",
+    "from_account": "ACC-M7",
+    "to_account": null,
+    "amount_inr": 17000,
+    "ts": "2026-09-18T07:03:00Z",
+    "channel": "cash",
+    "reference": "Withdrawal 45",
+    "location_label": "Synthetic City North, ATM cluster 2",
+    "held_out": true
+  },
+  {
+    "complaint_id": "C-13",
+    "victim_id": "V20",
+    "incident_id": "INC-D",
+    "filed_at": "2026-09-19T03:30:00Z",
+    "narrative": "I am reporting this incident because I want an investigator to review the evidence carefully. Rohan asked me to call back on +91-90000-00105 and mentioned a payment of INR 80,000. I remember being worried and following the instructions at the time. I am not certain about every timestamp or amount, so the transaction record should be checked alongside my account. Please treat this statement as my recollection and compare it with the communication logs and ledger entries. I can answer follow-up questions if needed.",
+    "held_out": true
+  }
+]

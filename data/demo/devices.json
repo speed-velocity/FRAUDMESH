@@ -1,0 +1,77 @@
+[
+  {
+    "device_id": "DEV-1",
+    "label": "Synthetic device 1",
+    "log_entries": [
+      {
+        "log_id": "DL-01",
+        "account_id": "ACC-M1",
+        "ts": "2026-09-02T03:50:00Z"
+      },
+      {
+        "log_id": "DL-02",
+        "account_id": "ACC-M2",
+        "ts": "2026-09-03T14:15:00Z"
+      },
+      {
+        "log_id": "DL-03",
+        "account_id": "ACC-M7",
+        "ts": "2026-09-04T07:50:00Z"
+      }
+    ]
+  },
+  {
+    "device_id": "DEV-2",
+    "label": "Synthetic device 2",
+    "log_entries": [
+      {
+        "log_id": "DL-04",
+        "account_id": "ACC-M3",
+        "ts": "2026-09-04T03:40:00Z"
+      },
+      {
+        "log_id": "DL-05",
+        "account_id": "ACC-M4",
+        "ts": "2026-09-04T04:30:00Z"
+      }
+    ]
+  },
+  {
+    "device_id": "DEV-3",
+    "label": "Synthetic device 3",
+    "log_entries": [
+      {
+        "log_id": "DL-06",
+        "account_id": "ACC-M5",
+        "ts": "2026-09-04T06:30:00Z"
+      }
+    ]
+  },
+  {
+    "device_id": "DEV-4",
+    "label": "Synthetic device 4",
+    "log_entries": [
+      {
+        "log_id": "DL-07",
+        "account_id": "ACC-M6",
+        "ts": "2026-09-04T07:50:00Z"
+      }
+    ]
+  },
+  {
+    "device_id": "DEV-5",
+    "label": "Synthetic device 5",
+    "log_entries": [
+      {
+        "log_id": "DL-08",
+        "account_id": "ACC-D1",
+        "ts": "2026-09-01T05:00:00Z"
+      },
+      {
+        "log_id": "DL-09",
+        "account_id": "ACC-D1",
+        "ts": "2026-09-10T11:30:00Z"
+      }
+    ]
+  }
+]

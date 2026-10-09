@@ -1,0 +1,30 @@
+{
+  "network_members": [
+    "ACC-M1",
+    "ACC-M2",
+    "ACC-M3",
+    "ACC-M4",
+    "ACC-M5",
+    "ACC-M6",
+    "ACC-M7"
+  ],
+  "decoys": [
+    "ACC-D1",
+    "PHN-P6"
+  ],
+  "expected_alerts": [
+    "R2:T-020",
+    "R1:T-026",
+    "R1:T-035",
+    "R1:T-038",
+    "R4:T-044",
+    "R4:T-045",
+    "R6:C-013"
+  ],
+  "narrative_only_link": [
+    "C-05",
+    "C-09",
+    "C-10",
+    "C-13"
+  ]
+}

@@ -1,0 +1,346 @@
+[
+  {
+    "account_id": "ACC-M1",
+    "account_number": "990000000001",
+    "bank": "Bank Beta",
+    "holder_entity_id": "ENT-01",
+    "scope": "investigated",
+    "opened_date": "2026-08-01"
+  },
+  {
+    "account_id": "ACC-M2",
+    "account_number": "990000000002",
+    "bank": "Bank Alpha",
+    "holder_entity_id": "ENT-02",
+    "scope": "investigated",
+    "opened_date": "2026-08-01"
+  },
+  {
+    "account_id": "ACC-M3",
+    "account_number": "990000000003",
+    "bank": "Bank Alpha",
+    "holder_entity_id": "ENT-03",
+    "scope": "investigated",
+    "opened_date": "2026-08-01"
+  },
+  {
+    "account_id": "ACC-M4",
+    "account_number": "990000000004",
+    "bank": "Bank Beta",
+    "holder_entity_id": "ENT-04",
+    "scope": "investigated",
+    "opened_date": "2026-08-01"
+  },
+  {
+    "account_id": "ACC-M5",
+    "account_number": "990000000005",
+    "bank": "Bank Gamma",
+    "holder_entity_id": "ENT-05",
+    "scope": "investigated",
+    "opened_date": "2026-08-01"
+  },
+  {
+    "account_id": "ACC-M6",
+    "account_number": "990000000006",
+    "bank": "Bank Beta",
+    "holder_entity_id": "ENT-06",
+    "scope": "investigated",
+    "opened_date": "2026-08-01"
+  },
+  {
+    "account_id": "ACC-M7",
+    "account_number": "990000000007",
+    "bank": "Bank Gamma",
+    "holder_entity_id": "ENT-07",
+    "scope": "investigated",
+    "opened_date": "2026-08-01"
+  },
+  {
+    "account_id": "ACC-D1",
+    "account_number": "990000000008",
+    "bank": "Bank Alpha",
+    "holder_entity_id": "ENT-08",
+    "scope": "investigated",
+    "opened_date": "2026-08-01"
+  },
+  {
+    "account_id": "ACC-VA01",
+    "account_number": "980000000001",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA02",
+    "account_number": "980000000002",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA03",
+    "account_number": "980000000003",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA04",
+    "account_number": "980000000004",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA05",
+    "account_number": "980000000005",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA06",
+    "account_number": "980000000006",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA07",
+    "account_number": "980000000007",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA08",
+    "account_number": "980000000008",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA09",
+    "account_number": "980000000009",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA10",
+    "account_number": "980000000010",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA11",
+    "account_number": "980000000011",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA12",
+    "account_number": "980000000012",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA13",
+    "account_number": "980000000013",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA14",
+    "account_number": "980000000014",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA15",
+    "account_number": "980000000015",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA16",
+    "account_number": "980000000016",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA17",
+    "account_number": "980000000017",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA18",
+    "account_number": "980000000018",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA19",
+    "account_number": "980000000019",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-VA20",
+    "account_number": "980000000020",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA01",
+    "account_number": "970000000001",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA02",
+    "account_number": "970000000002",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA03",
+    "account_number": "970000000003",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA04",
+    "account_number": "970000000004",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA05",
+    "account_number": "970000000005",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA06",
+    "account_number": "970000000006",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA07",
+    "account_number": "970000000007",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA08",
+    "account_number": "970000000008",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA09",
+    "account_number": "970000000009",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA10",
+    "account_number": "970000000010",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA11",
+    "account_number": "970000000011",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA12",
+    "account_number": "970000000012",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA13",
+    "account_number": "970000000013",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA14",
+    "account_number": "970000000014",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  },
+  {
+    "account_id": "ACC-XA15",
+    "account_number": "970000000015",
+    "bank": "Bank Alpha",
+    "holder_entity_id": null,
+    "scope": "external",
+    "opened_date": "2026-01-01"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "phone_id": "PHN-P1",
+    "number": "+91 90000 00101",
+    "label": "reported caller"
+  },
+  {
+    "phone_id": "PHN-P2",
+    "number": "+91 90000 00102",
+    "label": "reported caller"
+  },
+  {
+    "phone_id": "PHN-P3",
+    "number": "+91 90000 00103",
+    "label": "reported caller"
+  },
+  {
+    "phone_id": "PHN-P4",
+    "number": "+91 90000 00104",
+    "label": "reported caller"
+  },
+  {
+    "phone_id": "PHN-P5",
+    "number": "+91 90000 00105",
+    "label": "callback number"
+  },
+  {
+    "phone_id": "PHN-P6",
+    "number": "+91 90000 00106",
+    "label": "decoy family contact"
+  }
+]

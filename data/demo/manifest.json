@@ -1,0 +1,19 @@
+{
+  "dataset_id": "DS-S1",
+  "name": "FraudMesh canonical synthetic demo",
+  "version": "1.0",
+  "seed": "S1",
+  "synthetic": true,
+  "base_date": "2026-09-01",
+  "generator_version": "s1.v1",
+  "counts": {
+    "victims": 20,
+    "accounts": 8,
+    "transactions": 56,
+    "complaints": 13,
+    "communications": 9,
+    "devices": 5,
+    "phones": 6,
+    "upis": 6
+  }
+}

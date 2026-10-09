@@ -1,0 +1,26 @@
+[
+  {
+    "upi_id": "m1@bankbeta",
+    "account_id": "ACC-M1"
+  },
+  {
+    "upi_id": "m2@bankalpha",
+    "account_id": "ACC-M2"
+  },
+  {
+    "upi_id": "m3@bankalpha",
+    "account_id": "ACC-M3"
+  },
+  {
+    "upi_id": "m4@bankbeta",
+    "account_id": "ACC-M4"
+  },
+  {
+    "upi_id": "m7@bankgamma",
+    "account_id": "ACC-M7"
+  },
+  {
+    "upi_id": "d1@bankalpha",
+    "account_id": "ACC-D1"
+  }
+]

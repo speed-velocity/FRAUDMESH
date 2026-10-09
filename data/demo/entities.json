@@ -1,0 +1,42 @@
+[
+  {
+    "entity_id": "ENT-01",
+    "display_name": "Synthetic Holder 01",
+    "role_tag": "account_holder"
+  },
+  {
+    "entity_id": "ENT-02",
+    "display_name": "Synthetic Holder 02",
+    "role_tag": "account_holder"
+  },
+  {
+    "entity_id": "ENT-03",
+    "display_name": "Synthetic Holder 03",
+    "role_tag": "account_holder"
+  },
+  {
+    "entity_id": "ENT-04",
+    "display_name": "Synthetic Holder 04",
+    "role_tag": "account_holder"
+  },
+  {
+    "entity_id": "ENT-05",
+    "display_name": "Synthetic Holder 05",
+    "role_tag": "account_holder"
+  },
+  {
+    "entity_id": "ENT-06",
+    "display_name": "Synthetic Holder 06",
+    "role_tag": "account_holder"
+  },
+  {
+    "entity_id": "ENT-07",
+    "display_name": "Synthetic Holder 07",
+    "role_tag": "account_holder"
+  },
+  {
+    "entity_id": "ENT-08",
+    "display_name": "Synthetic Holder 08",
+    "role_tag": "account_holder"
+  }
+]
