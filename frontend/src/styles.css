@@ -1197,3 +1197,19 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .intro h2 { font-size: 40px; }
   .primary-action, .secondary-action { width: 100%; min-height: 48px; }
 }
+
+/* Dashboard page: exhibition-like hero, sparse metrics, and sharp review surfaces. */
+.content > .intro { min-height: 280px; display: flex; align-items: end; padding: var(--fm-space-56) var(--fm-space-40); }
+.content > .intro h2 { max-width: 900px; font-size: clamp(40px, 7vw, 80px); }
+.content > .intro p { max-width: 620px; font-size: 18px; line-height: 1.56; }
+.metric-grid { background: var(--fm-color-black); }
+.metric { min-height: 142px; padding-block: var(--fm-space-32); }
+.metric strong { font-size: 40px; line-height: 1; }
+.risk-profile-panel, .controls-panel, .workspace-grid .panel, .lower-grid .panel { background: var(--fm-color-charcoal); }
+.risk-profile-form input { min-height: 48px; padding: var(--fm-space-12) var(--fm-space-16); }
+.risk-profile-score b { color: var(--fm-color-gold); }
+.risk-factors span { padding: var(--fm-space-8) var(--fm-space-12); border: 1px solid var(--fm-color-graphite); background: var(--fm-color-iron); color: var(--fm-color-smoke); }
+.risk-disclaimer { border-left-color: var(--fm-color-gold); background: var(--fm-color-iron); color: var(--fm-color-smoke); }
+.simulator-row { min-height: 72px; padding: var(--fm-space-16) 0; border-top: 1px solid var(--fm-color-graphite); border-bottom: 1px solid var(--fm-color-graphite); }
+.simulator-row small { color: var(--fm-color-ash); }
+.global-status { background: var(--fm-color-charcoal); color: var(--fm-color-smoke); border-left-color: var(--fm-color-gold); }
