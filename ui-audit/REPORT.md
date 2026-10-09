@@ -46,7 +46,7 @@ The complete raw baseline is in [`before-issues.json`](before-issues.json), incl
 
 Final audit result: 76 minor findings, 0 major findings, 0 blockers, 0 axe serious/critical findings, and 0 document/element horizontal-overflow findings. Raw final results are in [`after-issues.json`](after-issues.json).
 
-The final run also exercised the mocked/synthetic alert, case, graph, evidence, audit, Nemotron-unavailable, and login states. The audit command remains deterministic and billable-API free.
+The final run also exercised the mocked/synthetic alert, selected alert detail, mobile sidebar-expanded state, focus state, Nemotron-unavailable state, case, graph, evidence, audit-empty state, and login states. These additional state screenshots are in [`after/`](after/). The audit command remains deterministic and billable-API free.
 
 ## Remaining known issues
 

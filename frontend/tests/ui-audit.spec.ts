@@ -45,7 +45,7 @@ async function mockApi(page: Page, authenticated = true) {
     if (url.pathname.includes("/findings")) return json(route, { findings: [] });
     if (url.pathname.includes("/hypotheses")) return json(route, { hypotheses: [] });
     if (url.pathname.includes("/plan")) return json(route, { steps: [] });
-    if (url.pathname.includes("/reasoning")) return json(route, { label: "Nemotron unavailable", summary: "Live reasoning is unavailable in this audit harness." }, 503);
+    if (url.pathname.includes("/reasoning")) return json(route, { label: "Nemotron unavailable", summary: "Live reasoning is unavailable in this audit harness." });
     if (url.pathname.includes("/audit")) return json(route, { records: [] });
     if (url.pathname.includes("/path")) return json(route, { found: false, hops: 0, nodes: [], edges: [] });
     return json(route, {});
@@ -91,6 +91,15 @@ test("FraudMesh UI audit across routes and responsive viewports", async ({ brows
     await page.goto(`${hash}`, { waitUntil: "domcontentloaded" }); await page.waitForTimeout(500);
     const screenshotPath = path.join(ROOT, "ui-audit", PHASE, `${pageName}-${viewport.name}.png`); await page.screenshot({ path: screenshotPath, fullPage: true });
     issues.push(...await collectIssues(page, pageName, viewport, `ui-audit/${PHASE}/${pageName}-${viewport.name}.png`));
+    if (pageName === "live-alerts") {
+      const explain = page.getByRole("button", { name: /Explain with Nemotron/i });
+      if (await explain.count()) { await explain.click(); await page.waitForTimeout(250); await page.screenshot({ path: path.join(ROOT, "ui-audit", PHASE, `live-alerts-nemotron-unavailable-${viewport.name}.png`), fullPage: true }); }
+    }
+    if (viewport.width <= 768) {
+      const menu = page.getByRole("button", { name: /^(Menu|Close menu)$/ });
+      if (await menu.count()) { await menu.click(); await page.screenshot({ path: path.join(ROOT, "ui-audit", PHASE, `${pageName}-sidebar-expanded-${viewport.name}.png`), fullPage: true }); }
+      const firstControl = page.locator("button, input, select, textarea, a").first(); await firstControl.focus(); await page.screenshot({ path: path.join(ROOT, "ui-audit", PHASE, `${pageName}-focus-${viewport.name}.png`), fullPage: true });
+    }
     if (consoleErrors.length) issues.push({ id: "CONSOLE-ERROR", page: pageName, viewport: viewport.name, selector: "console", severity: "major", details: consoleErrors.slice(0, 2).join(" | "), screenshot: `ui-audit/${PHASE}/${pageName}-${viewport.name}.png` });
     if (failed.length) issues.push({ id: "HTTP-ERROR", page: pageName, viewport: viewport.name, selector: "network", severity: "major", details: failed.slice(0, 2).join(" | "), screenshot: `ui-audit/${PHASE}/${pageName}-${viewport.name}.png` });
     await context.close();
