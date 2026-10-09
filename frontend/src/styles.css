@@ -1,4 +1,6 @@
-:root { color: #262626; background: #fff; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+@import "./design-tokens.css";
+
+:root { color: var(--fm-color-graphite); background: var(--fm-color-white); font-family: var(--fm-font-body); }
 * { box-sizing: border-box; } body { margin: 0; min-width: 320px; background: #fff; }
 .app { min-height: 100vh; padding: 0 32px 64px; background: #fff; }.banner { border-bottom: 1px solid #e6e6e6; color: #6b6b6b; padding: 12px 2px; font-size: 11px; letter-spacing: .02em; }
 .layout { display: grid; grid-template-columns: 220px 1fr; gap: 48px; max-width: 1440px; margin: 0 auto; }.sidebar { border-right: 1px solid #e6e6e6; padding: 32px 32px 28px 0; display: flex; flex-direction: column; min-height: calc(100vh - 64px); }.brand { display: flex; align-items: center; gap: 12px; color: #262626; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; font-size: 14px; margin-bottom: 56px; }.brand-mark { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid #1c69d4; color: #1c69d4; font-size: 10px; letter-spacing: 0; }
@@ -1101,24 +1103,24 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 
 /* Generated from docs/LAMBORGHINI_DESIGN.md: final brand system pass. */
 :root {
-  --lm-black: #000000;
-  --lm-surface: #181818;
-  --lm-panel: #202020;
-  --lm-panel-raised: #202020;
-  --lm-gold: #ffc000;
-  --lm-gold-hover: #917300;
-  --lm-white: #ffffff;
-  --lm-smoke: #f5f5f5;
-  --lm-ash: #7d7d7d;
-  --lm-steel: #969696;
-  --lm-line: #494949;
-  --lm-info: #29abe2;
-  --fm-primary: var(--lm-gold);
-  --fm-surface-dark: var(--lm-black);
-  --fm-on-dark: var(--lm-white);
-  --fm-on-dark-mute: var(--lm-ash);
-  --fm-hairline-strong: rgba(255,255,255,.5);
-  --fm-radius: 0px;
+  --lm-black: var(--fm-color-black);
+  --lm-surface: var(--fm-color-iron);
+  --lm-panel: var(--fm-color-charcoal);
+  --lm-panel-raised: var(--fm-color-charcoal);
+  --lm-gold: var(--fm-color-gold);
+  --lm-gold-hover: var(--fm-color-gold-hover);
+  --lm-white: var(--fm-color-white);
+  --lm-smoke: var(--fm-color-smoke);
+  --lm-ash: var(--fm-color-ash);
+  --lm-steel: var(--fm-color-steel);
+  --lm-line: var(--fm-color-graphite);
+  --lm-info: var(--fm-color-cyan);
+  --fm-primary: var(--fm-color-gold);
+  --fm-surface-dark: var(--fm-color-black);
+  --fm-on-dark: var(--fm-color-white);
+  --fm-on-dark-mute: var(--fm-color-ash);
+  --fm-hairline-strong: var(--fm-border-ghost);
+  --fm-radius: var(--fm-radius-sharp);
 }
 
 html, body, #root { background: var(--lm-black); color: var(--lm-white); }

@@ -1,0 +1,52 @@
+:root {
+  /* Lamborghini DESIGN.md color roles */
+  --fm-color-black: #000000;
+  --fm-color-iron: #181818;
+  --fm-color-charcoal: #202020;
+  --fm-color-overlay: rgba(0, 0, 0, .7);
+  --fm-color-white: #ffffff;
+  --fm-color-smoke: #f5f5f5;
+  --fm-color-mist: #e6e6e6;
+  --fm-color-graphite: #494949;
+  --fm-color-ash: #7d7d7d;
+  --fm-color-steel: #969696;
+  --fm-color-gold: #ffc000;
+  --fm-color-gold-hover: #917300;
+  --fm-color-gold-text: #ffce3e;
+  --fm-color-cyan: #29abe2;
+  --fm-color-link: #3860be;
+  --fm-color-teal: #1eaedb;
+  --fm-color-success: #22c55e;
+  --fm-color-warning: #f59e0b;
+  --fm-color-error: #dc2626;
+
+  /* LamboType is proprietary; use the documented free fallback stack. */
+  --fm-font-display: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --fm-font-body: "Roboto", "Helvetica Neue", Arial, sans-serif;
+
+  --fm-weight-regular: 400;
+  --fm-weight-light: 300;
+  --fm-weight-bold: 700;
+  --fm-leading-display: .92;
+  --fm-leading-tight: 1.19;
+  --fm-leading-body: 1.5;
+
+  --fm-space-2: 2px;
+  --fm-space-4: 4px;
+  --fm-space-8: 8px;
+  --fm-space-12: 12px;
+  --fm-space-16: 16px;
+  --fm-space-24: 24px;
+  --fm-space-32: 32px;
+  --fm-space-40: 40px;
+  --fm-space-48: 48px;
+  --fm-space-56: 56px;
+  --fm-space-80: 80px;
+
+  --fm-radius-sharp: 0px;
+  --fm-radius-badge: 2px;
+  --fm-radius-circle: 50%;
+  --fm-border-ghost: rgba(255, 255, 255, .5);
+  --fm-border-surface: var(--fm-color-charcoal);
+  --fm-header-height: 80px;
+}
