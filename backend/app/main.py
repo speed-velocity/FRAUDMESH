@@ -103,6 +103,15 @@ def create_app() -> FastAPI:
         summary = current_summary(settings.database_url)
         return JSONResponse({"status": "ok", "service": "fraudmesh", **summary})
 
+    @app.get("/")
+    async def root() -> JSONResponse:
+        return JSONResponse({
+            "service": "fraudmesh-api",
+            "status": "online",
+            "health": "/api/v1/health",
+            "frontend": "https://fraudmesh-ui.onrender.com",
+        })
+
     @app.get("/api/v1/meta/limitations")
     async def limitations() -> JSONResponse:
         return JSONResponse({

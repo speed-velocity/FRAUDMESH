@@ -108,6 +108,8 @@ Health check:
 GET http://127.0.0.1:8000/api/v1/health
 ```
 
+The API root (`/`) returns a small service-status payload; the health endpoint above is the deployment health check.
+
 The UI shows `API ONLINE` when the backend is available. The frontend proxies `/api` requests to the backend.
 
 ## Deploy on Render free tier
