@@ -46,7 +46,13 @@ class NemotronClient:
     async def complete(self, messages: list[dict], temperature: float = 0.0) -> NemotronResult:
         if not self.configured:
             return NemotronResult("unavailable", error=f"Missing or invalid configuration: {', '.join(self.missing_configuration)}")
-        payload = {"model": self.model, "messages": messages, "temperature": temperature, "max_tokens": self.max_tokens}
+        payload = {
+            "model": self.model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": self.max_tokens,
+            "response_format": {"type": "json_object"},
+        }
         headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
         for attempt in range(self.max_retries + 1):
             try:

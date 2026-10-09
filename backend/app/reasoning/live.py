@@ -69,16 +69,16 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
         "case_id": case_id,
         "policy": "Investigator support only. Do not state guilt, intent, or an enforcement decision. Use cautious language.",
         "output_schema": {
-            "summary": "3-4 concise lines",
-            "suspicious_patterns": ["objects with pattern, evidence_ids, confidence"],
-            "recommended_checks": ["objects with check, rationale, evidence_ids"],
-            "cited_evidence_ids": ["only IDs from allowed_evidence_ids"],
+            "summary": "string: 3-4 concise evidence-grounded sentences explaining the observed case sequence",
+            "suspicious_patterns": ["object: {pattern: string, evidence_ids: string[], confidence: number}"],
+            "recommended_checks": ["object: {check: string, rationale: string, evidence_ids: string[]}"],
+            "cited_evidence_ids": ["string: only IDs from allowed_evidence_ids"],
         },
         "allowed_evidence_ids": sorted(allowed),
         "evidence": mask_prompt_records(records),
     }
     result = await client.complete([
-        {"role": "system", "content": "Return only one valid JSON object matching the requested schema. Do not describe the schema, prompt, or your formatting plan. The summary must directly explain this case using the supplied evidence in 3-4 concise sentences. Never say you will write a summary, never mention JSON, and never invent evidence IDs or facts."},
+        {"role": "system", "content": "Return only one valid JSON object matching the requested schema. Populate summary with the actual evidence-grounded explanation now; do not return a schema description, placeholder, formatting plan, or instructions to another writer. Use 3-4 concise sentences. Never mention JSON or invent evidence IDs or facts. If the evidence is insufficient, say that the linked evidence is insufficient and recommend human review."},
         {"role": "user", "content": json.dumps(prompt, ensure_ascii=True)},
     ])
     if result.status != "complete" or not result.content:
@@ -129,6 +129,8 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
         summary = " ".join(item["statement"] for item in findings[:3])
     if not summary and plan_steps:
         summary = "Recommended checks: " + "; ".join(item["action"] for item in plan_steps[:3])
+    if not summary:
+        summary = "Nemotron returned no grounded explanation for this case. Review the linked evidence manually before making a determination."
 
     return {
         "case_id": case_id,
