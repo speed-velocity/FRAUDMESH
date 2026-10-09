@@ -5,7 +5,7 @@ export type HeaderPage = { title: string };
 
 export function Header({ page, user, onSignOut }: { page: HeaderPage; user: HeaderUser; onSignOut: () => void }) {
   return <header className="app-header" data-testid="header">
-    <a className="app-brand" data-testid="brand" href="#dashboard" aria-label="FraudMesh dashboard">
+    <a className="app-brand" data-testid="brand" href="#dashboard" aria-label={`FraudMesh ${page.title.toLowerCase()}`}>
       <span className="brand-mark brand-logo" aria-hidden="true"><img src="/assets/fraudmesh-logo-for-dark.png" alt="" /></span>
       <h1 className="brand-page-title" data-testid="page-title">{page.title}</h1>
     </a>

@@ -1290,6 +1290,48 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .network-table-panel, .network-table-row { background: var(--fm-color-charcoal); }
 .network-table-row { border-bottom-color: var(--fm-color-graphite); color: var(--fm-color-smoke); }
 
+/* UI QA surgery: shared geometry, readable typography, and resilient wrapping. */
+body { line-height: 1.5; }
+p, li { line-height: 1.5; }
+.app-brand, .header-wordmark, .header-actions, .content, .layout, .panel, .panel-head, .button-row, .case-row, .evidence-row, .event-row, .audit-row { min-width: 0; }
+.app-brand { flex: 1 1 auto; min-width: 0; }
+.app-brand .brand-mark { flex: 0 0 44px; width: 44px; height: 44px; min-width: 44px; min-height: 44px; overflow: visible; }
+.app-brand .brand-mark img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.brand-page-title, .header-wordmark, .wordmark-live { min-width: 0; overflow-wrap: anywhere; word-break: normal; line-height: 1.2; }
+.brand-page-title { font-size: clamp(18px, 2vw, 28px); }
+.eyebrow, .metric span, .metric small { font-size: 12px; line-height: 1.3; letter-spacing: .08em; }
+small, .muted, .saved-state, .count-badge, .score-badge { font-size: 12px; line-height: 1.4; }
+.panel h3, .case-experience-grid h3, .network-layout h3, .evidence-layout h3 { line-height: 1.2; overflow-wrap: anywhere; }
+.intro h2, .cases-experience-header h1, .network-experience-header h1, .chain-experience-header h1, .evidence-experience-header h1, .audit-header h1, .login-card h1 { line-height: 1.08; overflow-wrap: anywhere; }
+button, input, select, textarea, .primary-action, .secondary-action { min-height: 48px; font-size: 14px; line-height: 1.4; }
+nav a, .sidebar nav a { min-height: 48px; padding-block: 12px; line-height: 1.3; overflow-wrap: anywhere; }
+.sign-out, .mobile-menu-toggle { min-height: 48px; }
+.back-link { display: inline-flex; align-items: center; min-height: 44px; line-height: 1.4; }
+.timeline-mode button { min-height: 44px; line-height: 1.3; }
+.case-row strong, .evidence-row strong, .event-row strong, .audit-row strong, .network-table-row strong, .path-row span { min-width: 0; overflow-wrap: anywhere; }
+.case-row small, .evidence-row small, .event-row small, .audit-row small, .path-result small, .masked-record p { overflow-wrap: anywhere; word-break: break-word; }
+.case-row b, .evidence-row b, .audit-row > small { flex: 0 0 auto; }
+.network-table-panel, .evidence-record-panel, .audit-grid > .panel, .graph-panel, .chain-review { min-width: 0; overflow-x: auto; }
+.network-table-row, .evidence-record-row, .audit-row { min-width: 0; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--fm-color-gold); outline-offset: 3px; }
+
+@media (max-width: 767px) {
+  .app-header { gap: var(--fm-space-12); }
+  .app-brand .brand-mark { flex-basis: 40px; width: 40px; height: 40px; min-width: 40px; min-height: 40px; }
+  .brand-page-title { font-size: 18px; }
+  .header-wordmark { display: none; }
+  .header-actions { flex: 0 0 auto; }
+  .role-chip { min-height: 48px; }
+  .mobile-menu-toggle { display: flex; align-items: center; width: 100%; padding: 0 var(--fm-space-16); }
+  .sidebar nav a { min-height: 48px; }
+  .content > .intro { min-height: 240px; padding: var(--fm-space-32) var(--fm-space-16); }
+  .content > .intro h2 { font-size: clamp(36px, 11vw, 56px); }
+  .primary-action, .secondary-action { width: 100%; margin-left: 0; }
+  .button-row { flex-wrap: wrap; }
+  .button-row > * { min-width: min(100%, 220px); }
+  .case-row, .evidence-row, .event-row, .audit-row { gap: var(--fm-space-12); }
+}
+
 /* Causal Chain: bounded reasoning path with clear evidence hierarchy. */
 .chain-experience { background: var(--fm-color-black); color: var(--fm-color-white); }
 .chain-experience-header, .chain-toolbar { border-color: var(--fm-color-charcoal); }
