@@ -112,7 +112,7 @@ The UI shows `API ONLINE` when the backend is available. The frontend proxies `/
 
 ## Deploy on Render free tier
 
-The repository includes `render.yaml` with a free API web service and a free static frontend. In Render, choose **New → Blueprint**, connect this GitHub repository, and apply the blueprint. Render will build the two services and provide public `onrender.com` URLs.
+The repository includes `render.yaml` with a free API web service and a free static frontend. In Render, choose **New → Blueprint**, connect this GitHub repository, and apply the blueprint. Render will build the two services and provide public `onrender.com` URLs. The frontend build uses the committed pnpm lockfile for deterministic dependency installation.
 
 Before the first deploy, set these private API-service variables in Render:
 
