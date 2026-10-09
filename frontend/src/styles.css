@@ -1213,3 +1213,26 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .simulator-row { min-height: 72px; padding: var(--fm-space-16) 0; border-top: 1px solid var(--fm-color-graphite); border-bottom: 1px solid var(--fm-color-graphite); }
 .simulator-row small { color: var(--fm-color-ash); }
 .global-status { background: var(--fm-color-charcoal); color: var(--fm-color-smoke); border-left-color: var(--fm-color-gold); }
+
+/* Live Alerts: queue/detail split with explicit review states. */
+.alert-filters, .event-validation-panel, .live-events-panel { background: var(--fm-color-charcoal); }
+.alert-filters .button-row, .alert-filters label { color: var(--fm-color-ash); }
+.alert-filters select, .alert-filters input { min-height: 48px; background: var(--fm-color-black); color: var(--fm-color-white); border-color: var(--fm-color-graphite); }
+.view-grid { gap: var(--fm-space-24); }
+.alert-panel, .view-grid > .panel { background: var(--fm-color-charcoal); }
+.alert-row { min-height: 64px; border-bottom: 1px solid var(--fm-color-graphite); }
+.alert-row.selected { border-left: 3px solid var(--fm-color-gold); }
+.alert-row b { color: var(--fm-color-gold); }
+.detail-state { padding-top: var(--fm-space-32); }
+.detail-state ul { color: var(--fm-color-smoke); }
+.detail-state p { border-top-color: var(--fm-color-graphite); }
+.action-controls { margin-top: var(--fm-space-24); padding-top: var(--fm-space-16); border-top: 1px solid var(--fm-color-graphite); }
+.action-controls input { width: 100%; min-height: 48px; margin-top: var(--fm-space-12); padding: var(--fm-space-12) var(--fm-space-16); background: var(--fm-color-black); color: var(--fm-color-white); border: 1px solid var(--fm-color-steel); }
+.action-history { display: grid; gap: var(--fm-space-8); margin-top: var(--fm-space-24); padding-top: var(--fm-space-16); border-top: 1px solid var(--fm-color-graphite); }
+.action-history small { color: var(--fm-color-ash); }
+.saved-state { color: var(--fm-color-gold); }
+.live-events-panel { border-top: 1px solid var(--fm-color-graphite); }
+.event-row { min-height: 52px; border-bottom-color: var(--fm-color-graphite); }
+.event-status { color: var(--fm-color-smoke); }
+.event-status.duplicate { color: var(--fm-color-gold); }
+.event-validation-panel textarea { min-height: 160px; background: var(--fm-color-black); color: var(--fm-color-white); border-color: var(--fm-color-graphite); }
