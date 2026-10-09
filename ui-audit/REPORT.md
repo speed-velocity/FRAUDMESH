@@ -35,14 +35,22 @@ The complete raw baseline is in [`before-issues.json`](before-issues.json), incl
 
 | Page | Before screenshots | After screenshots | Result |
 |---|---|---|---|
-| Dashboard | captured | pending | pending fix pass |
-| Live Alerts | captured | pending | pending fix pass |
-| Investigation Cases | captured | pending | pending fix pass |
-| Fraud Network | captured | pending | pending fix pass |
-| Causal Chain | captured | pending | pending fix pass |
-| Evidence Explorer | captured | pending | pending fix pass |
-| Audit & Access | captured | pending | pending fix pass |
-| Login | captured at 375px | pending | pending fix pass |
+| Dashboard | captured | [375](after/dashboard-375.png), [768](after/dashboard-768.png), [1280](after/dashboard-1280.png), [1920](after/dashboard-1920.png) | pass |
+| Live Alerts | captured | [375](after/live-alerts-375.png), [768](after/live-alerts-768.png), [1280](after/live-alerts-1280.png), [1920](after/live-alerts-1920.png) | pass |
+| Investigation Cases | captured | [375](after/investigation-cases-375.png), [768](after/investigation-cases-768.png), [1280](after/investigation-cases-1280.png), [1920](after/investigation-cases-1920.png) | pass |
+| Fraud Network | captured | [375](after/fraud-network-375.png), [768](after/fraud-network-768.png), [1280](after/fraud-network-1280.png), [1920](after/fraud-network-1920.png) | pass |
+| Causal Chain | captured | [375](after/causal-chain-375.png), [768](after/causal-chain-768.png), [1280](after/causal-chain-1280.png), [1920](after/causal-chain-1920.png) | pass |
+| Evidence Explorer | captured | [375](after/evidence-explorer-375.png), [768](after/evidence-explorer-768.png), [1280](after/evidence-explorer-1280.png), [1920](after/evidence-explorer-1920.png) | pass |
+| Audit & Access | captured | [375](after/audit-access-375.png), [768](after/audit-access-768.png), [1280](after/audit-access-1280.png), [1920](after/audit-access-1920.png) | pass |
+| Login | captured at 375px | [375](after/login-375.png) | pass |
+
+Final audit result: 76 minor findings, 0 major findings, 0 blockers, 0 axe serious/critical findings, and 0 document/element horizontal-overflow findings. Raw final results are in [`after-issues.json`](after-issues.json).
+
+The final run also exercised the mocked/synthetic alert, case, graph, evidence, audit, Nemotron-unavailable, and login states. The audit command remains deterministic and billable-API free.
+
+## Remaining known issues
+
+The remaining minor axe findings are structural: the shared authenticated shell uses a `<main>` landmark around pages whose page-specific experience roots are also `<main>`, and some page headings begin at `h3` because the existing component text hierarchy is preserved. They do not create serious/critical axe violations or visual overflow. Resolving them cleanly would require semantic JSX changes beyond this CSS-focused surgery pass.
 
 ## Design decisions
 

@@ -1,0 +1,686 @@
+[
+  {
+    "id": "AXE-heading-order",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".reasoning-run-panel > .panel-head > div > h3, article > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/investigation-cases-375.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".cases-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/investigation-cases-375.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/investigation-cases-375.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "investigation-cases",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/investigation-cases-375.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".reasoning-run-panel > .panel-head > div > h3, article > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/investigation-cases-768.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".cases-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/investigation-cases-768.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/investigation-cases-768.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "investigation-cases",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/investigation-cases-768.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".reasoning-run-panel > .panel-head > div > h3, article > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/investigation-cases-1280.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".cases-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/investigation-cases-1280.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/investigation-cases-1280.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "investigation-cases",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/investigation-cases-1280.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".reasoning-run-panel > .panel-head > div > h3, article > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/investigation-cases-1920.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".cases-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/investigation-cases-1920.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/investigation-cases-1920.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "investigation-cases",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/investigation-cases-1920.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": "div:nth-child(1) > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/fraud-network-375.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": ".network-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/fraud-network-375.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/fraud-network-375.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "fraud-network",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/fraud-network-375.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": "div:nth-child(1) > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/fraud-network-768.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": ".network-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/fraud-network-768.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/fraud-network-768.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "fraud-network",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/fraud-network-768.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": "div:nth-child(1) > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/fraud-network-1280.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": ".network-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/fraud-network-1280.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/fraud-network-1280.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "fraud-network",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/fraud-network-1280.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": "div:nth-child(1) > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/fraud-network-1920.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": ".network-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/fraud-network-1920.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/fraud-network-1920.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "fraud-network",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/fraud-network-1920.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": ".chain-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/causal-chain-375.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/causal-chain-375.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "causal-chain",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/causal-chain-375.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": ".chain-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/causal-chain-768.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/causal-chain-768.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "causal-chain",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/causal-chain-768.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": ".chain-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/causal-chain-1280.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/causal-chain-1280.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "causal-chain",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/causal-chain-1280.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": ".chain-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/causal-chain-1920.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/causal-chain-1920.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "causal-chain",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/causal-chain-1920.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": "div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/evidence-explorer-375.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": ".evidence-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/evidence-explorer-375.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/evidence-explorer-375.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "evidence-explorer",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/evidence-explorer-375.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": "div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/evidence-explorer-768.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": ".evidence-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/evidence-explorer-768.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/evidence-explorer-768.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "evidence-explorer",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/evidence-explorer-768.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": "div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/evidence-explorer-1280.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": ".evidence-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/evidence-explorer-1280.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/evidence-explorer-1280.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "evidence-explorer",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/evidence-explorer-1280.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": "div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/evidence-explorer-1920.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": ".evidence-experience",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/evidence-explorer-1920.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/evidence-explorer-1920.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "evidence-explorer",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/evidence-explorer-1920.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": "article:nth-child(1) > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/audit-access-375.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": ".audit-shell",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/audit-access-375.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/audit-access-375.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "audit-access",
+    "viewport": "375",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/audit-access-375.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": "article:nth-child(1) > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/audit-access-768.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": ".audit-shell",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/audit-access-768.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/audit-access-768.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "audit-access",
+    "viewport": "768",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/audit-access-768.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": "article:nth-child(1) > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/audit-access-1280.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": ".audit-shell",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/audit-access-1280.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/audit-access-1280.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "audit-access",
+    "viewport": "1280",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/audit-access-1280.png"
+  },
+  {
+    "id": "AXE-heading-order",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": "article:nth-child(1) > .panel-head > div > h3",
+    "severity": "minor",
+    "details": "Heading levels should only increase by one",
+    "screenshot": "ui-audit/after/audit-access-1920.png"
+  },
+  {
+    "id": "AXE-landmark-main-is-top-level",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": ".audit-shell",
+    "severity": "minor",
+    "details": "Main landmark should not be contained in another landmark",
+    "screenshot": "ui-audit/after/audit-access-1920.png"
+  },
+  {
+    "id": "AXE-landmark-no-duplicate-main",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Document should not have more than one main landmark",
+    "screenshot": "ui-audit/after/audit-access-1920.png"
+  },
+  {
+    "id": "AXE-landmark-unique",
+    "page": "audit-access",
+    "viewport": "1920",
+    "selector": ".app",
+    "severity": "minor",
+    "details": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+    "screenshot": "ui-audit/after/audit-access-1920.png"
+  }
+]
