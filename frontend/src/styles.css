@@ -1313,6 +1313,11 @@ nav a, .sidebar nav a { min-height: 48px; padding-block: 12px; line-height: 1.3;
 .case-row b, .evidence-row b, .audit-row > small { flex: 0 0 auto; }
 .network-table-panel, .evidence-record-panel, .audit-grid > .panel, .graph-panel, .chain-review { min-width: 0; overflow-x: auto; }
 .network-table-row, .evidence-record-row, .audit-row { min-width: 0; }
+.brand-page-title { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
+.risk-profile-form { min-width: 0; flex-wrap: wrap; }
+.risk-profile-form > * { min-width: 0; max-width: 100%; }
+.intro p, .metric small, .empty-state p, .detail-state p, .detail-state small, .muted, label, .sidebar-foot, .network-kpis, .back-link, .event-status, .app-footer { color: var(--fm-color-steel); font-size: 12px; }
+.intro p, .muted, .empty-state p, .detail-state p, .detail-state small { line-height: 1.5; }
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--fm-color-gold); outline-offset: 3px; }
 
 @media (max-width: 767px) {
