@@ -129,6 +129,10 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
     result = await client.complete(messages, feature="explain")
     if result.status != "complete" or not result.content:
         raise ValueError(result.error or "Nemotron request was unavailable")
+    # A completed Token Factory request is not the same thing as a usable
+    # grounded narrative. Keep that distinction explicit so the UI does not
+    # report a successful provider call as an outage.
+    fallback_reason = ""
     repair_used = False
     try:
         payload = _parse_json(result.content)
@@ -137,6 +141,7 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
         if plaintext:
             payload = {"summary": plaintext, "suspicious_patterns": [], "recommended_checks": [], "cited_evidence_ids": sorted({item for item in allowed if item in plaintext})}
         else:
+            fallback_reason = "invalid_or_uncited_model_output"
             repair_used = True
             repair = await client.complete([
                 {"role": "system", "content": "Your previous output was unusable. Return one and only one valid JSON object now. The summary must contain 3-4 concrete, cautious sentences grounded in the supplied evidence IDs. Do not return a schema, preamble, markdown, or planning text."},
@@ -152,6 +157,7 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
     initial_text = _text_from_payload(payload)
     structured_items = payload.get("suspicious_patterns", payload.get("findings", []))
     if (not initial_text.strip() or _is_meta_summary(initial_text)) and not structured_items and not repair_used:
+        fallback_reason = "empty_or_schema_only_model_output"
         repair_used = True
         repair = await client.complete([
             {"role": "system", "content": "Return one valid JSON object now. Do not describe the schema. Write 3-4 concrete, cautious sentences in summary using only the supplied evidence IDs, then include empty arrays if no additional findings are supported."},
@@ -201,6 +207,7 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
     if _is_meta_summary(summary):
         summary = ""
         model_grounded = False
+        fallback_reason = fallback_reason or "meta_model_output"
     if not summary and findings:
         summary = " ".join(item["statement"] for item in findings[:3])
         model_grounded = True
@@ -208,12 +215,16 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
         summary = "Recommended checks: " + "; ".join(item["action"] for item in plan_steps[:3])
         model_grounded = True
     if not summary:
+        fallback_reason = fallback_reason or "no_grounded_model_narrative"
         summary = _evidence_fallback(records)
+
+    live_label = "Live Nemotron · Nebius Token Factory"
+    fallback_label = "Live call succeeded · grounded server fallback"
 
     return {
         "case_id": case_id,
         "mode": "live",
-        "label": "Live Nemotron · Nebius Token Factory" if model_grounded else "Deterministic grounded fallback · Nemotron unavailable",
+        "label": live_label if model_grounded else fallback_label,
         "summary": summary,
         "findings": findings,
         "hypotheses": [],
@@ -221,7 +232,9 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
         "cited_evidence_ids": cited,
         "withheld_count": withheld,
         "human_review_required": True,
-        "recording_label": "Live result (not a cached recording)" if model_grounded else "Deterministic result from linked ledger records (not a cached recording)",
+        "recording_label": "Live result (not a cached recording)" if model_grounded else "Grounded server fallback after a successful live call (not a cached recording)",
         "grounding_source": "nemotron" if model_grounded else "server_ledger_fallback",
         "repair_used": repair_used,
+        "provider_call_succeeded": True,
+        "fallback_reason": fallback_reason or None,
     }
