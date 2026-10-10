@@ -10,6 +10,20 @@ FraudMesh is an investigation-support console for reviewing synthetic fraud sign
 
 Fresh per-tab captures with the Nemo drawer open (light and dark): [Dashboard](docs/media/nemo/dashboard-light.png) / [dark](docs/media/nemo/dashboard-dark.png) · [Live Alerts](docs/media/nemo/live-alerts-light.png) / [dark](docs/media/nemo/live-alerts-dark.png) · [Investigation Cases](docs/media/nemo/investigation-cases-light.png) / [dark](docs/media/nemo/investigation-cases-dark.png) · [Fraud Network](docs/media/nemo/fraud-network-light.png) / [dark](docs/media/nemo/fraud-network-dark.png) · [Causal Chain](docs/media/nemo/causal-chain-light.png) / [dark](docs/media/nemo/causal-chain-dark.png) · [Evidence Explorer](docs/media/nemo/evidence-explorer-light.png) / [dark](docs/media/nemo/evidence-explorer-dark.png) · [Audit & Access](docs/media/nemo/audit-access-light.png) / [dark](docs/media/nemo/audit-access-dark.png).
 
+### Full tab gallery
+
+Using multiple screenshots is intentional: each tab demonstrates a distinct investigation step. These are fresh 1280px captures, with light and dark variants labelled explicitly.
+
+| Site tab | Light | Dark |
+| --- | --- | --- |
+| Dashboard | [Open](docs/media/tabs/dashboard-light.png) | [Open](docs/media/tabs/dashboard-dark.png) |
+| Live Alerts | [Open](docs/media/tabs/live-alerts-light.png) | [Open](docs/media/tabs/live-alerts-dark.png) |
+| Investigation Cases | [Open](docs/media/tabs/investigation-cases-light.png) | [Open](docs/media/tabs/investigation-cases-dark.png) |
+| Fraud Network | [Open](docs/media/tabs/fraud-network-light.png) | [Open](docs/media/tabs/fraud-network-dark.png) |
+| Causal Chain | [Open](docs/media/tabs/causal-chain-light.png) | [Open](docs/media/tabs/causal-chain-dark.png) |
+| Evidence Explorer | [Open](docs/media/tabs/evidence-explorer-light.png) | [Open](docs/media/tabs/evidence-explorer-dark.png) |
+| Audit & Access | [Open](docs/media/tabs/audit-access-light.png) | [Open](docs/media/tabs/audit-access-dark.png) |
+
 Live frontend: **TODO: Render URL** · Nebius backend: **TODO: backend URL** · Demo video: **TODO: demo video URL** · Repository: https://github.com/speed-velocity/FRAUDMESH
 
 ## Problem and approach
