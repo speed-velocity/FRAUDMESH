@@ -17,6 +17,7 @@ from app.reasoning.nemo import MAX_HISTORY, answer_nemo, validate_page_context
 from app.reasoning.metrics import llm_metrics
 from app.reasoning.brief import generate_case_brief
 from app.reasoning.advanced import extract_complaint, generate_cluster_story, generate_devil
+from app.reasoning.features3 import ask_graph, generate_council, classify_scam
 from app.db.database import alert_actions, alert_status, append_audit, apply_alert_action, audit_records, authenticate_user, case_contradictions, case_evidence, case_subgraph, cases_for_entity, chronology_summary, complaint_extraction, contradiction_catalog, create_case, create_finding, create_hypothesis, create_link, create_plan_step, current_summary, edge_detail, ensure_demo_users, entity_detail, evidence_detail, evidence_records, evaluation_summary, ingest_transaction, ingested_events, list_cases, list_findings, list_hypotheses, list_links, list_plan_steps, list_users, narrative_links, network_path, network_summary, review_finding, review_link, review_plan_item, risk_alerts, risk_profile, rollback_alert_action, run_grounded_reasoning, search_entities, session_user, revoke_session, simulator_reset, simulator_status, simulator_step, update_case_notes, update_case_status
 
 
@@ -305,6 +306,19 @@ def create_app() -> FastAPI:
             return JSONResponse(result)
         except ValueError as exc: return JSONResponse({"detail": str(exc), "code": "cluster_not_found"}, status_code=404)
 
+    @app.post("/api/network/ask")
+    async def ask_network(payload: dict = Body(...), request: Request = None) -> JSONResponse:
+        actor = bearer_user(request) if request else None
+        if not actor: return JSONResponse({"detail": "Not authenticated"}, status_code=401)
+        question = payload.get("question") if isinstance(payload, dict) else None
+        if not isinstance(question, str) or not question.strip(): return JSONResponse({"detail": "Question is required"}, status_code=422)
+        if len(question) > 1000: return JSONResponse({"detail": "Question is too long"}, status_code=422)
+        if rate_limited("graph_query", actor["user_id"], settings.expensive_rate_limit_per_minute): return JSONResponse({"detail": "Request rate limit exceeded"}, status_code=429)
+        client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
+        result = await ask_graph(settings.database_url, question, client)
+        append_audit(settings.database_url, actor["user_id"], actor["role"], "graph_query", "success" if result.get("status") == "ok" else "rejected", request.headers.get("X-Request-ID"), details={"match_count": result.get("count", 0)})
+        return JSONResponse(result, status_code=200 if result.get("status") == "ok" else 422)
+
     @app.get("/api/v1/network/path")
     async def path(source: str = "", target: str = "", max_hops: int = 8) -> JSONResponse:
         try:
@@ -527,6 +541,18 @@ def create_app() -> FastAPI:
             return JSONResponse(result)
         except ValueError as exc: return JSONResponse({"detail": str(exc), "code": "alert_not_found"}, status_code=404)
 
+    @app.post("/api/alerts/{alert_id}/council")
+    async def council(alert_id: str, request: Request = None) -> JSONResponse:
+        actor = bearer_user(request) if request else None
+        if not actor: return JSONResponse({"detail": "Not authenticated"}, status_code=401)
+        if rate_limited("council", actor["user_id"], settings.expensive_rate_limit_per_minute): return JSONResponse({"detail": "Request rate limit exceeded"}, status_code=429)
+        client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
+        try:
+            result = await generate_council(settings.database_url, alert_id, client)
+            append_audit(settings.database_url, actor["user_id"], actor["role"], "council", "success", request.headers.get("X-Request-ID"), "alert", alert_id, {"seat_count": len(result.get("seats", [])), "evidence_ids_count": len(result.get("consensus", {}).get("shared_evidence", []))})
+            return JSONResponse(result)
+        except ValueError as exc: return JSONResponse({"detail": str(exc), "code": "alert_not_found"}, status_code=404)
+
     nemo_history: dict[tuple[str, str], deque[dict]] = defaultdict(lambda: deque(maxlen=MAX_HISTORY))
 
     @app.post("/api/chat")
@@ -581,6 +607,19 @@ def create_app() -> FastAPI:
                 if source:
                     mismatch["evidence_ids"] = source.get("source_evidence_ids", [])
         append_audit(settings.database_url, actor["user_id"], actor["role"], "complaint_intake", "success", request.headers.get("X-Request-ID"), details={"language": result.get("language_detected"), "mismatch_count": len(result.get("mismatches", []))})
+        return JSONResponse(result)
+
+    @app.post("/api/scam/classify")
+    async def scam_classify(payload: dict = Body(...), request: Request = None) -> JSONResponse:
+        actor = bearer_user(request) if request else None
+        if not actor: return JSONResponse({"detail": "Not authenticated"}, status_code=401)
+        transcript = payload.get("transcript") if isinstance(payload, dict) else None
+        if not isinstance(transcript, str) or not transcript.strip(): return JSONResponse({"detail": "Synthetic transcript is required"}, status_code=422)
+        if len(transcript) > 5000: return JSONResponse({"detail": "Transcript is too long"}, status_code=422)
+        if rate_limited("scam_classifier", actor["user_id"], settings.expensive_rate_limit_per_minute): return JSONResponse({"detail": "Request rate limit exceeded"}, status_code=429)
+        client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
+        result = await classify_scam(transcript, client)
+        append_audit(settings.database_url, actor["user_id"], actor["role"], "scam_classifier", "success", request.headers.get("X-Request-ID"), details={"scam_type": result.get("scam_type"), "verified_flag_count": len(result.get("matched_red_flags", []))})
         return JSONResponse(result)
 
     @app.post("/api/v1/cases/{case_id}/plan", status_code=201)
