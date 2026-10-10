@@ -108,17 +108,42 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
         "allowed_evidence_ids": sorted(allowed),
         "evidence": mask_prompt_records(records),
     }
-    result = await client.complete([
+    messages = [
         {"role": "system", "content": "Return only one valid JSON object matching the requested schema. Populate summary with the actual evidence-grounded explanation now; do not return a schema description, placeholder, formatting plan, or instructions to another writer. Use 3-4 concise sentences. Never mention JSON or invent evidence IDs or facts. If the evidence is insufficient, say that the linked evidence is insufficient and recommend human review."},
         {"role": "user", "content": json.dumps(prompt, ensure_ascii=True)},
-    ], feature="explain")
+    ]
+    result = await client.complete(messages, feature="explain")
     if result.status != "complete" or not result.content:
         raise ValueError(result.error or "Nemotron request was unavailable")
+    repair_used = False
     try:
         payload = _parse_json(result.content)
     except (json.JSONDecodeError, ValueError) as exc:
-        raise ValueError("Nemotron returned invalid JSON") from exc
+        repair_used = True
+        repair = await client.complete([
+            {"role": "system", "content": "Your previous output was unusable. Return one and only one valid JSON object now. The summary must contain 3-4 concrete, cautious sentences grounded in the supplied evidence IDs. Do not return a schema, preamble, markdown, or planning text."},
+            {"role": "user", "content": json.dumps(prompt, ensure_ascii=True)},
+        ], feature="explain")
+        if repair.status != "complete" or not repair.content:
+            raise ValueError("Nemotron returned invalid JSON") from exc
+        try:
+            payload = _parse_json(repair.content)
+        except (json.JSONDecodeError, ValueError) as repair_exc:
+            raise ValueError("Nemotron returned invalid JSON") from repair_exc
     payload = _normalise_payload(payload)
+    initial_text = _text_from_payload(payload)
+    structured_items = payload.get("suspicious_patterns", payload.get("findings", []))
+    if (not initial_text.strip() or _is_meta_summary(initial_text)) and not structured_items and not repair_used:
+        repair_used = True
+        repair = await client.complete([
+            {"role": "system", "content": "Return one valid JSON object now. Do not describe the schema. Write 3-4 concrete, cautious sentences in summary using only the supplied evidence IDs, then include empty arrays if no additional findings are supported."},
+            {"role": "user", "content": json.dumps(prompt, ensure_ascii=True)},
+        ], feature="explain")
+        if repair.status == "complete" and repair.content:
+            try:
+                payload = _normalise_payload(_parse_json(repair.content))
+            except (json.JSONDecodeError, ValueError):
+                pass
 
     cited = [item for item in payload.get("cited_evidence_ids", []) if item in allowed]
     withheld = len(payload.get("cited_evidence_ids", [])) - len(cited)
@@ -180,4 +205,5 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
         "human_review_required": True,
         "recording_label": "Live result (not a cached recording)" if model_grounded else "Deterministic result from linked ledger records (not a cached recording)",
         "grounding_source": "nemotron" if model_grounded else "server_ledger_fallback",
+        "repair_used": repair_used,
     }

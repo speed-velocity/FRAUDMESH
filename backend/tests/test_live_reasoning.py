@@ -7,7 +7,7 @@ from app.reasoning.live import _parse_json
 
 
 class FakeTokenFactoryClient:
-    async def complete(self, messages):
+    async def complete(self, messages, **kwargs):
         assert "E-" in messages[1]["content"]
         return type("Result", (), {"status": "complete", "content": '{"summary":"Review the linked movement.","suspicious_patterns":[{"pattern":"Repeated linked transfers warrant review.","evidence_ids":["E-0001"],"confidence":0.7}],"recommended_checks":[{"check":"Compare source timestamps.","rationale":"Confirm chronology.","evidence_ids":["E-0001"]}],"cited_evidence_ids":["E-0001","E-9999"]}', "error": None})()
 
@@ -18,7 +18,7 @@ def test_live_parser_accepts_reasoning_wrapper_and_markdown_fence():
 
 def test_live_reasoning_uses_validated_finding_when_summary_is_empty():
     class FindingOnlyClient:
-        async def complete(self, messages):
+        async def complete(self, messages, **kwargs):
             return type("Result", (), {"status": "complete", "content": '{"suspicious_patterns":[{"pattern":"Repeated linked transfers warrant review.","evidence_ids":["E-0001"]}],"cited_evidence_ids":["E-0001"]}', "error": None})()
 
     selector_policy = getattr(asyncio, "WindowsSelectorEventLoopPolicy", None)
@@ -61,6 +61,31 @@ def test_live_reasoning_grounds_mocked_token_factory_response():
     if selector_policy:
         asyncio.set_event_loop_policy(selector_policy())
     database_path = Path(__file__).resolve().parent / "_api_tmp" / "live_reasoning.db"
+    database_path.unlink(missing_ok=True)
+
+
+def test_schema_only_model_response_gets_one_repair_attempt_and_grounded_fallback():
+    class SchemaOnlyClient:
+        def __init__(self):
+            self.calls = 0
+
+        async def complete(self, messages, **kwargs):
+            self.calls += 1
+            if self.calls == 1:
+                return type("Result", (), {"status": "complete", "content": '{"summary":"The requested schema is shown below."}', "error": None})()
+            return type("Result", (), {"status": "complete", "content": '{"summary":"Ledger records show a bounded movement sequence requiring review.","suspicious_patterns":[],"recommended_checks":[],"cited_evidence_ids":["E-0001"]}', "error": None})()
+
+    database_path = Path(__file__).resolve().parent / "_api_tmp" / "live_reasoning_repair.db"
+    database_path.unlink(missing_ok=True)
+    database = f"sqlite:///{database_path}"
+    dataset = Path(__file__).resolve().parents[2] / "data" / "demo"
+    load_dataset(str(dataset), database)
+    create_case(database, "ACC-M3", 80, "Review ACC-M3", "Investigator review")
+    client = SchemaOnlyClient()
+    result = asyncio.run(run_live_reasoning(database, "CASE-001", client))
+    assert client.calls == 2
+    assert "no additional grounded narrative" not in result["summary"].lower()
+    assert result["grounding_source"] == "nemotron"
     database_path.unlink(missing_ok=True)
     database = f"sqlite:///{database_path}"
     dataset = Path(__file__).resolve().parents[2] / "data" / "demo"
