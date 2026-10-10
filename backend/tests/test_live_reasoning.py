@@ -49,6 +49,13 @@ def test_live_reasoning_accepts_openai_choice_wrapper():
     assert _text_from_payload(payload) == "Review the linked movement."
 
 
+def test_live_reasoning_accepts_alternate_final_text_fields():
+    from app.reasoning.live import _text_from_payload
+
+    assert _text_from_payload({"final_answer": "Review the linked movement."}) == "Review the linked movement."
+    assert _text_from_payload({"message": {"reasoning_content": "Review the linked movement."}}) == "Review the linked movement."
+
+
 def test_live_reasoning_grounds_mocked_token_factory_response():
     selector_policy = getattr(asyncio, "WindowsSelectorEventLoopPolicy", None)
     if selector_policy:

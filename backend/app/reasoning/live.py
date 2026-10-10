@@ -44,7 +44,7 @@ def _normalise_payload(payload: dict) -> dict:
 
 
 def _text_from_payload(payload: dict) -> str:
-    for key in ("summary", "answer", "explanation", "analysis", "reasoning", "narrative", "text", "content", "output_text", "response", "message", "choices"):
+    for key in ("summary", "answer", "final", "final_answer", "explanation", "analysis", "reasoning", "reasoning_content", "narrative", "text", "content", "output_text", "generated_text", "completion", "response", "message", "choices"):
         value = payload.get(key)
         if isinstance(value, str) and value.strip():
             return value.strip()

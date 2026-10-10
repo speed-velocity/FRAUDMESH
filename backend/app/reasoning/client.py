@@ -63,7 +63,18 @@ class NemotronClient:
                         await asyncio.sleep(0.25 * (2**attempt)); continue
                 response.raise_for_status()
                 data = response.json()
-                content = data.get("choices", [{}])[0].get("message", {}).get("content")
+                message = data.get("choices", [{}])[0].get("message", {})
+                content = message.get("content")
+                if isinstance(content, list):
+                    content = " ".join(
+                        item.get("text", "").strip()
+                        for item in content
+                        if isinstance(item, dict) and isinstance(item.get("text"), str) and item.get("text", "").strip()
+                    )
+                if not isinstance(content, str) or not content.strip():
+                    fallback = message.get("reasoning_content") or message.get("output_text")
+                    if isinstance(fallback, str) and fallback.strip():
+                        content = fallback
                 if not isinstance(content, str):
                     return NemotronResult("invalid", error="Nemotron response did not contain message content")
                 return NemotronResult("complete", content=content)
