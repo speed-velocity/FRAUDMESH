@@ -574,6 +574,12 @@ def create_app() -> FastAPI:
         if rate_limited("complaint_intake", actor["user_id"], settings.expensive_rate_limit_per_minute): return JSONResponse({"detail": "Request rate limit exceeded"}, status_code=429)
         client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
         result = await extract_complaint(text, client)
+        planted = {item.get("kind"): item for item in contradiction_catalog(settings.database_url)}
+        for mismatch in result.get("mismatches", []):
+            if not mismatch.get("evidence_ids"):
+                source = planted.get(mismatch.get("kind"))
+                if source:
+                    mismatch["evidence_ids"] = source.get("source_evidence_ids", [])
         append_audit(settings.database_url, actor["user_id"], actor["role"], "complaint_intake", "success", request.headers.get("X-Request-ID"), details={"language": result.get("language_detected"), "mismatch_count": len(result.get("mismatches", []))})
         return JSONResponse(result)
 
