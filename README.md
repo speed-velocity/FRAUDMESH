@@ -6,9 +6,9 @@ FraudMesh is an investigation-support console for reviewing synthetic fraud sign
 
 > Synthetic data only. Investigation support only. Human review required. FraudMesh does not determine guilt or take automatic enforcement action.
 
-![Fresh FraudMesh dashboard capture](docs/media/dashboard.png)
+![Fresh FraudMesh dashboard with Nemo open](docs/media/nemo/dashboard-light.png)
 
-Fresh UI audit captures: [Live Alerts](docs/media/live-alerts.png), [Cases](docs/media/cases.png), [Fraud Network](docs/media/network.png), [Evidence Explorer](docs/media/evidence.png), and [dark-mode dashboard](docs/media/dashboard-dark.png). These are sourced from the latest available light/dark audit runs, not the older header snapshots.
+Fresh per-tab captures with the Nemo drawer open (light and dark): [Dashboard](docs/media/nemo/dashboard-light.png) / [dark](docs/media/nemo/dashboard-dark.png) · [Live Alerts](docs/media/nemo/live-alerts-light.png) / [dark](docs/media/nemo/live-alerts-dark.png) · [Investigation Cases](docs/media/nemo/investigation-cases-light.png) / [dark](docs/media/nemo/investigation-cases-dark.png) · [Fraud Network](docs/media/nemo/fraud-network-light.png) / [dark](docs/media/nemo/fraud-network-dark.png) · [Causal Chain](docs/media/nemo/causal-chain-light.png) / [dark](docs/media/nemo/causal-chain-dark.png) · [Evidence Explorer](docs/media/nemo/evidence-explorer-light.png) / [dark](docs/media/nemo/evidence-explorer-dark.png) · [Audit & Access](docs/media/nemo/audit-access-light.png) / [dark](docs/media/nemo/audit-access-dark.png).
 
 Live frontend: **TODO: Render URL** · Nebius backend: **TODO: backend URL** · Demo video: **TODO: demo video URL** · Repository: https://github.com/speed-velocity/FRAUDMESH
 

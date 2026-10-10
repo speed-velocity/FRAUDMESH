@@ -220,3 +220,30 @@ test("Nemo drawer is usable at mobile and desktop sizes in both modes", async ({
     }
   }
 });
+
+test("captures Nemo on every application tab", async ({ browser }) => {
+  await fs.mkdir(path.join(ROOT, "ui-audit", "nemo-tabs"), { recursive: true });
+  for (const mode of ["light", "dark"] as const) {
+    const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, colorScheme: mode });
+    const page = await context.newPage();
+    await mockApi(page);
+    await page.addInitScript((selectedMode) => {
+      localStorage.setItem("fraudmesh_token", "ui-audit-token");
+      localStorage.setItem("fraudmesh_mode", selectedMode);
+    }, mode);
+    for (const [pageName, hash] of pages) {
+      await page.goto(hash, { waitUntil: "domcontentloaded" });
+      await expect(page.getByRole("button", { name: "Ask Nemo" })).toBeVisible();
+      await page.getByRole("button", { name: "Ask Nemo" }).click();
+      await expect(page.getByRole("dialog", { name: "Nemo" })).toBeVisible();
+      const snapshotPath = path.join(ROOT, "ui-audit", "nemo-tabs", `${pageName}-${mode}.png`);
+      try {
+        await page.screenshot({ path: snapshotPath, clip: { x: 0, y: 0, width: 1280, height: 800 }, animations: "disabled" });
+      } catch {
+        await page.screenshot({ path: snapshotPath, clip: { x: 0, y: 0, width: 1280, height: 800 }, animations: "disabled", timeout: 15_000 });
+      }
+      await page.getByRole("button", { name: "Close Nemo" }).click();
+    }
+    await context.close();
+  }
+});
