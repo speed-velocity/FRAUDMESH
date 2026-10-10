@@ -90,6 +90,20 @@ def _is_meta_summary(summary: str) -> bool:
     ))
 
 
+def _usable_plaintext_response(content: str, allowed: set[str]) -> str:
+    """Accept a model's plain-text answer only when it cites supplied evidence."""
+    cleaned = re.sub(r"<think>.*?</think>", "", content, flags=re.I | re.S)
+    cleaned = re.sub(r"```(?:text|markdown)?", "", cleaned, flags=re.I).replace("```", "").strip()
+    if not cleaned or _is_meta_summary(cleaned) or len(cleaned) < 40:
+        return ""
+    cited = {match.group(0) for match in re.finditer(r"\bE-\d{3,6}\b", cleaned)}
+    if not cited or not cited.intersection(allowed):
+        return ""
+    if re.search(r"\b(guilty|fraudster|criminal|definitely fraud)\b", cleaned, re.I):
+        return ""
+    return cleaned[:2400]
+
+
 async def run_live_reasoning(database_url: str, case_id: str, client: NemotronClient) -> dict:
     records = case_evidence(database_url, case_id)
     if not records:
@@ -119,17 +133,21 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
     try:
         payload = _parse_json(result.content)
     except (json.JSONDecodeError, ValueError) as exc:
-        repair_used = True
-        repair = await client.complete([
-            {"role": "system", "content": "Your previous output was unusable. Return one and only one valid JSON object now. The summary must contain 3-4 concrete, cautious sentences grounded in the supplied evidence IDs. Do not return a schema, preamble, markdown, or planning text."},
-            {"role": "user", "content": json.dumps(prompt, ensure_ascii=True)},
-        ], feature="explain")
-        if repair.status != "complete" or not repair.content:
-            raise ValueError("Nemotron returned invalid JSON") from exc
-        try:
-            payload = _parse_json(repair.content)
-        except (json.JSONDecodeError, ValueError) as repair_exc:
-            raise ValueError("Nemotron returned invalid JSON") from repair_exc
+        plaintext = _usable_plaintext_response(result.content, allowed)
+        if plaintext:
+            payload = {"summary": plaintext, "suspicious_patterns": [], "recommended_checks": [], "cited_evidence_ids": sorted({item for item in allowed if item in plaintext})}
+        else:
+            repair_used = True
+            repair = await client.complete([
+                {"role": "system", "content": "Your previous output was unusable. Return one and only one valid JSON object now. The summary must contain 3-4 concrete, cautious sentences grounded in the supplied evidence IDs. Do not return a schema, preamble, markdown, or planning text."},
+                {"role": "user", "content": json.dumps(prompt, ensure_ascii=True)},
+            ], feature="explain")
+            if repair.status != "complete" or not repair.content:
+                raise ValueError("Nemotron returned invalid JSON") from exc
+            try:
+                payload = _parse_json(repair.content)
+            except (json.JSONDecodeError, ValueError) as repair_exc:
+                raise ValueError("Nemotron returned invalid JSON") from repair_exc
     payload = _normalise_payload(payload)
     initial_text = _text_from_payload(payload)
     structured_items = payload.get("suspicious_patterns", payload.get("findings", []))

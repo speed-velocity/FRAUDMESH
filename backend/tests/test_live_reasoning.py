@@ -77,6 +77,24 @@ def test_schema_only_model_response_gets_one_repair_attempt_and_grounded_fallbac
 
     database_path = Path(__file__).resolve().parent / "_api_tmp" / "live_reasoning_repair.db"
     database_path.unlink(missing_ok=True)
+
+
+def test_cited_plaintext_model_response_is_accepted_as_live_grounded_text():
+    class PlaintextClient:
+        async def complete(self, messages, **kwargs):
+            return type("Result", (), {"status": "complete", "content": "The linked ledger sequence contains repeated transfers that warrant chronology review [E-0001]. The records do not establish intent; compare independent case evidence before deciding next steps [E-0001].", "error": None})()
+
+    database_path = Path(__file__).resolve().parent / "_api_tmp" / "live_reasoning_plaintext.db"
+    database_path.unlink(missing_ok=True)
+    database = f"sqlite:///{database_path}"
+    dataset = Path(__file__).resolve().parents[2] / "data" / "demo"
+    load_dataset(str(dataset), database)
+    create_case(database, "ACC-M3", 80, "Review ACC-M3", "Investigator review")
+    result = asyncio.run(run_live_reasoning(database, "CASE-001", PlaintextClient()))
+    assert result["grounding_source"] == "nemotron"
+    assert result["cited_evidence_ids"] == ["E-0001"]
+    assert "repeated transfers" in result["summary"]
+    database_path.unlink(missing_ok=True)
     database = f"sqlite:///{database_path}"
     dataset = Path(__file__).resolve().parents[2] / "data" / "demo"
     load_dataset(str(dataset), database)
