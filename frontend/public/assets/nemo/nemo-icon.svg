@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="238 122 548 548" width="512" height="512" role="img" aria-labelledby="t">
+<title id="t">Nemo</title>
+<rect id="chip" x="238" y="122" width="548" height="548" rx="120" fill="#15161A"/>
+<g id="nemo-icon" fill="none" stroke="#F4F4F6" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+ <path id="hood" d="M511 214 L392 222 L321 304 L299 345 L289 403 L282 438 C282 495 305 537 345 549 H679 C719 537 742 495 742 438 L735 403 L725 345 L703 304 L631 223 Z"/>
+ <path id="face" d="M346 377 V461 L352 470 L458 546 M677 377 V461 L674 468 L566 546"/>
+ <path id="crown-lines" d="M346 377 L418 293 L511 214 M418 293 L511 342 M511 214 V342"/>
+ <path id="link-head" stroke="#7C4DFF" d="M511 214 L603 278 L511 342"/>
+ <g id="nodes" stroke="none">
+  <g id="n-crown"><circle cx="511" cy="214" r="38" fill="#F4F4F6"/><circle cx="511" cy="214" r="25" fill="#7C3AED"/></g>
+  <g id="n-left"><circle cx="418" cy="293" r="33" fill="#F4F4F6"/><circle cx="418" cy="293" r="20" fill="#A66BFF"/></g>
+  <g id="n-low"><circle cx="511" cy="342" r="33" fill="#F4F4F6"/><circle cx="511" cy="342" r="20" fill="#7C3AED"/></g>
+  <g id="n-right"><circle cx="603" cy="278" r="34" fill="#4C2BB8"/><circle cx="603" cy="278" r="19" fill="#8B5CF6"/></g>
+ </g>
+ <g id="eyes" stroke-width="16">
+  <g id="eye-left"><path d="M386 421 H476"/><circle cx="431" cy="421" r="26" fill="#F4F4F6" stroke="none"/></g>
+  <g id="eye-right"><path d="M547 421 H637"/><circle cx="592" cy="421" r="26" fill="#F4F4F6" stroke="none"/></g>
+ </g>
+</g>
+</svg>

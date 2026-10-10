@@ -160,9 +160,17 @@ label { display: grid; gap: var(--fm-space-1); color: var(--fm-muted); font-size
 pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); color: var(--fm-ink); }
 ::selection { background: var(--fm-oxblood); color: var(--fm-paper); }
 .nemo-launcher { position: fixed; right: clamp(16px, 3vw, 32px); bottom: clamp(16px, 3vw, 32px); z-index: 40; display: inline-flex; align-items: center; gap: var(--fm-space-2); min-height: var(--fm-touch-height); padding: 0 var(--fm-space-4); border: var(--fm-border); border-radius: var(--fm-radius); background: var(--fm-oxblood); color: var(--fm-paper); font-family: var(--fm-font-body); font-weight: var(--fm-weight-semibold); box-shadow: var(--fm-shadow); }
-.nemo-avatar { display: inline-grid; place-items: center; flex: 0 0 42px; width: 42px; height: 42px; padding: 3px; border: 1px solid var(--fm-ink); border-radius: var(--fm-radius); background: var(--fm-ink); color: var(--fm-paper); overflow: hidden; }
+.nemo-avatar { display: inline-grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; padding: 0; border: 0; border-radius: var(--fm-radius); background: var(--fm-ink); color: var(--fm-paper); overflow: hidden; opacity: 1; filter: none; }
 .nemo-avatar > span { display: block; width: 100%; height: 100%; }
 .nemo-avatar svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.nemo-large-avatar { display: inline-grid; place-items: center; width: 120px; height: 120px; padding: var(--fm-space-3); border-radius: var(--fm-radius); background: var(--fm-ink); overflow: hidden; }
+.nemo-large-avatar > span { display: block; width: 100%; height: 100%; }
+.nemo-large-avatar svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.nemo-welcome { display: grid; place-items: center; padding: var(--fm-space-3) 0; }
+.nemo-message { display: flex; align-items: flex-start; gap: var(--fm-space-2); }
+.nemo-message > span:last-child { min-width: 0; }
+.nemo-message-avatar { flex: 0 0 32px; }
+.nemo-message-avatar .nemo-avatar { width: 32px; height: 32px; flex-basis: 32px; }
 .nemo-avatar svg g { transform-box: fill-box; transform-origin: center; }
 .nemo-avatar svg #arm-left { transform-origin: 100% 0; }
 .nemo-avatar svg #arm-right { transform-origin: 0 0; }
@@ -177,7 +185,7 @@ pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); 
 .nemo-state-idle svg #n-torso .core { animation: nemo-idle-pulse 3.8s 1.2s ease-in-out infinite; }
 .nemo-state-idle svg #n-hip-left .core { animation: nemo-idle-pulse 3.8s 1.5s ease-in-out infinite; }
 .nemo-state-idle svg #n-hip-right .core { animation: nemo-idle-pulse 3.8s 1.8s ease-in-out infinite; }
-.nemo-state-idle svg #nemo { animation: nemo-float 4.5s ease-in-out infinite; }
+.nemo-state-idle svg #nemo, .nemo-state-idle svg #nemo-icon { animation: nemo-float 4.5s ease-in-out infinite; }
 .nemo-launcher:hover svg #arm-left { animation: nemo-wave-left 900ms ease-in-out 2; }
 .nemo-launcher:hover svg #arm-right { animation: nemo-wave-right 900ms ease-in-out 2; }
 .nemo-state-thinking svg #n-crown .core { animation: nemo-thinking-pulse 1.8s ease-in-out infinite; }
@@ -191,7 +199,7 @@ pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); 
 .nemo-state-thinking svg #n-hip-left .core { animation: nemo-thinking-pulse 1.8s 1.6s ease-in-out infinite; }
 .nemo-state-responding svg #n-crown .core { animation: nemo-respond 700ms ease-out; }
 .nemo-state-error svg .core { fill: var(--fm-amber) !important; animation: none !important; }
-.nemo-state-error svg #nemo, .nemo-state-error svg #link-head, .nemo-state-error svg #link-torso, .nemo-state-error svg #link-torso-dark { animation: none !important; }
+.nemo-state-error svg #nemo, .nemo-state-error svg #nemo-icon, .nemo-state-error svg #link-head, .nemo-state-error svg #link-torso, .nemo-state-error svg #link-torso-dark { animation: none !important; }
 @keyframes nemo-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 @keyframes nemo-idle-pulse { 0%, 100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.08); opacity: 1; } }
 @keyframes nemo-thinking-pulse { 0%, 100% { transform: scale(1); opacity: .78; } 50% { transform: scale(1.2); opacity: 1; } }

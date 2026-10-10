@@ -166,21 +166,34 @@ test("FraudMesh UI audit across routes, modes, and responsive viewports", async 
 
 test("Nemo drawer is usable at mobile and desktop sizes in both modes", async ({ browser }) => {
   for (const mode of ["light", "dark"] as const) {
-    for (const width of [375, 768, 1280]) {
-      const context = await browser.newContext({ viewport: { width, height: 812 }, colorScheme: mode });
+    for (const width of [375, 1280]) {
+      for (const dpr of [1, 2]) {
+      const context = await browser.newContext({ viewport: { width, height: 812 }, deviceScaleFactor: dpr, colorScheme: mode });
       const page = await context.newPage();
       await mockApi(page);
       await page.addInitScript((selectedMode) => { localStorage.setItem("fraudmesh_token", "ui-audit-token"); localStorage.setItem("fraudmesh_mode", selectedMode); }, mode);
       await page.goto("/#dashboard", { waitUntil: "domcontentloaded" });
+      const launcherIcon = page.locator(".nemo-launcher .nemo-avatar");
+      await expect(launcherIcon).toBeVisible();
+      const iconMetrics = await launcherIcon.evaluate((element) => { const style = getComputedStyle(element); const rect = element.getBoundingClientRect(); return { width: rect.width, height: rect.height, opacity: style.opacity, filter: style.filter }; });
+      expect(iconMetrics.width).toBeGreaterThanOrEqual(36);
+      expect(iconMetrics.height).toBeGreaterThanOrEqual(36);
+      expect(iconMetrics.opacity).toBe("1");
+      expect(iconMetrics.filter).toBe("none");
+      await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "/assets/nemo/nemo-icon.svg");
+      await fs.mkdir(path.join(ROOT, "ui-audit", "nemo-fix"), { recursive: true });
+      await page.screenshot({ path: path.join(ROOT, "ui-audit", "nemo-fix", `launcher-${mode}-${width}-dpr${dpr}.png`) });
       await page.getByRole("button", { name: "Ask Nemo" }).click();
       const drawer = page.getByRole("dialog", { name: "Nemo" });
       await expect(drawer).toBeVisible();
+      await page.screenshot({ path: path.join(ROOT, "ui-audit", "nemo-fix", `drawer-${mode}-${width}-dpr${dpr}.png`) });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
       for (let index = 0; index < 10; index += 1) await page.keyboard.press("Tab");
       expect(await page.evaluate(() => Boolean(document.activeElement?.closest("#nemo-drawer")))).toBeTruthy();
       await page.getByRole("button", { name: "Close Nemo" }).press("Enter");
       await expect(drawer).toBeHidden();
       await context.close();
+      }
     }
   }
 });
