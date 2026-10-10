@@ -42,6 +42,13 @@ def test_live_reasoning_accepts_nested_model_output():
     assert _text_from_payload(payload) == "Review the linked movement."
 
 
+def test_live_reasoning_accepts_openai_choice_wrapper():
+    from app.reasoning.live import _normalise_payload, _text_from_payload
+
+    payload = _normalise_payload({"choices": [{"message": {"content": "Review the linked movement."}}]})
+    assert _text_from_payload(payload) == "Review the linked movement."
+
+
 def test_live_reasoning_grounds_mocked_token_factory_response():
     selector_policy = getattr(asyncio, "WindowsSelectorEventLoopPolicy", None)
     if selector_policy:

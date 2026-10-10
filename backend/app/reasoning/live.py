@@ -32,15 +32,19 @@ def _parse_json(content: str) -> dict:
 
 def _normalise_payload(payload: dict) -> dict:
     """Accept common OpenAI/model wrappers without weakening evidence checks."""
-    for key in ("output", "result", "data"):
+    for key in ("output", "result", "data", "response", "choices"):
         nested = payload.get(key)
-        if isinstance(nested, dict) and any(name in nested for name in ("summary", "answer", "content", "message", "findings", "suspicious_patterns", "recommended_checks")):
-            return nested
+        if isinstance(nested, dict):
+            return _normalise_payload(nested)
+        if isinstance(nested, list):
+            for item in nested:
+                if isinstance(item, dict):
+                    return _normalise_payload(item)
     return payload
 
 
 def _text_from_payload(payload: dict) -> str:
-    for key in ("summary", "answer", "explanation", "analysis", "reasoning", "narrative", "text", "content", "output_text", "response", "message"):
+    for key in ("summary", "answer", "explanation", "analysis", "reasoning", "narrative", "text", "content", "output_text", "response", "message", "choices"):
         value = payload.get(key)
         if isinstance(value, str) and value.strip():
             return value.strip()
@@ -52,6 +56,11 @@ def _text_from_payload(payload: dict) -> str:
             parts = [item.strip() for item in value if isinstance(item, str) and item.strip()]
             if parts:
                 return " ".join(parts)
+            for item in value:
+                if isinstance(item, dict):
+                    nested = _text_from_payload(item)
+                    if nested:
+                        return nested
     return ""
 
 
