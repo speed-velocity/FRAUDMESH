@@ -18,7 +18,7 @@ GRAPH_REJECTION = "I can't express that as a graph query here. Try asking about 
 
 GRAPH_FIELDS = {
     "entity_type", "cluster_id", "degree", "in_degree", "out_degree", "distinct_senders",
-    "inbound_total_inr", "outbound_total_inr", "forwarded_within_minutes", "link_strength",
+    "inbound_total_inr", "outbound_total_inr", "amount_inr", "count", "forwarded_within_minutes", "link_strength",
     "alert_score", "rules_fired",
 }
 GRAPH_OPS = {"eq", "ne", "gt", "gte", "lt", "lte", "in", "contains-id"}
