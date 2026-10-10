@@ -2,6 +2,7 @@ import { StrictMode, useEffect, useMemo, useRef, useState, type FormEvent, type 
 import { createRoot } from "react-dom/client";
 import "./styles.css";
 import { Header, ModeToggle, SafetyBanner, runSignOut, type HeaderPage, type HeaderUser } from "./header";
+import { GlyphTide } from "./components/backgrounds/effects/glyph-tide";
 
 try { document.documentElement.dataset.theme = window.localStorage.getItem("fraudmesh_theme") || "editorial"; } catch { document.documentElement.dataset.theme = "editorial"; }
 
@@ -54,7 +55,7 @@ function App() {
   const signOut = async () => { await runSignOut(() => fetch("http://127.0.0.1:8000/api/v1/auth/logout", { method: "POST" }), window.localStorage).catch(() => undefined); sessionToken = ""; setAuthRequired(true); window.history.replaceState({}, "", "?protected=1#dashboard"); };
   const page = pageCopy[route];
   if (authRequired) return <Login onSuccess={() => { setAuthRequired(false); window.location.reload(); }} />;
-  const content = route === "not-found" ? <NotFound /> : route === "cases" ? <>{cases[0] && <GroundedReview caseId={cases[0].case_id} />}<ContradictionSummary /><CasesExperience cases={cases} /></> : route === "network" ? <NetworkExperience nodes={nodes} edges={edges} /> : route === "chain" ? <ChainExperience nodes={nodes} /> : route === "evidence" ? <EvidenceExperience records={evidence} /> : route === "audit" ? <Audit /> : <><section className="intro"><div><h2>{page.hero}</h2><p>{page.description}</p></div></section>{route === "dashboard" && <Dashboard counts={counts} health={health} alerts={alerts} evaluation={evaluation} controls={controls} onRefresh={refreshSummaryAndEvents} />}{route === "alerts" && <Alerts alerts={alerts} liveEvents={liveEvents} onOpenCase={openCase} onRefresh={refreshSummaryAndEvents} />}</>;
+  const content = route === "not-found" ? <NotFound /> : route === "cases" ? <>{cases[0] && <GroundedReview caseId={cases[0].case_id} />}<ContradictionSummary /><CasesExperience cases={cases} /></> : route === "network" ? <NetworkExperience nodes={nodes} edges={edges} /> : route === "chain" ? <ChainExperience nodes={nodes} /> : route === "evidence" ? <EvidenceExperience records={evidence} /> : route === "audit" ? <Audit /> : <><section className="intro"><GlyphTide /><div><h2>{page.hero}</h2><p>{page.description}</p></div></section>{route === "dashboard" && <Dashboard counts={counts} health={health} alerts={alerts} evaluation={evaluation} controls={controls} onRefresh={refreshSummaryAndEvents} />}{route === "alerts" && <Alerts alerts={alerts} liveEvents={liveEvents} onOpenCase={openCase} onRefresh={refreshSummaryAndEvents} />}</>;
   return <Shell route={route} page={page} health={health} user={user} onSignOut={signOut} notice={globalMessage}>{content}</Shell>;
 }
 

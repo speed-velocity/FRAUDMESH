@@ -58,6 +58,21 @@ label, .eyebrow, .count-badge, .score-badge, .status-select, .audit-outcome, .co
 .global-status { margin-bottom: var(--fm-space-4); padding: var(--fm-space-3) var(--fm-space-4); border-left: 3px solid var(--fm-oxblood); background: var(--fm-oxblood-soft); color: var(--fm-oxblood); }
 .app-footer { width: min(100% - 32px, var(--fm-content-max)); margin: 0 auto; padding: var(--fm-space-6) clamp(16px, 4vw, 56px); border-top: var(--fm-border); color: var(--fm-muted); font-size: .9rem; }
 .intro, .cases-experience-header, .network-experience-header, .chain-experience-header, .evidence-experience-header, .audit-header { padding: var(--fm-space-8) 0 var(--fm-space-7); border-top: 4px double var(--fm-ink); border-bottom: var(--fm-border); }
+.intro { position: relative; isolation: isolate; overflow: hidden; }
+.intro > div { position: relative; z-index: 1; }
+.glyph-tide { position: absolute; inset: 0; z-index: -1; pointer-events: none; color: var(--fm-oxblood); opacity: .18; }
+.glyph-tide svg { display: block; width: 100%; height: 100%; }
+.glyph-tide-line, .glyph-tide-glyphs path { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.glyph-tide-line { stroke-width: 1.5; }
+.glyph-tide-line-a { opacity: .95; }
+.glyph-tide-line-b { color: var(--fm-green); opacity: .7; }
+.glyph-tide-line-c { opacity: .55; }
+.glyph-tide-glyphs { fill: none; stroke: var(--fm-green); stroke-width: 1.5; opacity: .9; }
+.glyph-tide-glyphs circle:first-child, .glyph-tide-glyphs circle:nth-child(3), .glyph-tide-glyphs circle:nth-child(5) { fill: var(--fm-green); stroke: none; }
+.glyph-tide-glyphs circle:nth-child(even) { fill: none; }
+@keyframes glyph-tide-drift { from { transform: translateX(0); } to { transform: translateX(-24px); } }
+.glyph-tide svg { animation: glyph-tide-drift 18s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) { .glyph-tide svg { animation: none; } }
 .intro h2 { max-width: 980px; margin-top: var(--fm-space-2); }
 .intro p, .cases-experience-header p, .network-experience-header p, .chain-experience-header p, .evidence-experience-header p, .audit-header p { max-width: 720px; margin: var(--fm-space-4) 0 0; color: var(--fm-muted); font-size: 1.08rem; }
 .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: var(--fm-space-7); border-bottom: 2px solid var(--fm-ink); }
