@@ -171,7 +171,7 @@ Risk is an explainable investigation-priority signal, not a finding of fraud, gu
 
 FraudMesh satisfies the Nebius runtime requirement in two explicit ways:
 
-1. **Nebius Token Factory inference:** `backend/app/reasoning/live.py` calls the existing `POST /api/v1/cases/{case_id}/reasoning` path, which uses `NemotronClient` and Token Factory's OpenAI-compatible `/v1/chat/completions` endpoint. The alert shortcut is `POST /api/v1/alerts/{entity_id}/reasoning`. The verified model configuration is `nvidia/nemotron-3.5-lightning-30b-a3b`; confirm that this model remains enabled in your Token Factory project.
+1. **Nebius Token Factory inference:** `backend/app/reasoning/live.py` calls the existing `POST /api/v1/cases/{case_id}/reasoning` path, which uses `NemotronClient` and Token Factory's OpenAI-compatible `/v1/chat/completions` endpoint. The alert shortcut is `POST /api/v1/alerts/{entity_id}/reasoning`. The documented public model identifier is `nvidia/Nemotron-3_5-Lightning`; confirm that it is enabled for your Token Factory key.
 2. **Nebius AI Cloud backend:** `backend/Dockerfile` packages the FastAPI service and canonical demo data for a Nebius AI Cloud container/Compute VM deployment. The exact Serverless Endpoint product flags are account- and region-specific and are documented as a TODO in [docs/NEBIUS_DEPLOY.md](docs/NEBIUS_DEPLOY.md) rather than guessed.
 
 Deployment link: `TODO — add the final Nebius backend URL after deployment`.
@@ -191,7 +191,7 @@ Nemotron is optional. Configure the Nebius Token Factory-compatible OpenAI endpo
 ```dotenv
 NEMOTRON_BASE_URL=https://api.tokenfactory.nebius.com/v1
 NEMOTRON_API_KEY=your-private-token-factory-key
-NEMOTRON_MODEL=nvidia/nemotron-3.5-lightning-30b-a3b
+NEMOTRON_MODEL=nvidia/Nemotron-3_5-Lightning
 NEMOTRON_TIMEOUT_S=90
 NEMOTRON_MAX_TOKENS=2048
 ```

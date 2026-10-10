@@ -25,7 +25,7 @@ services:
       - key: NEMOTRON_BASE_URL
         value: https://api.tokenfactory.nebius.com/v1
       - key: NEMOTRON_MODEL
-        value: nvidia/nemotron-3.5-lightning-30b-a3b
+        value: nvidia/Nemotron-3_5-Lightning
       - key: NEMOTRON_API_KEY
         sync: false
 

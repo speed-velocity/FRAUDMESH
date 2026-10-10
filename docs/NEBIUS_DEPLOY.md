@@ -9,7 +9,7 @@ Nebius documents an OpenAI-compatible endpoint at `https://api.tokenfactory.nebi
 ```bash
 export NEMOTRON_BASE_URL=https://api.tokenfactory.nebius.com/v1
 export NEMOTRON_API_KEY='replace-with-your-token-factory-key'
-export NEMOTRON_MODEL='nvidia/nemotron-3.5-lightning-30b-a3b'
+export NEMOTRON_MODEL='nvidia/Nemotron-3_5-Lightning'
 ```
 
 Model IDs are account/catalog dependent. Verify the exact Nemotron ID in the Token Factory model catalog before setting `NEMOTRON_MODEL`; do not put the key in the frontend or repository.
@@ -27,7 +27,7 @@ docker run --rm -p 8000:8000 \
   -e DEMO_ADMIN_PASSWORD='replace-with-12-character-password' \
   -e NEMOTRON_BASE_URL='https://api.tokenfactory.nebius.com/v1' \
   -e NEMOTRON_API_KEY='replace-with-your-token-factory-key' \
-  -e NEMOTRON_MODEL='nvidia/nemotron-3.5-lightning-30b-a3b' \
+  -e NEMOTRON_MODEL='nvidia/Nemotron-3_5-Lightning' \
   fraudmesh-api:local
 curl http://127.0.0.1:8000/api/v1/health
 ```
