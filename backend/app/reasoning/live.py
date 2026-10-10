@@ -68,10 +68,13 @@ def _evidence_fallback(records: list[dict]) -> str:
     total = sum(int(record.get("amount_inr") or 0) for record in records)
     timestamps = [str(record.get("ts_utc")) for record in records if record.get("ts_utc")]
     timing = f"from {min(timestamps)} through {max(timestamps)}" if timestamps else "with no complete timestamp range"
+    citations = " ".join(f"[{record.get('evidence_id')}]" for record in records[:6] if record.get("evidence_id"))
+    counterparties = sorted({str(record.get("from_entity")) for record in records if record.get("from_entity")} | {str(record.get("to_entity")) for record in records if record.get("to_entity")})
+    counterparty_text = f" The linked records involve {len(counterparties)} recorded counterparties." if counterparties else " The linked counterparties are not fully established in the available records."
     return (
-        f"The linked case contains {len(records)} transaction records totaling INR {total:,} {timing}. "
-        "Review the ledger sequence and linked counterparties to determine whether the movement is coordinated. "
-        "The live model did not provide an additional grounded narrative, so human review is required."
+        f"The ledger contains {len(records)} linked transaction records totaling INR {total:,} {timing}.{counterparty_text} {citations} "
+        f"The recorded sequence is a reviewable movement pattern, but these records alone do not establish coordination, intent, or guilt. {citations} "
+        f"Compare the ledger timestamps, counterparties, and any independent case evidence before drawing a conclusion. {citations}"
     )
 
 
@@ -151,19 +154,23 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
                 "review_state": "pending",
             })
     summary = _text_from_payload(payload)
+    model_grounded = bool(summary.strip())
     if _is_meta_summary(summary):
         summary = ""
+        model_grounded = False
     if not summary and findings:
         summary = " ".join(item["statement"] for item in findings[:3])
+        model_grounded = True
     if not summary and plan_steps:
         summary = "Recommended checks: " + "; ".join(item["action"] for item in plan_steps[:3])
+        model_grounded = True
     if not summary:
         summary = _evidence_fallback(records)
 
     return {
         "case_id": case_id,
         "mode": "live",
-        "label": "Live Nemotron · Nebius Token Factory",
+        "label": "Live Nemotron · Nebius Token Factory" if model_grounded else "Deterministic grounded fallback · Nemotron unavailable",
         "summary": summary,
         "findings": findings,
         "hypotheses": [],
@@ -171,5 +178,6 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
         "cited_evidence_ids": cited,
         "withheld_count": withheld,
         "human_review_required": True,
-        "recording_label": "Live result (not a cached recording)",
+        "recording_label": "Live result (not a cached recording)" if model_grounded else "Deterministic result from linked ledger records (not a cached recording)",
+        "grounding_source": "nemotron" if model_grounded else "server_ledger_fallback",
     }
