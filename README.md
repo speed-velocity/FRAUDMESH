@@ -218,6 +218,20 @@ The dashboard reports held-out synthetic coverage, precision, recall, false posi
 
 All three use the existing `NEMOTRON_*` client and appear in the Nemotron metrics panel as `cluster_story`, `complaint_intake`, and `devils_advocate`. Every result carries the human-review footer and deterministic fallback label when live inference is unavailable.
 
+### Ask the graph
+
+Fraud Network → **Ask the graph** accepts English or Hinglish questions, including “jin accounts ko 1 ghante mein 5 se zyada senders se paisa aaya”. `POST /api/network/ask` lets Nemotron propose only a bounded JSON query spec. The server validates the target, fields, operators, numeric bounds, sort and limit, then executes the spec in deterministic code against the synthetic graph. The model never writes SQL or executes a free-form query. Results include the exact matched IDs and a code-generated interpretation; unknown or unsafe requests are rejected with a bounded suggestion.
+
+### Council of 3
+
+Live Alerts → **Convene council** sends the same server-built alert context to three parallel Token Factory calls: Analyst, Skeptic, and Auditor. `POST /api/alerts/{alert_id}/council` validates each strict JSON seat response, filters citations to the alert evidence, and computes consensus, shared evidence, disagreements, and de-duplicated next checks in code. Per-seat latency, wall-clock latency, and measured seat-sum timing are shown. The council never changes an alert score, status, or action.
+
+### Scam script classifier
+
+Investigation Cases → **Scam script classifier** reviews clearly labelled synthetic English, Hinglish, or Devanagari transcripts. `POST /api/scam/classify` uses the existing client and a closed taxonomy for fake KYC/OTP, authority impersonation, fake refund, investment/task patterns, and `none_detected`. Every returned red-flag quote is verified as a normalized substring of the submitted transcript; unverified quotes are withheld. The benign bank-reminder sample is a negative control and should remain `none_detected`.
+
+All three features use the existing `NEMOTRON_*` variables and are recorded in the metrics panel as `graph_query`, `council` (three calls), and `scam_classifier`. Each has a deterministic fallback labelled `Deterministic result, Nemotron unavailable`, a human-review footer, rate limiting, audit metadata without content, and no authority to take enforcement actions.
+
 ## Nemo, the investigation assistant (Nemotron via Nebius Token Factory)
 
 Nemo is the small “Ask Nemo” assistant in the lower-right corner of the console. It runs on the existing NVIDIA Nemotron client and the existing `NEMOTRON_BASE_URL`, `NEMOTRON_API_KEY`, and `NEMOTRON_MODEL` variables; it does not introduce a second `NEBIUS_*` configuration. Nemo is this project's assistant and is unrelated to NVIDIA NeMo. It uses an NVIDIA Nemotron model through Nebius Token Factory.
