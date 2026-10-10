@@ -16,6 +16,7 @@ from app.reasoning.live import run_live_reasoning
 from app.reasoning.nemo import MAX_HISTORY, answer_nemo, validate_page_context
 from app.reasoning.metrics import llm_metrics
 from app.reasoning.brief import generate_case_brief
+from app.reasoning.advanced import extract_complaint, generate_cluster_story, generate_devil
 from app.db.database import alert_actions, alert_status, append_audit, apply_alert_action, audit_records, authenticate_user, case_contradictions, case_evidence, case_subgraph, cases_for_entity, chronology_summary, complaint_extraction, contradiction_catalog, create_case, create_finding, create_hypothesis, create_link, create_plan_step, current_summary, edge_detail, ensure_demo_users, entity_detail, evidence_detail, evidence_records, evaluation_summary, ingest_transaction, ingested_events, list_cases, list_findings, list_hypotheses, list_links, list_plan_steps, list_users, narrative_links, network_path, network_summary, review_finding, review_link, review_plan_item, risk_alerts, risk_profile, rollback_alert_action, run_grounded_reasoning, search_entities, session_user, revoke_session, simulator_reset, simulator_status, simulator_step, update_case_notes, update_case_status
 
 
@@ -292,6 +293,18 @@ def create_app() -> FastAPI:
     async def network() -> JSONResponse:
         return JSONResponse(network_summary(settings.database_url))
 
+    @app.post("/api/network/clusters/{cluster_id}/story")
+    async def cluster_story(cluster_id: str, request: Request = None) -> JSONResponse:
+        actor = bearer_user(request) if request else None
+        if not actor: return JSONResponse({"detail": "Not authenticated"}, status_code=401)
+        if rate_limited("cluster_story", actor["user_id"], settings.expensive_rate_limit_per_minute): return JSONResponse({"detail": "Request rate limit exceeded"}, status_code=429)
+        client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
+        try:
+            result = await generate_cluster_story(settings.database_url, cluster_id, client)
+            append_audit(settings.database_url, actor["user_id"], actor["role"], "cluster_story", "success", request.headers.get("X-Request-ID"), "cluster", cluster_id, {"evidence_ids_count": len(result.get("citations", []))})
+            return JSONResponse(result)
+        except ValueError as exc: return JSONResponse({"detail": str(exc), "code": "cluster_not_found"}, status_code=404)
+
     @app.get("/api/v1/network/path")
     async def path(source: str = "", target: str = "", max_hops: int = 8) -> JSONResponse:
         try:
@@ -502,6 +515,18 @@ def create_app() -> FastAPI:
         except ValueError as exc:
             return JSONResponse({"detail": str(exc), "code": "reasoning_unavailable"}, status_code=400)
 
+    @app.post("/api/alerts/{alert_id}/devils-advocate")
+    async def devils_advocate(alert_id: str, request: Request = None) -> JSONResponse:
+        actor = bearer_user(request) if request else None
+        if not actor: return JSONResponse({"detail": "Not authenticated"}, status_code=401)
+        if rate_limited("devils_advocate", actor["user_id"], settings.expensive_rate_limit_per_minute): return JSONResponse({"detail": "Request rate limit exceeded"}, status_code=429)
+        client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
+        try:
+            result = await generate_devil(settings.database_url, alert_id, client)
+            append_audit(settings.database_url, actor["user_id"], actor["role"], "devils_advocate", "success", request.headers.get("X-Request-ID"), "alert", alert_id, {"evidence_ids_count": len(result.get("citations", []))})
+            return JSONResponse(result)
+        except ValueError as exc: return JSONResponse({"detail": str(exc), "code": "alert_not_found"}, status_code=404)
+
     nemo_history: dict[tuple[str, str], deque[dict]] = defaultdict(lambda: deque(maxlen=MAX_HISTORY))
 
     @app.post("/api/chat")
@@ -538,6 +563,19 @@ def create_app() -> FastAPI:
         except ValueError as exc:
             append_audit(settings.database_url, actor["user_id"], actor["role"], "nemo_chat", "failure", request.headers.get("X-Request-ID"), details=audit_details)
             return JSONResponse({"detail": str(exc), "code": "nemo_unavailable"}, status_code=503)
+
+    @app.post("/api/complaints/intake")
+    async def complaint_intake(payload: dict = Body(...), request: Request = None) -> JSONResponse:
+        actor = bearer_user(request) if request else None
+        if not actor: return JSONResponse({"detail": "Not authenticated"}, status_code=401)
+        text = payload.get("text") if isinstance(payload, dict) else None
+        if not isinstance(text, str) or not text.strip(): return JSONResponse({"detail": "Complaint text is required"}, status_code=422)
+        if len(text) > 4000: return JSONResponse({"detail": "Complaint text is too long"}, status_code=422)
+        if rate_limited("complaint_intake", actor["user_id"], settings.expensive_rate_limit_per_minute): return JSONResponse({"detail": "Request rate limit exceeded"}, status_code=429)
+        client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
+        result = await extract_complaint(text, client)
+        append_audit(settings.database_url, actor["user_id"], actor["role"], "complaint_intake", "success", request.headers.get("X-Request-ID"), details={"language": result.get("language_detected"), "mismatch_count": len(result.get("mismatches", []))})
+        return JSONResponse(result)
 
     @app.post("/api/v1/cases/{case_id}/plan", status_code=201)
     async def add_plan_step(case_id: str, payload: dict = Body(...)) -> JSONResponse:

@@ -78,6 +78,9 @@ label, .eyebrow, .count-badge, .score-badge, .status-select, .audit-outcome, .co
 .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: var(--fm-space-7); border-bottom: 2px solid var(--fm-ink); }
 .metric-grid.compact { margin: 0; border-bottom: 0; }
 .case-brief-panel { margin: var(--fm-space-6) 0; }
+.feature-panel { margin: var(--fm-space-6) 0; }
+.feature-panel textarea, .feature-panel select { width: 100%; margin: var(--fm-space-3) 0; }
+.feature-result { border-top: 1px solid var(--fm-rule); margin-top: var(--fm-space-4); padding-top: var(--fm-space-4); }
 .case-brief-content h3 { margin-bottom: var(--fm-space-2); }
 .case-brief-content section { border-top: 1px solid var(--fm-rule); padding-top: var(--fm-space-3); margin-top: var(--fm-space-3); }
 .case-brief-content h4 { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; }

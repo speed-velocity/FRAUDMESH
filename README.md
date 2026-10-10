@@ -210,6 +210,14 @@ Investigation Cases includes **Generate case brief**, which calls `POST /api/v1/
 
 The dashboard reports held-out synthetic coverage, precision, recall, false positives, and a per-event simulator outcome. Run `python scripts/eval.py` for the JSON summary and read [docs/EVALUATION.md](docs/EVALUATION.md) for the DEV/HELD-OUT split and limitations. These values are synthetic evaluation signals, not production metrics; existing ACC-M1/ACC-M2/ACC-M3 alert behavior remains the reference regression surface.
 
+### Additional Nemotron investigator features
+
+- **Cluster story**: Fraud Network → **Explain this cluster** calls `POST /api/network/clusters/{cluster_id}/story`. Hub candidates and link strength are computed from the server-owned graph; inferred and weak links remain explicitly qualified.
+- **Complaint intake (English + Hinglish)**: Investigation Cases → **Complaint intake** accepts synthetic English, Romanized Hindi/Hinglish, or Devanagari text and calls `POST /api/complaints/intake`. Nemotron extracts; deterministic server logic computes mismatches and keeps software ledger values authoritative.
+- **Devil’s advocate**: Live Alerts → **Challenge this signal** calls `POST /api/alerts/{alert_id}/devils-advocate`. It does not change score or status and lists plausible benign hypotheses and discriminating checks.
+
+All three use the existing `NEMOTRON_*` client and appear in the Nemotron metrics panel as `cluster_story`, `complaint_intake`, and `devils_advocate`. Every result carries the human-review footer and deterministic fallback label when live inference is unavailable.
+
 ## Nemo, the investigation assistant (Nemotron via Nebius Token Factory)
 
 Nemo is the small “Ask Nemo” assistant in the lower-right corner of the console. It runs on the existing NVIDIA Nemotron client and the existing `NEMOTRON_BASE_URL`, `NEMOTRON_API_KEY`, and `NEMOTRON_MODEL` variables; it does not introduce a second `NEBIUS_*` configuration. Nemo is this project's assistant and is unrelated to NVIDIA NeMo. It uses an NVIDIA Nemotron model through Nebius Token Factory.
