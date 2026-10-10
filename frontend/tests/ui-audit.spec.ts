@@ -164,6 +164,26 @@ test("FraudMesh UI audit across routes, modes, and responsive viewports", async 
   expect(allIssues.filter((issue) => issue.severity === "blocker" || issue.severity === "major").length).toBe(0);
 });
 
+test("cold-start wake state is visible when the backend is unavailable", async ({ browser }) => {
+  for (const mode of ["light", "dark"] as const) {
+    for (const viewport of [{ width: 375, height: 812 }, { width: 1280, height: 800 }]) {
+      const context = await browser.newContext({ viewport, colorScheme: mode });
+      const page = await context.newPage();
+      await page.addInitScript((selectedMode) => {
+        localStorage.setItem("fraudmesh_token", "ui-audit-token");
+        localStorage.setItem("fraudmesh_mode", selectedMode);
+      }, mode);
+      await page.route("http://127.0.0.1:8000/**", (route) => route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ detail: "warming" }) }));
+      await page.goto("#dashboard", { waitUntil: "domcontentloaded" });
+      await expect(page.getByTestId("wake-up-state")).toBeVisible({ timeout: 7_000 });
+      await expect(page.getByText(/Waking up|taking a moment/)).toBeVisible();
+      await fs.mkdir(path.join(ROOT, "ui-audit", "cold-start"), { recursive: true });
+      await page.screenshot({ path: path.join(ROOT, "ui-audit", "cold-start", `${mode}-${viewport.width}.png`), fullPage: true });
+      await context.close();
+    }
+  }
+});
+
 test("Nemo drawer is usable at mobile and desktop sizes in both modes", async ({ browser }) => {
   for (const mode of ["light", "dark"] as const) {
     for (const width of [375, 1280]) {

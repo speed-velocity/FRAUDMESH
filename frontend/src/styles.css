@@ -194,6 +194,10 @@ label { display: grid; gap: var(--fm-space-1); color: var(--fm-muted); font-size
 .login-card { width: min(520px, 100%); margin: 10vh auto 0; padding: clamp(24px, 5vw, 48px); border: var(--fm-border); border-top: 4px double var(--fm-ink); background: var(--fm-paper-raised); }
 .login-card h1 { margin-top: var(--fm-space-2); font-size: clamp(2.5rem, 8vw, 4.5rem); }
 .login-card p { color: var(--fm-muted); font-size: 1.05rem; }
+.wake-card { text-align: left; }
+.wake-progress { height: 4px; margin: var(--fm-space-6) 0; overflow: hidden; background: var(--fm-rule); }
+.wake-progress span { display: block; width: 38%; height: 100%; background: var(--fm-oxblood); animation: wake-progress 1.6s ease-in-out infinite; }
+@keyframes wake-progress { 0% { transform: translateX(-110%); } 100% { transform: translateX(290%); } }
 .login-form { display: grid; gap: var(--fm-space-2); margin-top: var(--fm-space-7); }
 .login-form input { margin-bottom: var(--fm-space-3); }
 .login-error { color: var(--fm-danger); }
@@ -283,6 +287,7 @@ pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); 
 }
 @media (prefers-reduced-motion: reduce) {
   .nemo-avatar svg *, .nemo-large-avatar svg * { animation: none !important; transition: none !important; }
+  .wake-progress span { animation: none; width: 100%; }
 }
 @media (max-width: 900px) {
   .app-header { grid-template-columns: minmax(0, 1fr) auto; }

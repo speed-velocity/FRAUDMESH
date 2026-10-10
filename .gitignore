@@ -1,4 +1,6 @@
 .env
+.env.*
+!.env.example
 .venv/
 __pycache__/
 *.py[cod]
@@ -15,4 +17,17 @@ backend/.pytest-work-goals*/
 backend/data/runtime/
 backend/tests/_api_tmp/
 backend/tests/_pytest_tmp_auth/
+*.pem
+*.key
+*.crt
+*.sqlite
+*.db
+*.db-*
+*.tmp
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+playwright-report/
+test-results/
 
