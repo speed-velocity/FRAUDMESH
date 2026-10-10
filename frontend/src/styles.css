@@ -163,7 +163,7 @@ pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); 
 .nemo-avatar { display: inline-grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; padding: 0; border: 0; border-radius: var(--fm-radius); background: var(--fm-ink); color: var(--fm-paper); overflow: hidden; opacity: 1; filter: none; }
 .nemo-avatar > span { display: block; width: 100%; height: 100%; }
 .nemo-avatar svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.nemo-large-avatar { display: inline-grid; place-items: center; width: 120px; height: 120px; padding: var(--fm-space-3); border-radius: var(--fm-radius); background: var(--fm-ink); overflow: hidden; }
+.nemo-large-avatar { display: inline-grid; place-items: center; box-sizing: border-box; width: 140px; height: 140px; padding: 16px; border-radius: 24px; background: var(--fm-ink); overflow: hidden; }
 .nemo-large-avatar > span { display: block; width: 100%; height: 100%; }
 .nemo-large-avatar svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .nemo-welcome { display: grid; place-items: center; padding: var(--fm-space-3) 0; }
@@ -178,6 +178,8 @@ pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); 
 .nemo-avatar svg #eye-left circle, .nemo-avatar svg #eye-right circle { animation: nemo-blink 7s ease-in-out infinite; }
 .nemo-avatar:hover svg #eye-left, .nemo-avatar:hover svg #eye-right { transform: translateY(-3px); }
 .nemo-avatar:hover svg #eye-left circle, .nemo-avatar:hover svg #eye-right circle { transform: scale(1.2); animation: none; }
+.nemo-state-curious svg #eye-left, .nemo-state-curious svg #eye-right { transform: translateY(-3px); }
+.nemo-state-curious svg #eye-left circle, .nemo-state-curious svg #eye-right circle { transform: scale(1.2); }
 .nemo-state-idle svg #n-crown .core { animation: nemo-idle-pulse 3.8s ease-in-out infinite; }
 .nemo-state-idle svg #n-left .core { animation: nemo-idle-pulse 3.8s .3s ease-in-out infinite; }
 .nemo-state-idle svg #n-low .core { animation: nemo-idle-pulse 3.8s .6s ease-in-out infinite; }
@@ -188,6 +190,8 @@ pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); 
 .nemo-state-idle svg #nemo, .nemo-state-idle svg #nemo-icon { animation: nemo-float 4.5s ease-in-out infinite; }
 .nemo-launcher:hover svg #arm-left { animation: nemo-wave-left 900ms ease-in-out 2; }
 .nemo-launcher:hover svg #arm-right { animation: nemo-wave-right 900ms ease-in-out 2; }
+.nemo-state-greeting svg #arm-left { animation: nemo-wave-left 900ms ease-in-out 1; }
+.nemo-state-greeting svg #arm-right { animation: nemo-wave-right 900ms ease-in-out 1; }
 .nemo-state-thinking svg #n-crown .core { animation: nemo-thinking-pulse 1.8s ease-in-out infinite; }
 .nemo-state-thinking svg #link-head { animation: nemo-link-pulse 1.8s .2s ease-in-out infinite; }
 .nemo-state-thinking svg #n-right .core { animation: nemo-thinking-pulse 1.8s .4s ease-in-out infinite; }
@@ -208,21 +212,22 @@ pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); 
 @keyframes nemo-blink { 0%, 93%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.2); } }
 @keyframes nemo-wave-left { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(-12deg); } 60% { transform: rotate(10deg); } }
 @keyframes nemo-wave-right { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(12deg); } 60% { transform: rotate(-10deg); } }
-.nemo-drawer { position: fixed; inset: 0 0 0 auto; z-index: 50; display: flex; flex-direction: column; width: min(440px, 100vw); padding: var(--fm-space-5); border-left: var(--fm-border); background: var(--fm-paper-raised); color: var(--fm-ink); box-shadow: var(--fm-shadow); }
+.nemo-drawer { position: fixed; inset: 0 0 0 auto; z-index: 50; display: flex; flex-direction: column; width: min(440px, 100vw); height: 100dvh; max-height: 100dvh; box-sizing: border-box; padding: calc(var(--fm-space-5) + env(safe-area-inset-top)) calc(var(--fm-space-5) + env(safe-area-inset-right)) calc(var(--fm-space-5) + env(safe-area-inset-bottom)) calc(var(--fm-space-5) + env(safe-area-inset-left)); border-left: var(--fm-border); background: var(--fm-paper-raised); color: var(--fm-ink); box-shadow: var(--fm-shadow); overflow: hidden; }
 .nemo-head, .nemo-head > div, .nemo-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--fm-space-3); }
 .nemo-head > div { justify-content: flex-start; }
 .nemo-head strong, .nemo-head small { display: block; }
 .nemo-head small, .nemo-provider, .nemo-actions small { color: var(--fm-muted); }
 .nemo-icon-button { min-width: var(--fm-touch-height); min-height: var(--fm-touch-height); border: var(--fm-border); background: transparent; color: var(--fm-ink); font-size: 1.5rem; }
 .nemo-provider { margin: var(--fm-space-4) 0; padding-bottom: var(--fm-space-3); border-bottom: var(--fm-border); font-family: var(--fm-font-mono); font-size: .78rem; }
-.nemo-messages { flex: 1 1 auto; min-height: 0; overflow-y: auto; display: grid; align-content: start; gap: var(--fm-space-3); padding: var(--fm-space-2) 0; }
+.nemo-messages { flex: 1 1 auto; min-height: 0; overflow-y: auto; display: grid; align-content: start; gap: var(--fm-space-3); padding: var(--fm-space-2) 0; overscroll-behavior: contain; }
 .nemo-message { max-width: 92%; padding: var(--fm-space-3); border: var(--fm-border); border-radius: var(--fm-radius); line-height: 1.5; overflow-wrap: anywhere; }
 .nemo-message.assistant { justify-self: start; background: var(--fm-paper-deep); }
 .nemo-message.user { justify-self: end; background: var(--fm-oxblood); color: var(--fm-paper); }
 .nemo-chip { display: inline-flex; align-items: center; min-height: 36px; margin: 2px; padding: 0 var(--fm-space-2); border: var(--fm-border); border-radius: var(--fm-radius); background: var(--fm-paper-raised); color: var(--fm-oxblood); font-family: var(--fm-font-mono); font-size: .82rem; text-decoration: none; }
-.nemo-chips { padding: var(--fm-space-2) 0; }
+.nemo-chips { flex: 0 0 auto; padding: var(--fm-space-2) 0; }
 .nemo-compose { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--fm-space-2); padding-top: var(--fm-space-3); border-top: var(--fm-border); }
 .nemo-compose input { min-width: 0; }
+.nemo-compose, .nemo-actions { flex: 0 0 auto; }
 .nemo-compose .secondary-action { grid-column: 1 / -1; }
 .nemo-actions { align-items: flex-start; padding-top: var(--fm-space-3); }
 .nemo-actions small { max-width: 220px; text-align: right; }
@@ -230,8 +235,11 @@ pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); 
 .nemo-error button { margin-left: var(--fm-space-2); color: var(--fm-oxblood); text-decoration: underline; }
 @media (max-width: 600px) {
   .nemo-launcher { right: 16px; bottom: 16px; min-height: var(--fm-touch-height); }
-  .nemo-drawer { width: 100vw; padding: var(--fm-space-4); }
+  .nemo-drawer { inset: 0; width: 100vw; padding: calc(var(--fm-space-4) + env(safe-area-inset-top)) calc(var(--fm-space-4) + env(safe-area-inset-right)) calc(var(--fm-space-4) + env(safe-area-inset-bottom)) calc(var(--fm-space-4) + env(safe-area-inset-left)); }
   .nemo-chip { min-height: var(--fm-touch-height); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nemo-avatar svg *, .nemo-large-avatar svg * { animation: none !important; transition: none !important; }
 }
 @media (max-width: 900px) {
   .app-header { grid-template-columns: minmax(0, 1fr) auto; }

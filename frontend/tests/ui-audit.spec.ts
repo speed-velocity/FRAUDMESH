@@ -180,12 +180,15 @@ test("Nemo drawer is usable at mobile and desktop sizes in both modes", async ({
       expect(iconMetrics.height).toBeGreaterThanOrEqual(36);
       expect(iconMetrics.opacity).toBe("1");
       expect(iconMetrics.filter).toBe("none");
+      expect(await launcherIcon.locator("svg").evaluate((svg) => !svg.querySelector("#arm-left, #body, #foot-left"))).toBeTruthy();
       await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "/assets/nemo/nemo-icon.svg");
       await fs.mkdir(path.join(ROOT, "ui-audit", "nemo-fix"), { recursive: true });
       await page.screenshot({ path: path.join(ROOT, "ui-audit", "nemo-fix", `launcher-${mode}-${width}-dpr${dpr}.png`) });
       await page.getByRole("button", { name: "Ask Nemo" }).click();
       const drawer = page.getByRole("dialog", { name: "Nemo" });
       await expect(drawer).toBeVisible();
+      expect(await page.locator(".nemo-welcome").evaluate((element) => { const style = getComputedStyle(element.querySelector(".nemo-large-avatar")!); const rect = element.getBoundingClientRect(); return rect.width >= 140 && style.backgroundColor !== "rgba(0, 0, 0, 0)"; })).toBeTruthy();
+      expect(await page.locator(".nemo-drawer").evaluate((drawerElement) => { const drawerRect = drawerElement.getBoundingClientRect(); return [...drawerElement.querySelectorAll<HTMLElement>(".nemo-chips, .nemo-compose, .nemo-actions")].every((element) => element.getBoundingClientRect().bottom <= drawerRect.bottom + 1); })).toBeTruthy();
       await page.screenshot({ path: path.join(ROOT, "ui-audit", "nemo-fix", `drawer-${mode}-${width}-dpr${dpr}.png`) });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
       for (let index = 0; index < 10; index += 1) await page.keyboard.press("Tab");
