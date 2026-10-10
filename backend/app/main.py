@@ -15,6 +15,7 @@ from app.reasoning.client import NemotronClient
 from app.reasoning.live import run_live_reasoning
 from app.reasoning.nemo import MAX_HISTORY, answer_nemo, validate_page_context
 from app.reasoning.metrics import llm_metrics
+from app.reasoning.brief import generate_case_brief
 from app.db.database import alert_actions, alert_status, append_audit, apply_alert_action, audit_records, authenticate_user, case_contradictions, case_evidence, case_subgraph, cases_for_entity, chronology_summary, complaint_extraction, contradiction_catalog, create_case, create_finding, create_hypothesis, create_link, create_plan_step, current_summary, edge_detail, ensure_demo_users, entity_detail, evidence_detail, evidence_records, evaluation_summary, ingest_transaction, ingested_events, list_cases, list_findings, list_hypotheses, list_links, list_plan_steps, list_users, narrative_links, network_path, network_summary, review_finding, review_link, review_plan_item, risk_alerts, risk_profile, rollback_alert_action, run_grounded_reasoning, search_entities, session_user, revoke_session, simulator_reset, simulator_status, simulator_step, update_case_notes, update_case_status
 
 
@@ -467,6 +468,21 @@ def create_app() -> FastAPI:
             return JSONResponse(result)
         except ValueError as exc:
             return JSONResponse({"detail": str(exc), "code": "reasoning_unavailable"}, status_code=400)
+
+    @app.post("/api/v1/cases/{case_id}/brief")
+    async def case_brief(case_id: str, request: Request = None) -> JSONResponse:
+        actor = bearer_user(request) if request else None
+        if not actor:
+            return JSONResponse({"detail": "Not authenticated"}, status_code=401)
+        if rate_limited("case_brief", actor["user_id"], settings.expensive_rate_limit_per_minute):
+            return JSONResponse({"detail": "Case brief rate limit exceeded", "code": "rate_limited"}, status_code=429)
+        client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
+        try:
+            result = await generate_case_brief(settings.database_url, case_id, client)
+            append_audit(settings.database_url, actor["user_id"], actor["role"], "case_brief", "success", request.headers.get("X-Request-ID"), "case", case_id, {"evidence_ids_count": len(result.get("cited_evidence_ids", []))})
+            return JSONResponse(result)
+        except ValueError as exc:
+            return JSONResponse({"detail": str(exc), "code": "brief_unavailable"}, status_code=404)
 
     @app.post("/api/v1/alerts/{entity_id}/reasoning")
     async def explain_alert(entity_id: str, request: Request = None) -> JSONResponse:

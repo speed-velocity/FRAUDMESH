@@ -76,6 +76,18 @@ label, .eyebrow, .count-badge, .score-badge, .status-select, .audit-outcome, .co
 .intro h2 { max-width: 980px; margin-top: var(--fm-space-2); }
 .intro p, .cases-experience-header p, .network-experience-header p, .chain-experience-header p, .evidence-experience-header p, .audit-header p { max-width: 720px; margin: var(--fm-space-4) 0 0; color: var(--fm-muted); font-size: 1.08rem; }
 .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: var(--fm-space-7); border-bottom: 2px solid var(--fm-ink); }
+.metric-grid.compact { margin: 0; border-bottom: 0; }
+.case-brief-panel { margin: var(--fm-space-6) 0; }
+.case-brief-content h3 { margin-bottom: var(--fm-space-2); }
+.case-brief-content section { border-top: 1px solid var(--fm-rule); padding-top: var(--fm-space-3); margin-top: var(--fm-space-3); }
+.case-brief-content h4 { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; }
+.case-brief-content .count-badge { display: inline-block; margin-right: .35rem; }
+@media print {
+  body { background: #fff !important; color: #111 !important; }
+  .app-header, .sidebar, .intro, .case-brief-panel .panel-head .button-row, .nemo-launcher, .nemo-drawer, .case-review-panel, .safety-banner { display: none !important; }
+  .case-brief-panel { display: block !important; border: 0 !important; box-shadow: none !important; }
+  .case-brief-content { color: #111 !important; }
+}
 .metric { min-width: 0; padding: var(--fm-space-6) var(--fm-space-4) var(--fm-space-6) 0; border-right: var(--fm-border); }
 .metric + .metric { padding-left: var(--fm-space-4); }
 .metric:last-child { border-right: 0; }

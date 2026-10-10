@@ -202,6 +202,10 @@ The client accepts a host or `/v1` base URL and never prints the API key. Prompt
 
 Every live Nemotron call records operational metadata only: feature, model, status, latency, retry count, and API-reported token counts when available. The bounded process-local store never records prompts, completions, evidence, or user messages. Admins can view `GET /api/metrics/llm`; the dashboard shows a compact view and Audit & Access shows the latest calls. To measure a configured deployment without exposing output, run `python scripts/bench_token_factory.py -n 3 -m 2`. The script prints measured timings from that run and does not claim a performance comparison.
 
+### Case brief
+
+Investigation Cases includes **Generate case brief**, which calls `POST /api/v1/cases/{case_id}/brief`. The server assembles masked case evidence, contradictions, and graph context; client-supplied facts are not accepted. Live output is citation-filtered against the supplied evidence IDs. If Nemotron is unavailable or returns invalid JSON, the UI labels a deterministic data-only brief and preserves the human-review footer. Briefs can be downloaded as Markdown or printed/saved as PDF using the browser print dialog.
+
 ## Nemo, the investigation assistant (Nemotron via Nebius Token Factory)
 
 Nemo is the small “Ask Nemo” assistant in the lower-right corner of the console. It runs on the existing NVIDIA Nemotron client and the existing `NEMOTRON_BASE_URL`, `NEMOTRON_API_KEY`, and `NEMOTRON_MODEL` variables; it does not introduce a second `NEBIUS_*` configuration. Nemo is this project's assistant and is unrelated to NVIDIA NeMo. It uses an NVIDIA Nemotron model through Nebius Token Factory.
