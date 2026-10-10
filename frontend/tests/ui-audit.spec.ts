@@ -48,6 +48,7 @@ async function mockApi(page: Page, authenticated = true) {
     if (url.pathname.includes("/hypotheses")) return json(route, { hypotheses: [] });
     if (url.pathname.includes("/plan")) return json(route, { steps: [] });
     if (url.pathname.includes("/reasoning")) return json(route, { label: "Nemotron unavailable", summary: "Live reasoning is unavailable in this audit harness." });
+    if (url.pathname.endsWith("/api/chat")) return json(route, { answer: "Review the linked record [E-0093].\n\nInvestigation support only. Human review required.", citations: ["E-0093"], entities: [], suggested_followups: [] });
     if (url.pathname.includes("/audit")) return json(route, { records: [] });
     if (url.pathname.includes("/path")) return json(route, { found: false, hops: 0, nodes: [], edges: [] });
     return json(route, {});
@@ -161,4 +162,25 @@ test("FraudMesh UI audit across routes, modes, and responsive viewports", async 
   await preferenceContext.close();
   await fs.writeFile(path.join(ROOT, "ui-audit", "mode-issues.json"), JSON.stringify(allIssues, null, 2));
   expect(allIssues.filter((issue) => issue.severity === "blocker" || issue.severity === "major").length).toBe(0);
+});
+
+test("Nemo drawer is usable at mobile and desktop sizes in both modes", async ({ browser }) => {
+  for (const mode of ["light", "dark"] as const) {
+    for (const width of [375, 768, 1280]) {
+      const context = await browser.newContext({ viewport: { width, height: 812 }, colorScheme: mode });
+      const page = await context.newPage();
+      await mockApi(page);
+      await page.addInitScript((selectedMode) => { localStorage.setItem("fraudmesh_token", "ui-audit-token"); localStorage.setItem("fraudmesh_mode", selectedMode); }, mode);
+      await page.goto("/#dashboard", { waitUntil: "domcontentloaded" });
+      await page.getByRole("button", { name: "Ask Nemo" }).click();
+      const drawer = page.getByRole("dialog", { name: "Nemo" });
+      await expect(drawer).toBeVisible();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
+      for (let index = 0; index < 10; index += 1) await page.keyboard.press("Tab");
+      expect(await page.evaluate(() => Boolean(document.activeElement?.closest("#nemo-drawer")))).toBeTruthy();
+      await page.getByRole("button", { name: "Close Nemo" }).press("Enter");
+      await expect(drawer).toBeHidden();
+      await context.close();
+    }
+  }
 });

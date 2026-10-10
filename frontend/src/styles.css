@@ -159,6 +159,33 @@ label { display: grid; gap: var(--fm-space-1); color: var(--fm-muted); font-size
 .not-found { margin-top: var(--fm-space-7); }
 pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); color: var(--fm-ink); }
 ::selection { background: var(--fm-oxblood); color: var(--fm-paper); }
+.nemo-launcher { position: fixed; right: clamp(16px, 3vw, 32px); bottom: clamp(16px, 3vw, 32px); z-index: 40; display: inline-flex; align-items: center; gap: var(--fm-space-2); min-height: var(--fm-touch-height); padding: 0 var(--fm-space-4); border: var(--fm-border); border-radius: var(--fm-radius); background: var(--fm-oxblood); color: var(--fm-paper); font-family: var(--fm-font-body); font-weight: var(--fm-weight-semibold); box-shadow: var(--fm-shadow); }
+.nemo-avatar { display: inline-grid; place-items: center; flex: 0 0 32px; width: 32px; height: 32px; border: var(--fm-border); border-radius: 50%; background: var(--fm-paper); color: var(--fm-oxblood); font-family: var(--fm-font-display); font-weight: var(--fm-weight-bold); }
+.nemo-drawer { position: fixed; inset: 0 0 0 auto; z-index: 50; display: flex; flex-direction: column; width: min(440px, 100vw); padding: var(--fm-space-5); border-left: var(--fm-border); background: var(--fm-paper-raised); color: var(--fm-ink); box-shadow: var(--fm-shadow); }
+.nemo-head, .nemo-head > div, .nemo-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--fm-space-3); }
+.nemo-head > div { justify-content: flex-start; }
+.nemo-head strong, .nemo-head small { display: block; }
+.nemo-head small, .nemo-provider, .nemo-actions small { color: var(--fm-muted); }
+.nemo-icon-button { min-width: var(--fm-touch-height); min-height: var(--fm-touch-height); border: var(--fm-border); background: transparent; color: var(--fm-ink); font-size: 1.5rem; }
+.nemo-provider { margin: var(--fm-space-4) 0; padding-bottom: var(--fm-space-3); border-bottom: var(--fm-border); font-family: var(--fm-font-mono); font-size: .78rem; }
+.nemo-messages { flex: 1 1 auto; min-height: 0; overflow-y: auto; display: grid; align-content: start; gap: var(--fm-space-3); padding: var(--fm-space-2) 0; }
+.nemo-message { max-width: 92%; padding: var(--fm-space-3); border: var(--fm-border); border-radius: var(--fm-radius); line-height: 1.5; overflow-wrap: anywhere; }
+.nemo-message.assistant { justify-self: start; background: var(--fm-paper-deep); }
+.nemo-message.user { justify-self: end; background: var(--fm-oxblood); color: var(--fm-paper); }
+.nemo-chip { display: inline-flex; align-items: center; min-height: 36px; margin: 2px; padding: 0 var(--fm-space-2); border: var(--fm-border); border-radius: var(--fm-radius); background: var(--fm-paper-raised); color: var(--fm-oxblood); font-family: var(--fm-font-mono); font-size: .82rem; text-decoration: none; }
+.nemo-chips { padding: var(--fm-space-2) 0; }
+.nemo-compose { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--fm-space-2); padding-top: var(--fm-space-3); border-top: var(--fm-border); }
+.nemo-compose input { min-width: 0; }
+.nemo-compose .secondary-action { grid-column: 1 / -1; }
+.nemo-actions { align-items: flex-start; padding-top: var(--fm-space-3); }
+.nemo-actions small { max-width: 220px; text-align: right; }
+.nemo-error { padding: var(--fm-space-3); border-left: 3px solid var(--fm-oxblood); background: var(--fm-amber-soft); color: var(--fm-ink); overflow-wrap: anywhere; }
+.nemo-error button { margin-left: var(--fm-space-2); color: var(--fm-oxblood); text-decoration: underline; }
+@media (max-width: 600px) {
+  .nemo-launcher { right: 16px; bottom: 16px; min-height: var(--fm-touch-height); }
+  .nemo-drawer { width: 100vw; padding: var(--fm-space-4); }
+  .nemo-chip { min-height: var(--fm-touch-height); }
+}
 @media (max-width: 900px) {
   .app-header { grid-template-columns: minmax(0, 1fr) auto; }
   .header-wordmark { display: none; }

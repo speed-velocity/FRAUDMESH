@@ -198,6 +198,23 @@ NEMOTRON_MAX_TOKENS=2048
 
 The client accepts a host or `/v1` base URL and never prints the API key. Prompts are assembled from server-side alert/case data, bounded and masked before transmission. The validator accepts only grounded findings and plan checks that refer to available evidence; unsupported output is withheld. Cached reasoning remains available as a clearly labelled sample recording without a live model. See [docs/NEBIUS_DEPLOY.md](docs/NEBIUS_DEPLOY.md) for container setup.
 
+## Nemo, the investigation assistant (Nemotron via Nebius Token Factory)
+
+Nemo is the small “Ask Nemo” assistant in the lower-right corner of the console. It runs on the existing NVIDIA Nemotron client and the existing `NEMOTRON_BASE_URL`, `NEMOTRON_API_KEY`, and `NEMOTRON_MODEL` variables; it does not introduce a second `NEBIUS_*` configuration. Nemo is this project's assistant and is unrelated to NVIDIA NeMo. It uses an NVIDIA Nemotron model through Nebius Token Factory.
+
+The protected `POST /api/chat` route receives a message, an optional conversation ID, and a `page_context` object containing IDs only. The server retrieves the selected alert, case, masked evidence, entity details, contradictions, and bounded cluster context. The existing completion client sends that compact context to Nemotron. Tool calling is not required: server-side retrieval is the deterministic fallback because model tool-calling support is not assumed.
+
+Each response is checked against the evidence IDs supplied by the server. Invalid citations are removed and flagged, unmasked values are never sent to the model, and Nemo cannot acknowledge, dismiss, escalate, or unmask anything. Guilt questions and human-only actions receive fixed refusals. Conversations are held in memory per signed-in user/session, limited to the last six turns, and each request writes an audit event containing referenced IDs but not message content.
+
+Demo script:
+
+1. Open **Live Alerts**, then ask: “Why did ACC-M3 surface?” Nemo should answer with grounded `[E-...]` citations.
+2. On **Investigation Cases**, ask: “What contradictions exist in this case?” Review the X1–X4 evidence links.
+3. Ask: “Is ACC-M3 guilty?” Nemo refuses to determine guilt and says human review is required.
+4. Ask: “Unmask E-0093.” Nemo refuses and points to **Audit & Access**.
+
+For a manual live smoke call, authenticate in the application, export the bearer token as `FRAUDMESH_TOKEN`, and run `scripts/smoke_nemo.sh`. The script is intentionally excluded from CI and does not print or accept a Nemotron API key.
+
 ## Testing and build
 
 ```powershell

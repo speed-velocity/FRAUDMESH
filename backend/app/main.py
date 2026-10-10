@@ -13,6 +13,7 @@ from fastapi.responses import JSONResponse
 from app.core.config import get_settings
 from app.reasoning.client import NemotronClient
 from app.reasoning.live import run_live_reasoning
+from app.reasoning.nemo import MAX_HISTORY, answer_nemo, validate_page_context
 from app.db.database import alert_actions, alert_status, append_audit, apply_alert_action, audit_records, authenticate_user, case_contradictions, case_evidence, case_subgraph, cases_for_entity, chronology_summary, complaint_extraction, contradiction_catalog, create_case, create_finding, create_hypothesis, create_link, create_plan_step, current_summary, edge_detail, ensure_demo_users, entity_detail, evidence_detail, evidence_records, evaluation_summary, ingest_transaction, ingested_events, list_cases, list_findings, list_hypotheses, list_links, list_plan_steps, list_users, narrative_links, network_path, network_summary, review_finding, review_link, review_plan_item, risk_alerts, risk_profile, rollback_alert_action, run_grounded_reasoning, search_entities, session_user, revoke_session, simulator_reset, simulator_status, simulator_step, update_case_notes, update_case_status
 
 
@@ -75,7 +76,7 @@ def create_app() -> FastAPI:
             response.headers["Retry-After"] = "60"
             response.headers["X-Request-ID"] = request_id
             return response
-        expensive_prefixes = ("/api/v1/reasoning", "/api/v1/events", "/api/v1/simulator", "/api/v1/network/path")
+        expensive_prefixes = ("/api/v1/reasoning", "/api/v1/events", "/api/v1/simulator", "/api/v1/network/path", "/api/chat")
         if request.url.path.startswith(expensive_prefixes) and rate_limited("expensive", client_key, settings.expensive_rate_limit_per_minute):
             response = JSONResponse({"detail": "Request rate limit exceeded", "code": "rate_limited", "request_id": request_id}, status_code=429)
             response.headers["Retry-After"] = "60"
@@ -473,6 +474,43 @@ def create_app() -> FastAPI:
             return JSONResponse(result)
         except ValueError as exc:
             return JSONResponse({"detail": str(exc), "code": "reasoning_unavailable"}, status_code=400)
+
+    nemo_history: dict[tuple[str, str], deque[dict]] = defaultdict(lambda: deque(maxlen=MAX_HISTORY))
+
+    @app.post("/api/chat")
+    async def nemo_chat(payload: dict = Body(...), request: Request = None) -> JSONResponse:
+        actor = bearer_user(request) if request else None
+        if not actor:
+            return JSONResponse({"detail": "Not authenticated", "code": "not_authenticated"}, status_code=401)
+        message = payload.get("message") if isinstance(payload, dict) else None
+        if not isinstance(message, str) or not message.strip():
+            return JSONResponse({"detail": "Message is required", "code": "invalid_message"}, status_code=422)
+        if len(message) > 1200:
+            return JSONResponse({"detail": "Message is too long. Keep it under 1,200 characters.", "code": "message_too_long"}, status_code=422)
+        try:
+            page_context = validate_page_context(payload.get("page_context"))
+            conversation_id = str(payload.get("conversation_id") or "default")[:80]
+            if not conversation_id or not all(character.isalnum() or character in "_-" for character in conversation_id):
+                return JSONResponse({"detail": "conversation_id is invalid", "code": "invalid_conversation"}, status_code=422)
+        except ValueError as exc:
+            return JSONResponse({"detail": str(exc), "code": "invalid_page_context"}, status_code=422)
+        if rate_limited("nemo", actor["user_id"], settings.expensive_rate_limit_per_minute):
+            return JSONResponse({"detail": "Nemo request rate limit exceeded", "code": "rate_limited"}, status_code=429, headers={"Retry-After": "60"})
+        client = NemotronClient(settings.nemotron_base_url, settings.nemotron_api_key, settings.nemotron_model, settings.nemotron_timeout_s, max_tokens=settings.nemotron_max_tokens)
+        audit_details = {key: value for key, value in page_context.items()}
+        try:
+            if not client.configured:
+                append_audit(settings.database_url, actor["user_id"], actor["role"], "nemo_chat", "unavailable", request.headers.get("X-Request-ID"), details=audit_details)
+                return JSONResponse({"detail": "Nemo is unavailable", "missing": client.missing_configuration, "code": "nemo_unavailable"}, status_code=503)
+            history_key = (actor["user_id"], conversation_id)
+            answer = await answer_nemo(settings.database_url, client, message, page_context, list(nemo_history[history_key]))
+            nemo_history[history_key].append({"role": "user", "content": message[:1200]})
+            nemo_history[history_key].append({"role": "assistant", "content": answer["answer"][:2000]})
+            append_audit(settings.database_url, actor["user_id"], actor["role"], "nemo_chat", "success", request.headers.get("X-Request-ID"), details=audit_details)
+            return JSONResponse(answer)
+        except ValueError as exc:
+            append_audit(settings.database_url, actor["user_id"], actor["role"], "nemo_chat", "failure", request.headers.get("X-Request-ID"), details=audit_details)
+            return JSONResponse({"detail": str(exc), "code": "nemo_unavailable"}, status_code=503)
 
     @app.post("/api/v1/cases/{case_id}/plan", status_code=201)
     async def add_plan_step(case_id: str, payload: dict = Body(...)) -> JSONResponse:
