@@ -5,6 +5,9 @@ from dataclasses import dataclass
 from urllib.parse import urlparse
 
 import httpx
+from time import perf_counter
+
+from app.reasoning.metrics import llm_metrics
 
 
 @dataclass
@@ -43,9 +46,11 @@ class NemotronClient:
         """Accept both a host base URL and an OpenAI-compatible `/v1` base URL."""
         return f"{self.base_url}/chat/completions" if self.base_url.endswith("/v1") else f"{self.base_url}/v1/chat/completions"
 
-    async def complete(self, messages: list[dict], temperature: float = 0.0) -> NemotronResult:
+    async def complete(self, messages: list[dict], temperature: float = 0.0, feature: str = "reasoning") -> NemotronResult:
         if not self.configured:
             return NemotronResult("unavailable", error=f"Missing or invalid configuration: {', '.join(self.missing_configuration)}")
+        started = perf_counter()
+        attempts = 0
         payload = {
             "model": self.model,
             "messages": messages,
@@ -55,6 +60,7 @@ class NemotronClient:
         }
         headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
         for attempt in range(self.max_retries + 1):
+            attempts = attempt + 1
             try:
                 async with httpx.AsyncClient(timeout=self.timeout_s) as client:
                     response = await client.post(self.completion_url, json=payload, headers=headers)
@@ -63,6 +69,8 @@ class NemotronClient:
                         await asyncio.sleep(0.25 * (2**attempt)); continue
                 response.raise_for_status()
                 data = response.json()
+                usage = data.get("usage") if isinstance(data, dict) else {}
+                usage = usage if isinstance(usage, dict) else {}
                 message = data.get("choices", [{}])[0].get("message", {})
                 content = message.get("content")
                 if isinstance(content, list):
@@ -76,10 +84,18 @@ class NemotronClient:
                     if isinstance(fallback, str) and fallback.strip():
                         content = fallback
                 if not isinstance(content, str):
+                    llm_metrics.record(feature=feature, model=self.model, status="error", latency_ms=(perf_counter() - started) * 1000, retries=max(0, attempts - 1), error_type="invalid_response")
                     return NemotronResult("invalid", error="Nemotron response did not contain message content")
+                llm_metrics.record(feature=feature, model=self.model, status="ok", latency_ms=(perf_counter() - started) * 1000, prompt_tokens=usage.get("prompt_tokens"), completion_tokens=usage.get("completion_tokens"), total_tokens=usage.get("total_tokens"), tool_calls=len(data.get("tool_calls", [])) if isinstance(data.get("tool_calls"), list) else 0, retries=max(0, attempts - 1))
                 return NemotronResult("complete", content=content)
+            except httpx.TimeoutException:
+                if attempt < self.max_retries:
+                    await asyncio.sleep(0.25 * (2**attempt)); continue
+                llm_metrics.record(feature=feature, model=self.model, status="timeout", latency_ms=(perf_counter() - started) * 1000, retries=max(0, attempts - 1), error_type="timeout")
+                return NemotronResult("unavailable", error="Nemotron request timed out")
             except (httpx.HTTPError, ValueError) as exc:
                 if attempt < self.max_retries:
                     await asyncio.sleep(0.25 * (2**attempt)); continue
+                llm_metrics.record(feature=feature, model=self.model, status="error", latency_ms=(perf_counter() - started) * 1000, retries=max(0, attempts - 1), error_type="http" if isinstance(exc, httpx.HTTPError) else "invalid_response")
                 return NemotronResult("unavailable", error=str(exc))
         return NemotronResult("unavailable", error="Nemotron request failed")

@@ -14,6 +14,7 @@ from app.core.config import get_settings
 from app.reasoning.client import NemotronClient
 from app.reasoning.live import run_live_reasoning
 from app.reasoning.nemo import MAX_HISTORY, answer_nemo, validate_page_context
+from app.reasoning.metrics import llm_metrics
 from app.db.database import alert_actions, alert_status, append_audit, apply_alert_action, audit_records, authenticate_user, case_contradictions, case_evidence, case_subgraph, cases_for_entity, chronology_summary, complaint_extraction, contradiction_catalog, create_case, create_finding, create_hypothesis, create_link, create_plan_step, current_summary, edge_detail, ensure_demo_users, entity_detail, evidence_detail, evidence_records, evaluation_summary, ingest_transaction, ingested_events, list_cases, list_findings, list_hypotheses, list_links, list_plan_steps, list_users, narrative_links, network_path, network_summary, review_finding, review_link, review_plan_item, risk_alerts, risk_profile, rollback_alert_action, run_grounded_reasoning, search_entities, session_user, revoke_session, simulator_reset, simulator_status, simulator_step, update_case_notes, update_case_status
 
 
@@ -187,6 +188,16 @@ def create_app() -> FastAPI:
         if not user: return JSONResponse({"detail": "Not authenticated"}, status_code=401)
         if user["role"] != "admin": return JSONResponse({"detail": "You do not have access to this action."}, status_code=403)
         return JSONResponse({"users": list_users(settings.database_url)})
+
+    @app.get("/api/metrics/llm")
+    async def llm_metrics_endpoint(request: Request) -> JSONResponse:
+        """Admin-only operational telemetry; never includes prompts or completions."""
+        user = bearer_user(request)
+        if not user:
+            return JSONResponse({"detail": "Not authenticated"}, status_code=401)
+        if user["role"] != "admin":
+            return JSONResponse({"detail": "You do not have access to this action."}, status_code=403)
+        return JSONResponse({"summary": llm_metrics.summary(), "calls": llm_metrics.snapshot()[-20:]})
 
     @app.get("/api/v1/datasets/current")
     async def current_dataset() -> JSONResponse:

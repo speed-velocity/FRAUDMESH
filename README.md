@@ -198,6 +198,10 @@ NEMOTRON_MAX_TOKENS=2048
 
 The client accepts a host or `/v1` base URL and never prints the API key. Prompts are assembled from server-side alert/case data, bounded and masked before transmission. The validator accepts only grounded findings and plan checks that refer to available evidence; unsupported output is withheld. Cached reasoning remains available as a clearly labelled sample recording without a live model. See [docs/NEBIUS_DEPLOY.md](docs/NEBIUS_DEPLOY.md) for container setup.
 
+### Nemotron metrics
+
+Every live Nemotron call records operational metadata only: feature, model, status, latency, retry count, and API-reported token counts when available. The bounded process-local store never records prompts, completions, evidence, or user messages. Admins can view `GET /api/metrics/llm`; the dashboard shows a compact view and Audit & Access shows the latest calls. To measure a configured deployment without exposing output, run `python scripts/bench_token_factory.py -n 3 -m 2`. The script prints measured timings from that run and does not claim a performance comparison.
+
 ## Nemo, the investigation assistant (Nemotron via Nebius Token Factory)
 
 Nemo is the small “Ask Nemo” assistant in the lower-right corner of the console. It runs on the existing NVIDIA Nemotron client and the existing `NEMOTRON_BASE_URL`, `NEMOTRON_API_KEY`, and `NEMOTRON_MODEL` variables; it does not introduce a second `NEBIUS_*` configuration. Nemo is this project's assistant and is unrelated to NVIDIA NeMo. It uses an NVIDIA Nemotron model through Nebius Token Factory.

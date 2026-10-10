@@ -108,7 +108,7 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
     result = await client.complete([
         {"role": "system", "content": "Return only one valid JSON object matching the requested schema. Populate summary with the actual evidence-grounded explanation now; do not return a schema description, placeholder, formatting plan, or instructions to another writer. Use 3-4 concise sentences. Never mention JSON or invent evidence IDs or facts. If the evidence is insufficient, say that the linked evidence is insufficient and recommend human review."},
         {"role": "user", "content": json.dumps(prompt, ensure_ascii=True)},
-    ])
+    ], feature="explain")
     if result.status != "complete" or not result.content:
         raise ValueError(result.error or "Nemotron request was unavailable")
     try:

@@ -188,7 +188,7 @@ async def answer_nemo(database_url: str, client: NemotronClient, message: str, p
     result = await client.complete([
         {"role": "system", "content": system},
         {"role": "user", "content": json.dumps(prompt, ensure_ascii=True)},
-    ])
+    ], feature="chat")
     if result.status != "complete" or not result.content:
         raise ValueError(result.error or "Nemo is unavailable")
     try:
