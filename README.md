@@ -6,13 +6,9 @@ FraudMesh is an investigation-support console for reviewing synthetic fraud sign
 
 > Synthetic data only. Investigation support only. Human review required. FraudMesh does not determine guilt or take automatic enforcement action.
 
-![FraudMesh dashboard](docs/media/dashboard.png)
+![Fresh FraudMesh dashboard capture](docs/media/dashboard.png)
 
-Screenshots: [Live Alerts](docs/media/live-alerts.png), [Cases](docs/media/cases.png), [Fraud Network](docs/media/network.png), and [Evidence Explorer](docs/media/evidence.png).
-
-![Dashboard](docs/media/dashboard.png)
-
-Screenshots: [dashboard](docs/media/dashboard.png), [Live Alerts](docs/media/live-alerts.png), [Cases](docs/media/cases.png), [Fraud Network](docs/media/network.png), and [Evidence Explorer](docs/media/evidence.png).
+Fresh UI audit captures: [Live Alerts](docs/media/live-alerts.png), [Cases](docs/media/cases.png), [Fraud Network](docs/media/network.png), [Evidence Explorer](docs/media/evidence.png), and [dark-mode dashboard](docs/media/dashboard-dark.png). These are sourced from the latest available light/dark audit runs, not the older header snapshots.
 
 Live frontend: **TODO: Render URL** · Nebius backend: **TODO: backend URL** · Demo video: **TODO: demo video URL** · Repository: https://github.com/speed-velocity/FRAUDMESH
 
@@ -23,6 +19,28 @@ FraudMesh helps investigators move from a suspicious signal to a reviewable expl
 ## Features
 
 Dashboard provides risk summaries, event simulation, evaluation readiness, queue, and safeguards. Live Alerts provides deterministic R1–R6 signals, filters, evidence, and Acknowledge/Escalate/Dismiss actions. Investigation Cases provides case lifecycle, notes, chronology, contradictions, findings, hypotheses, plans, and case briefs. Fraud Network provides search, clusters, links, paths, Ask the graph, and cluster stories. Causal Chain provides bounded source-to-target paths. Evidence Explorer provides masked records and audited reason-gated unmasking. Audit & Access provides append-only history, users, controls, and admin-only live metrics. Nemo, complaint intake, devil's advocate, Council of 3, and scam classification are optional Nemotron features with deterministic fallbacks.
+
+### Feature guide: what each feature does and why it is needed
+
+| Feature | What it does | Why it is needed |
+|---|---|---|
+| Dashboard | Summarises risk, alerts, entities, evidence, evaluation, and simulator state. | Gives an investigator one starting point and makes system coverage visible. |
+| Live Alerts | Shows deterministic signals, reasons, rules, evidence, and review actions. | Turns raw events into prioritised, explainable review work. |
+| Investigation Cases | Groups an alert with notes, chronology, contradictions, findings, hypotheses, and plans. | Preserves the reasoning trail across a longer investigation. |
+| Case brief | Generates a cited summary, timeline, gaps, contradictions, and next checks. | Reduces review time while keeping evidence and human review central. |
+| Fraud Network | Maps accounts, people, devices, links, clusters, and bounded paths. | Reveals relationships that are difficult to see in a flat alert list. |
+| Ask the graph | Converts a natural-language question into a validated graph query. | Lets investigators explore safely without allowing model-written queries or SQL. |
+| Causal Chain | Tests whether a bounded ordered path exists between two entities. | Separates established paths from unsupported assumptions. |
+| Evidence Explorer | Searches masked records and controls audited unmask requests. | Keeps source material inspectable while protecting sensitive identifiers. |
+| Audit & Access | Shows actor, action, target, outcome, users, controls, and model telemetry. | Makes protected actions and live-model usage accountable. |
+| Event simulator | Replays held-out synthetic events and records outcomes. | Demonstrates deterministic behaviour without changing production records. |
+| Evaluation readiness | Reports synthetic DEV/HELD-OUT coverage and error counts. | Measures rule coverage honestly without presenting it as a production metric. |
+| Nemo assistant | Answers grounded questions using server-retrieved masked context. | Gives investigators a conversational entry point without granting action authority. |
+| Cluster story | Summarises graph hubs, links, uncertainties, and next checks. | Helps review a connected group without treating inferred links as facts. |
+| Complaint intake | Extracts structured details from English, Hinglish, or Devanagari complaints. | Makes narrative complaints comparable with authoritative ledger records. |
+| Devil's advocate | Presents plausible benign hypotheses and checks. | Reduces confirmation bias before a human determination. |
+| Council of 3 | Runs Analyst, Skeptic, and Auditor review seats in parallel. | Provides structured disagreement without changing scores or actions. |
+| Scam classifier | Classifies synthetic scam-script patterns and verifies quoted red flags. | Speeds triage while constraining outputs to a closed, reviewable taxonomy. |
 
 ## Architecture
 
