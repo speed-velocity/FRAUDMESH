@@ -84,6 +84,14 @@ label, .eyebrow, .count-badge, .score-badge, .status-select, .audit-outcome, .co
 .review-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--fm-space-4); }
 .feature-samples { align-items: stretch; }
 .feature-samples .secondary-action { flex: 1 1 220px; white-space: normal; text-align: left; }
+.feature-panel[data-testid="ask-graph"] { padding: clamp(18px, 3vw, 32px); }
+.feature-panel[data-testid="ask-graph"] .panel-head h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; }
+.feature-panel[data-testid="ask-graph"] > p { max-width: 72ch; margin: var(--fm-space-3) 0 var(--fm-space-5); }
+.feature-panel[data-testid="ask-graph"] form { display: grid; gap: var(--fm-space-3); }
+.feature-panel[data-testid="ask-graph"] .feature-samples { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--fm-space-3); margin-top: var(--fm-space-4); }
+.feature-panel[data-testid="ask-graph"] .feature-samples .secondary-action { min-height: 56px; padding: var(--fm-space-3); font-size: .92rem; line-height: 1.35; }
+.network-toolbar > .secondary-action { min-height: var(--fm-control-height); }
+.network-toolbar > .secondary-action:last-child { flex: 0 0 auto; min-width: 132px; }
 .case-brief-content h3 { margin-bottom: var(--fm-space-2); }
 .case-brief-content section { border-top: 1px solid var(--fm-rule); padding-top: var(--fm-space-3); margin-top: var(--fm-space-3); }
 .case-brief-content h4 { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; }
@@ -271,6 +279,7 @@ pre, code, .event-validation-panel textarea { background: var(--fm-paper-deep); 
   .nemo-drawer { inset: 0; width: 100vw; padding: calc(var(--fm-space-4) + env(safe-area-inset-top)) calc(var(--fm-space-4) + env(safe-area-inset-right)) calc(var(--fm-space-4) + env(safe-area-inset-bottom)) calc(var(--fm-space-4) + env(safe-area-inset-left)); }
   .nemo-chip { min-height: var(--fm-touch-height); }
   .review-columns { grid-template-columns: 1fr; }
+  .feature-panel[data-testid="ask-graph"] .feature-samples { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   .nemo-avatar svg *, .nemo-large-avatar svg * { animation: none !important; transition: none !important; }
