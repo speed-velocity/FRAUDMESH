@@ -34,17 +34,36 @@ def _normalise_payload(payload: dict) -> dict:
     """Accept common OpenAI/model wrappers without weakening evidence checks."""
     for key in ("output", "result", "data"):
         nested = payload.get(key)
-        if isinstance(nested, dict) and any(name in nested for name in ("summary", "findings", "suspicious_patterns", "recommended_checks")):
+        if isinstance(nested, dict) and any(name in nested for name in ("summary", "answer", "content", "message", "findings", "suspicious_patterns", "recommended_checks")):
             return nested
     return payload
 
 
 def _text_from_payload(payload: dict) -> str:
-    for key in ("summary", "explanation", "analysis", "reasoning", "narrative", "text", "response", "message"):
+    for key in ("summary", "answer", "explanation", "analysis", "reasoning", "narrative", "text", "content", "output_text", "response", "message"):
         value = payload.get(key)
         if isinstance(value, str) and value.strip():
             return value.strip()
+        if isinstance(value, dict):
+            nested = _text_from_payload(value)
+            if nested:
+                return nested
+        if isinstance(value, list):
+            parts = [item.strip() for item in value if isinstance(item, str) and item.strip()]
+            if parts:
+                return " ".join(parts)
     return ""
+
+
+def _evidence_fallback(records: list[dict]) -> str:
+    total = sum(int(record.get("amount_inr") or 0) for record in records)
+    timestamps = [str(record.get("ts_utc")) for record in records if record.get("ts_utc")]
+    timing = f"from {min(timestamps)} through {max(timestamps)}" if timestamps else "with no complete timestamp range"
+    return (
+        f"The linked case contains {len(records)} transaction records totaling INR {total:,} {timing}. "
+        "Review the ledger sequence and linked counterparties to determine whether the movement is coordinated. "
+        "The live model did not provide an additional grounded narrative, so human review is required."
+    )
 
 
 def _is_meta_summary(summary: str) -> bool:
@@ -130,7 +149,7 @@ async def run_live_reasoning(database_url: str, case_id: str, client: NemotronCl
     if not summary and plan_steps:
         summary = "Recommended checks: " + "; ".join(item["action"] for item in plan_steps[:3])
     if not summary:
-        summary = "Nemotron returned no grounded explanation for this case. Review the linked evidence manually before making a determination."
+        summary = _evidence_fallback(records)
 
     return {
         "case_id": case_id,
