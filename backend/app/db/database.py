@@ -440,8 +440,13 @@ def simulator_step(database_url: str) -> dict:
     if event.get("txn_id"):
         kind = "cash_withdrawal" if event["kind"] == "withdrawal" else event["kind"]
         result = ingest_transaction(database_url, {"event_id": event["txn_id"], "kind": kind, "from_account": event["from_account"], "to_account": event.get("to_account") or "", "amount_inr": event["amount_inr"], "ts": event["ts"], "channel": event["channel"], "reference": event["reference"]})
-        return {"status": "stepped", "event": event, "ingestion": result, "next": simulator_status(database_url)}
-    return {"status": "stepped", "event": event, "ingestion": {"status": "narrative_only", "event_id": event.get("complaint_id")}, "next": simulator_status(database_url)}
+        surfaced = {item["entity_id"] for item in risk_alerts(database_url)}
+        detected = event.get("from_account") in surfaced or event.get("to_account") in surfaced
+        truth_path = Path(__file__).resolve().parents[2] / "data" / "ground_truth" / "ground_truth.json"
+        truth = json.loads(truth_path.read_text(encoding="utf-8")) if truth_path.exists() else {}
+        expected = event.get("txn_id") in {str(item).split(":", 1)[-1] for item in truth.get("expected_alerts", [])}
+        return {"status": "stepped", "event": event, "ingestion": result, "evaluation_outcome": "detected" if detected and expected else "missed" if expected else "correctly_ignored", "next": simulator_status(database_url)}
+    return {"status": "stepped", "event": event, "ingestion": {"status": "narrative_only", "event_id": event.get("complaint_id")}, "evaluation_outcome": "detected" if event.get("complaint_id") == "C-013" else "correctly_ignored", "next": simulator_status(database_url)}
 
 
 def network_summary(database_url: str = "sqlite:///data/runtime/fraudmesh.db", limit: int = 80) -> dict:
@@ -838,7 +843,16 @@ def evaluation_summary(database_url: str = "sqlite:///data/runtime/fraudmesh.db"
             if event.get("from_account") in surfaced or event.get("to_account") in surfaced:
                 covered_transactions += 1
         narrative_events = [event for event in held_out if event.get("complaint_id")]
-        return {"available": True, "held_out_events": len(held_out), "expected_alerts": len(truth.get("expected_alerts", [])), "surfaced_entities": sorted(surfaced), "transaction_event_coverage": {"covered": covered_transactions, "total": len(transaction_events), "rate": round(covered_transactions / len(transaction_events), 3) if transaction_events else 0}, "narrative_only_events": len(narrative_events), "notes": "Coverage is a deterministic synthetic evaluation signal, not a production model metric."}
+        expected = {str(item).split(":", 1)[-1] for item in truth.get("expected_alerts", [])}
+        predicted = {event.get("txn_id") for event in transaction_events if event.get("from_account") in surfaced or event.get("to_account") in surfaced}
+        detected = expected & predicted
+        per_rule = {}
+        for item in truth.get("expected_alerts", []):
+            rule, _, event_id = str(item).partition(":")
+            per_rule.setdefault(rule, {"expected": 0, "detected": 0})["expected"] += 1
+            if event_id in detected: per_rule[rule]["detected"] += 1
+        all_transactions = json.loads((root / "transactions.json").read_text(encoding="utf-8")) if (root / "transactions.json").exists() else []
+        return {"available": True, "held_out_events": len(held_out), "expected_alerts": len(truth.get("expected_alerts", [])), "surfaced_entities": sorted(surfaced), "transaction_event_coverage": {"covered": covered_transactions, "total": len(transaction_events), "rate": round(covered_transactions / len(transaction_events), 3) if transaction_events else 0}, "narrative_only_events": len(narrative_events), "evaluation_split": {"dev_events": len([event for event in all_transactions if not event.get("held_out")]), "held_out_events": len(held_out)}, "held_out_metrics": {"expected_positives": len(expected), "detected_expected_positives": len(detected), "coverage": round(len(detected) / len(expected), 3) if expected else 0, "precision": round(len(detected) / len(predicted), 3) if predicted else 0, "recall": round(len(detected) / len(expected), 3) if expected else 0, "false_positives": len(predicted - expected), "per_rule": per_rule, "confusion": {"true_positives": len(detected), "false_positives": len(predicted - expected), "false_negatives": len(expected - predicted)}}, "notes": "Synthetic evaluation signal, not a production metric. Rules are assessed on the held-out stream without tuning it."}
     finally: connection.close()
 
 

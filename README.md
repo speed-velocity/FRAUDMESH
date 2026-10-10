@@ -206,6 +206,10 @@ Every live Nemotron call records operational metadata only: feature, model, stat
 
 Investigation Cases includes **Generate case brief**, which calls `POST /api/v1/cases/{case_id}/brief`. The server assembles masked case evidence, contradictions, and graph context; client-supplied facts are not accepted. Live output is citation-filtered against the supplied evidence IDs. If Nemotron is unavailable or returns invalid JSON, the UI labels a deterministic data-only brief and preserves the human-review footer. Briefs can be downloaded as Markdown or printed/saved as PDF using the browser print dialog.
 
+### Evaluation
+
+The dashboard reports held-out synthetic coverage, precision, recall, false positives, and a per-event simulator outcome. Run `python scripts/eval.py` for the JSON summary and read [docs/EVALUATION.md](docs/EVALUATION.md) for the DEV/HELD-OUT split and limitations. These values are synthetic evaluation signals, not production metrics; existing ACC-M1/ACC-M2/ACC-M3 alert behavior remains the reference regression surface.
+
 ## Nemo, the investigation assistant (Nemotron via Nebius Token Factory)
 
 Nemo is the small “Ask Nemo” assistant in the lower-right corner of the console. It runs on the existing NVIDIA Nemotron client and the existing `NEMOTRON_BASE_URL`, `NEMOTRON_API_KEY`, and `NEMOTRON_MODEL` variables; it does not introduce a second `NEBIUS_*` configuration. Nemo is this project's assistant and is unrelated to NVIDIA NeMo. It uses an NVIDIA Nemotron model through Nebius Token Factory.
